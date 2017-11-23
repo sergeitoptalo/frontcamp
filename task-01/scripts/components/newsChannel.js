@@ -1,3 +1,5 @@
+import { renderListItem } from '../containers/listItem';
+
 import NewsContainer from '../containers/newsContainer';
 
 export default class NewsChannel extends NewsContainer {
@@ -12,7 +14,7 @@ export default class NewsChannel extends NewsContainer {
         super.getVideos(this.key, this);
     }
 
-    addButton(container) {
+    renderChannelButton(container) {
         let buttonElement = document.createElement('button');
         let button = container.appendChild(buttonElement);
         let buttonText = document.createTextNode(this.title);
@@ -21,11 +23,8 @@ export default class NewsChannel extends NewsContainer {
     }
 
     render(container) {
-        let newsSectionElement = document.createElement('section');
-        let newsSection = container.appendChild(newsSectionElement);
-        this.newsSection = newsSection;
-
-        this.addButton(newsSection);
+        let listItem = renderListItem(container);
+        this.renderChannelButton(listItem);
     }
 
     renderNews(data) {

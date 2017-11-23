@@ -72,17 +72,21 @@
 
 var _config = __webpack_require__(1);
 
-var _newsSection = __webpack_require__(2);
+var _list = __webpack_require__(2);
 
-var _newsSection2 = _interopRequireDefault(_newsSection);
+var _newsChannel = __webpack_require__(3);
+
+var _newsChannel2 = _interopRequireDefault(_newsChannel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener('DOMContentLoaded', function () {
-    var root = document.querySelector('#root');
-    _config.config.forEach(function (newsSection) {
-        return new _newsSection2.default(newsSection).render(root);
+    var channelsListContainer = document.querySelector('#channels-list-container');
+    var list = (0, _list.renderChannelList)(channelsListContainer);
+    _config.config.forEach(function (newsChannel) {
+        return new _newsChannel2.default(newsChannel).render(list);
     });
+    var chooseChannelButton = document.querySelector('#choose-channel-button');
 });
 
 /***/ }),
@@ -116,75 +120,13 @@ var config = exports.config = [{
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.renderChannelList = renderChannelList;
+function renderChannelList(container) {
+    var listElement = document.createElement('ul');
+    var list = container.appendChild(listElement);
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
-var _newsContainer = __webpack_require__(3);
-
-var _newsContainer2 = _interopRequireDefault(_newsContainer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var NewsSection = function (_NewsContainer) {
-    _inherits(NewsSection, _NewsContainer);
-
-    function NewsSection(channelConfig) {
-        _classCallCheck(this, NewsSection);
-
-        var _this = _possibleConstructorReturn(this, (NewsSection.__proto__ || Object.getPrototypeOf(NewsSection)).call(this));
-
-        _this.title = channelConfig.title;
-        _this.key = channelConfig.key;
-        _this.newsSection = null;
-        return _this;
-    }
-
-    _createClass(NewsSection, [{
-        key: 'getVideos',
-        value: function getVideos() {
-            _get(NewsSection.prototype.__proto__ || Object.getPrototypeOf(NewsSection.prototype), 'getVideos', this).call(this, this.key, this);
-        }
-    }, {
-        key: 'addButton',
-        value: function addButton(container) {
-            var _this2 = this;
-
-            var buttonElement = document.createElement('button');
-            var button = container.appendChild(buttonElement);
-            var buttonText = document.createTextNode(this.title);
-            button.appendChild(buttonText);
-            button.addEventListener('click', function () {
-                _this2.getVideos();
-            });
-        }
-    }, {
-        key: 'render',
-        value: function render(container) {
-            var newsSectionElement = document.createElement('section');
-            var newsSection = container.appendChild(newsSectionElement);
-            this.newsSection = newsSection;
-
-            this.addButton(newsSection);
-        }
-    }, {
-        key: 'renderNews',
-        value: function renderNews(data) {
-            alert(this.title);
-        }
-    }]);
-
-    return NewsSection;
-}(_newsContainer2.default);
-
-exports.default = NewsSection;
+    return list;
+}
 
 /***/ }),
 /* 3 */
@@ -199,7 +141,104 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _videosApi = __webpack_require__(4);
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+var _listItem = __webpack_require__(4);
+
+var _newsContainer = __webpack_require__(5);
+
+var _newsContainer2 = _interopRequireDefault(_newsContainer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var NewsChannel = function (_NewsContainer) {
+    _inherits(NewsChannel, _NewsContainer);
+
+    function NewsChannel(channelConfig) {
+        _classCallCheck(this, NewsChannel);
+
+        var _this = _possibleConstructorReturn(this, (NewsChannel.__proto__ || Object.getPrototypeOf(NewsChannel)).call(this));
+
+        _this.title = channelConfig.title;
+        _this.key = channelConfig.key;
+        _this.newsSection = null;
+        return _this;
+    }
+
+    _createClass(NewsChannel, [{
+        key: 'getVideos',
+        value: function getVideos() {
+            _get(NewsChannel.prototype.__proto__ || Object.getPrototypeOf(NewsChannel.prototype), 'getVideos', this).call(this, this.key, this);
+        }
+    }, {
+        key: 'renderChannelButton',
+        value: function renderChannelButton(container) {
+            var _this2 = this;
+
+            var buttonElement = document.createElement('button');
+            var button = container.appendChild(buttonElement);
+            var buttonText = document.createTextNode(this.title);
+            button.appendChild(buttonText);
+            button.addEventListener('click', function () {
+                _this2.getVideos();
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render(container) {
+            var listItem = (0, _listItem.renderListItem)(container);
+            this.renderChannelButton(listItem);
+        }
+    }, {
+        key: 'renderNews',
+        value: function renderNews(data) {
+            alert(this.title);
+        }
+    }]);
+
+    return NewsChannel;
+}(_newsContainer2.default);
+
+exports.default = NewsChannel;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.renderListItem = renderListItem;
+function renderListItem(list) {
+    var listItemElement = document.createElement('li');
+    var listItem = list.appendChild(listItemElement);
+
+    return listItem;
+}
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _videosApi = __webpack_require__(6);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -226,7 +265,7 @@ var newsContainer = function () {
 exports.default = newsContainer;
 
 /***/ }),
-/* 4 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
