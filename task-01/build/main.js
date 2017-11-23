@@ -78,6 +78,8 @@ var _newsChannel = __webpack_require__(3);
 
 var _newsChannel2 = _interopRequireDefault(_newsChannel);
 
+var _toggleMenu = __webpack_require__(7);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -87,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return new _newsChannel2.default(newsChannel).render(list);
     });
     var chooseChannelButton = document.querySelector('#choose-channel-button');
+    (0, _toggleMenu.addToggle)();
 });
 
 /***/ }),
@@ -277,6 +280,35 @@ Object.defineProperty(exports, "__esModule", {
 exports.videosApi = videosApi;
 function videosApi(key) {
     return fetch('https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=1de7e5223cf14337a6dd0e1330b80c7f', { method: 'GET' });
+}
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.addToggle = addToggle;
+function addToggle() {
+    var toggles = document.querySelectorAll('[data-toggle-target]');
+    Array.from(toggles).forEach(function (toggle) {
+        toggle.addEventListener('click', function () {
+            var toggledElement = document.getElementById(toggle.dataset.toggleTarget);
+            if (toggledElement.dataset.toggle === 'expanded') {
+                toggledElement.classList.add('collapsed');
+                toggledElement.classList.remove('expanded');
+                toggledElement.dataset.toggle = 'collapsed';
+            } else {
+                toggledElement.classList.add('expanded');
+                toggledElement.classList.remove('collapsed');
+                toggledElement.dataset.toggle = 'expanded';
+            }
+        });
+    });
 }
 
 /***/ })

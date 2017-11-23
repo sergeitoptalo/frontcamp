@@ -34,3 +34,37 @@ body {
 .news-container {
     border: 1px solid #d1d1d1;
 }
+
+.choose-channel-button {
+    display: none;
+}
+
+.channels-list-container .expanded {
+    display: block;
+}
+
+.channels-list-container .collapsed {
+    display: block;
+}
+
+@media screen and (max-width: 600px) {
+    .channels-list-container {
+        display: none;
+    }
+
+    .channels-list-container.expanded {
+        display: block;
+    }
+
+    .channels-list-container .collapsed {
+        display: none;
+    }
+
+    .choose-channel-button {
+        display: block;
+    }
+
+    .channels-list-container .collapsed {
+        display: none;
+    }
+}
