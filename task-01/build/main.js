@@ -296,9 +296,9 @@ exports.addToggle = addToggle;
 function addToggle() {
     var toggles = document.querySelectorAll('[data-toggle-target]');
     Array.from(toggles).forEach(function (toggle) {
-        toggle.addEventListener('click', function () {
+        toggle.addEventListener('click', function (event) {
             var toggledElement = document.getElementById(toggle.dataset.toggleTarget);
-            if (toggledElement.dataset.toggle === 'expanded') {
+            if (toggledElement.dataset.toggle === 'expanded' || event.target.parentNode === toggle) {
                 toggledElement.classList.add('collapsed');
                 toggledElement.classList.remove('expanded');
                 toggledElement.dataset.toggle = 'collapsed';

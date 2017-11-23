@@ -1,7 +1,7 @@
 export function addToggle() {
     let toggles = document.querySelectorAll('[data-toggle-target]');
     Array.from(toggles).forEach((toggle) => {
-        toggle.addEventListener('click', () => {
+        toggle.addEventListener('click', (event) => {
             let toggledElement = document.getElementById(toggle.dataset.toggleTarget);
             if (toggledElement.dataset.toggle === 'expanded') {
                 toggledElement.classList.add('collapsed');

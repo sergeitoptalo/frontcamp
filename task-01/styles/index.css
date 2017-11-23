@@ -62,6 +62,7 @@ body {
 
     .choose-channel-button {
         display: block;
+        width: 100%;
     }
 
     .channels-list-container .collapsed {
