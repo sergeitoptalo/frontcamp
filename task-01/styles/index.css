@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.app-header {
+    background-color: #63b6ff;
+    padding: 20px;
+    -webkit-box-shadow: -1px 5px 2px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 5px 2px -5px rgba(0,0,0,0.75);
+    box-shadow: -1px 5px 2px -5px rgba(0,0,0,0.75);
+}
+
+.header-logo {
+    color: #fff;
+    font-size: 30px;
+}
+
+.channels-list-container {
+    float: left;
+}
+
+.channels-list-container:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.news-container {
+    border: 1px solid #d1d1d1;
+}
