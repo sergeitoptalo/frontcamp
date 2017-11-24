@@ -78,7 +78,7 @@ var _newsChannel = __webpack_require__(3);
 
 var _newsChannel2 = _interopRequireDefault(_newsChannel);
 
-var _toggleMenu = __webpack_require__(7);
+var _toggleMenu = __webpack_require__(8);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -104,13 +104,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 var config = exports.config = [{
     'title': 'BBC News',
-    'key': 1
+    'source': 'bbc-news'
 }, {
-    'title': 'News 2',
-    'key': 2
+    'title': 'Daily Mail',
+    'source': 'daily-mail'
 }, {
     'title': 'News 3',
-    'key': 3
+    'source': 3
 }];
 
 /***/ }),
@@ -148,7 +148,9 @@ var _get = function get(object, property, receiver) { if (object === null) objec
 
 var _listItem = __webpack_require__(4);
 
-var _newsContainer = __webpack_require__(5);
+var _article = __webpack_require__(5);
+
+var _newsContainer = __webpack_require__(6);
 
 var _newsContainer2 = _interopRequireDefault(_newsContainer);
 
@@ -159,6 +161,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+//import { articleTemplate } from '../templates/article.template';
 
 var NewsChannel = function (_NewsContainer) {
     _inherits(NewsChannel, _NewsContainer);
@@ -169,7 +172,7 @@ var NewsChannel = function (_NewsContainer) {
         var _this = _possibleConstructorReturn(this, (NewsChannel.__proto__ || Object.getPrototypeOf(NewsChannel)).call(this));
 
         _this.title = channelConfig.title;
-        _this.key = channelConfig.key;
+        _this.source = channelConfig.source;
         _this.newsSection = null;
         return _this;
     }
@@ -177,7 +180,7 @@ var NewsChannel = function (_NewsContainer) {
     _createClass(NewsChannel, [{
         key: 'getVideos',
         value: function getVideos() {
-            _get(NewsChannel.prototype.__proto__ || Object.getPrototypeOf(NewsChannel.prototype), 'getVideos', this).call(this, this.key, this);
+            _get(NewsChannel.prototype.__proto__ || Object.getPrototypeOf(NewsChannel.prototype), 'getVideos', this).call(this, this.source, this);
         }
     }, {
         key: 'renderChannelButton',
@@ -200,8 +203,11 @@ var NewsChannel = function (_NewsContainer) {
         }
     }, {
         key: 'renderNews',
-        value: function renderNews(data) {
-            alert(this.title);
+        value: function renderNews(data, container) {
+            container.innerHTML = '';
+            data.forEach(function (article) {
+                container.innerHTML += (0, _article.renderArticle)(article);
+            });
         }
     }]);
 
@@ -238,34 +244,10 @@ function renderListItem(list) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _videosApi = __webpack_require__(6);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var newsContainer = function () {
-    function newsContainer() {
-        _classCallCheck(this, newsContainer);
-    }
-
-    _createClass(newsContainer, [{
-        key: 'getVideos',
-        value: function getVideos(key, section) {
-            var videos = (0, _videosApi.videosApi)(key).then(function (response) {
-                return response.json();
-            }).then(function (data) {
-                section.renderNews(data);
-                // return data;
-            });
-        }
-    }]);
-
-    return newsContainer;
-}();
-
-exports.default = newsContainer;
+exports.renderArticle = renderArticle;
+function renderArticle(articleConfig) {
+    return "\n        <div class=\"article\">\n            <div class=\"article-image-container\">\n                <img src=" + articleConfig.urlToImage + " />\n            </div>\n            <div class=\"article-text\">\n                <h3>\n                    <a href=\"" + articleConfig.url + "\">" + articleConfig.title + "</a>\n                </h3>\n                <p class=\"article-description\">\n                    " + articleConfig.description + "\n                </p>\n                <div class=\"article-author\">\n                    " + articleConfig.author + "\n                </div>\n                <div class=\"article-date\">\n                    " + new Date(articleConfig.publishedAt).getDate() + "-" + (new Date(articleConfig.publishedAt).getMonth() + 1) + "-" + new Date(articleConfig.publishedAt).getFullYear() + "\n                </div>\n            </div>\n        </div>\n    ";
+}
 
 /***/ }),
 /* 6 */
@@ -277,13 +259,59 @@ exports.default = newsContainer;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.videosApi = videosApi;
-function videosApi(key) {
-    return fetch('https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=1de7e5223cf14337a6dd0e1330b80c7f', { method: 'GET' });
-}
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _videosApi = __webpack_require__(7);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var newsContainer = function () {
+    function newsContainer() {
+        _classCallCheck(this, newsContainer);
+    }
+
+    _createClass(newsContainer, [{
+        key: 'getVideos',
+        value: function getVideos(key, section) {
+            var _this = this;
+
+            var videos = (0, _videosApi.videosApi)(key).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                var container = _this.getVideosContainer();
+                section.renderNews(data.articles, container);
+            });
+        }
+    }, {
+        key: 'getVideosContainer',
+        value: function getVideosContainer() {
+            return document.querySelector('#news-container');
+        }
+    }]);
+
+    return newsContainer;
+}();
+
+exports.default = newsContainer;
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.videosApi = videosApi;
+function videosApi(source) {
+    return fetch('https://newsapi.org/v2/top-headlines?sources=' + source + '&apiKey=1de7e5223cf14337a6dd0e1330b80c7f', { method: 'GET' });
+}
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -298,7 +326,7 @@ function addToggle() {
     Array.from(toggles).forEach(function (toggle) {
         toggle.addEventListener('click', function (event) {
             var toggledElement = document.getElementById(toggle.dataset.toggleTarget);
-            if (toggledElement.dataset.toggle === 'expanded' || event.target.parentNode === toggle) {
+            if (toggledElement.dataset.toggle === 'expanded') {
                 toggledElement.classList.add('collapsed');
                 toggledElement.classList.remove('expanded');
                 toggledElement.dataset.toggle = 'collapsed';

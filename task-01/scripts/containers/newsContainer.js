@@ -4,11 +4,15 @@ export default class newsContainer {
     getVideos(key, section) {
         let videos = videosApi(key)
         .then(response => {
-            return response.json()
+            return response.json();
         })
         .then(data => {
-            section.renderNews(data)
-           // return data;
+            let container = this.getVideosContainer();
+            section.renderNews(data.articles, container);
         })
+    }
+
+    getVideosContainer() {
+        return document.querySelector('#news-container');
     }
 }

@@ -1,4 +1,6 @@
 import { renderListItem } from '../containers/listItem';
+import { renderArticle } from '../templates/article.template';
+//import { articleTemplate } from '../templates/article.template';
 
 import NewsContainer from '../containers/newsContainer';
 
@@ -6,12 +8,12 @@ export default class NewsChannel extends NewsContainer {
     constructor(channelConfig) {
         super();
         this.title = channelConfig.title;
-        this.key = channelConfig.key;
+        this.source = channelConfig.source;
         this.newsSection = null;
     }
 
     getVideos() {
-        super.getVideos(this.key, this);
+        super.getVideos(this.source, this);
     }
 
     renderChannelButton(container) {
@@ -27,7 +29,10 @@ export default class NewsChannel extends NewsContainer {
         this.renderChannelButton(listItem);
     }
 
-    renderNews(data) {
-        alert(this.title);
+    renderNews(data, container) {
+        container.innerHTML = ``;
+        data.forEach(article => {
+            container.innerHTML += renderArticle(article);
+        })
     }
 }
