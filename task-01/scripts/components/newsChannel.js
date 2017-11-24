@@ -30,9 +30,11 @@ export default class NewsChannel extends NewsContainer {
     }
 
     renderNews(data, container) {
-        container.innerHTML = ``;
+        //container.innerHTML = ``;
+        let pageMarkup = ``;
         data.forEach(article => {
-            container.innerHTML += renderArticle(article);
-        })
+            pageMarkup += renderArticle(article);
+        });
+        container.innerHTML = pageMarkup;
     }
 }

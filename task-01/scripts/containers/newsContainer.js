@@ -1,4 +1,4 @@
-import { articlesApi } from '../api/articlespi';
+import { articlesApi } from '../api/articlesApi';
 
 export default class newsContainer {
     getArticles(key, section) {

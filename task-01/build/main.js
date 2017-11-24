@@ -178,9 +178,9 @@ var NewsChannel = function (_NewsContainer) {
     }
 
     _createClass(NewsChannel, [{
-        key: 'getVideos',
-        value: function getVideos() {
-            _get(NewsChannel.prototype.__proto__ || Object.getPrototypeOf(NewsChannel.prototype), 'getVideos', this).call(this, this.source, this);
+        key: 'getArticles',
+        value: function getArticles() {
+            _get(NewsChannel.prototype.__proto__ || Object.getPrototypeOf(NewsChannel.prototype), 'getArticles', this).call(this, this.source, this);
         }
     }, {
         key: 'renderChannelButton',
@@ -192,7 +192,7 @@ var NewsChannel = function (_NewsContainer) {
             var buttonText = document.createTextNode(this.title);
             button.appendChild(buttonText);
             button.addEventListener('click', function () {
-                _this2.getVideos();
+                _this2.getArticles();
             });
         }
     }, {
@@ -204,10 +204,12 @@ var NewsChannel = function (_NewsContainer) {
     }, {
         key: 'renderNews',
         value: function renderNews(data, container) {
-            container.innerHTML = '';
+            //container.innerHTML = ``;
+            var pageMarkup = '';
             data.forEach(function (article) {
-                container.innerHTML += (0, _article.renderArticle)(article);
+                pageMarkup += (0, _article.renderArticle)(article);
             });
+            container.innerHTML = pageMarkup;
         }
     }]);
 
@@ -262,7 +264,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _videosApi = __webpack_require__(7);
+var _articlesApi = __webpack_require__(7);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -272,20 +274,20 @@ var newsContainer = function () {
     }
 
     _createClass(newsContainer, [{
-        key: 'getVideos',
-        value: function getVideos(key, section) {
+        key: 'getArticles',
+        value: function getArticles(key, section) {
             var _this = this;
 
-            var videos = (0, _videosApi.videosApi)(key).then(function (response) {
+            var articles = (0, _articlesApi.articlesApi)(key).then(function (response) {
                 return response.json();
             }).then(function (data) {
-                var container = _this.getVideosContainer();
+                var container = _this.getArticlesContainer();
                 section.renderNews(data.articles, container);
             });
         }
     }, {
-        key: 'getVideosContainer',
-        value: function getVideosContainer() {
+        key: 'getArticlesContainer',
+        value: function getArticlesContainer() {
             return document.querySelector('#news-container');
         }
     }]);
@@ -305,8 +307,8 @@ exports.default = newsContainer;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.videosApi = videosApi;
-function videosApi(source) {
+exports.articlesApi = articlesApi;
+function articlesApi(source) {
     return fetch('https://newsapi.org/v2/top-headlines?sources=' + source + '&apiKey=1de7e5223cf14337a6dd0e1330b80c7f', { method: 'GET' });
 }
 
