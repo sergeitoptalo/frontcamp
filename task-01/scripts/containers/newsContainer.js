@@ -1,18 +1,18 @@
-import { videosApi } from '../api/videosApi';
+import { articlesApi } from '../api/articlespi';
 
 export default class newsContainer {
-    getVideos(key, section) {
-        let videos = videosApi(key)
+    getArticles(key, section) {
+        let articles = articlesApi(key)
         .then(response => {
             return response.json();
         })
         .then(data => {
-            let container = this.getVideosContainer();
+            let container = this.getArticlesContainer();
             section.renderNews(data.articles, container);
         })
     }
 
-    getVideosContainer() {
+    getArticlesContainer() {
         return document.querySelector('#news-container');
     }
 }

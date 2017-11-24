@@ -12,8 +12,8 @@ export default class NewsChannel extends NewsContainer {
         this.newsSection = null;
     }
 
-    getVideos() {
-        super.getVideos(this.source, this);
+    getArticles() {
+        super.getArticles(this.source, this);
     }
 
     renderChannelButton(container) {
@@ -21,7 +21,7 @@ export default class NewsChannel extends NewsContainer {
         let button = container.appendChild(buttonElement);
         let buttonText = document.createTextNode(this.title);
         button.appendChild(buttonText);
-        button.addEventListener('click', () => { this.getVideos() });
+        button.addEventListener('click', () => { this.getArticles() });
     }
 
     render(container) {

@@ -110,7 +110,7 @@ var config = exports.config = [{
     'source': 'daily-mail'
 }, {
     'title': 'News 3',
-    'source': 3
+    'source': 'axios'
 }];
 
 /***/ }),
@@ -246,7 +246,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.renderArticle = renderArticle;
 function renderArticle(articleConfig) {
-    return "\n        <div class=\"article\">\n            <div class=\"article-image-container\">\n                <img src=" + articleConfig.urlToImage + " />\n            </div>\n            <div class=\"article-text\">\n                <h3>\n                    <a href=\"" + articleConfig.url + "\">" + articleConfig.title + "</a>\n                </h3>\n                <p class=\"article-description\">\n                    " + articleConfig.description + "\n                </p>\n                <div class=\"article-author\">\n                    " + articleConfig.author + "\n                </div>\n                <div class=\"article-date\">\n                    " + new Date(articleConfig.publishedAt).getDate() + "-" + (new Date(articleConfig.publishedAt).getMonth() + 1) + "-" + new Date(articleConfig.publishedAt).getFullYear() + "\n                </div>\n            </div>\n        </div>\n    ";
+    return "\n        <div class=\"article\">\n            <div class=\"article-image-container\">\n                <img src=" + articleConfig.urlToImage + " />\n            </div>\n            <div class=\"article-text\">\n                <h3>\n                    <a href=\"" + articleConfig.url + "\" target=\"_blank\">" + articleConfig.title + "</a>\n                </h3>\n                <p class=\"article-description\">\n                    " + articleConfig.description + "\n                </p>\n                <div class=\"article-author\">\n                    " + articleConfig.author + "\n                </div>\n                <div class=\"article-date\">\n                    " + new Date(articleConfig.publishedAt).getDate() + "-" + (new Date(articleConfig.publishedAt).getMonth() + 1) + "-" + new Date(articleConfig.publishedAt).getFullYear() + "\n                </div>\n            </div>\n        </div>\n    ";
 }
 
 /***/ }),

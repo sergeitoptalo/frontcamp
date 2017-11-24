@@ -9,6 +9,6 @@ export const config = [
     },
     {
         'title': 'News 3',
-        'source': 3
+        'source': 'axios'
     },
 ];
