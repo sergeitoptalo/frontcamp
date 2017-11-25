@@ -1,6 +1,6 @@
-export function articlesApi(source) {
+export function articlesApi(source, apiKey) {
     return fetch(
-        `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=1de7e5223cf14337a6dd0e1330b80c7f`,
+        `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${apiKey}`,
         { method: 'GET' }
     );
 }

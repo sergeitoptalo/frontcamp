@@ -14,7 +14,7 @@ export function renderArticle(articleConfig) {
                 ${articleConfig.author ? `
                     <div class="article-author">
                         ${articleConfig.author}
-                </div>` : ` 
+                    </div>` : ` 
                     <div></div>
                 `
                 }

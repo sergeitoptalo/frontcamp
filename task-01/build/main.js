@@ -78,18 +78,24 @@ var _newsChannel = __webpack_require__(3);
 
 var _newsChannel2 = _interopRequireDefault(_newsChannel);
 
-var _toggleMenu = __webpack_require__(8);
+var _menuToggle = __webpack_require__(8);
+
+var _menuToggle2 = _interopRequireDefault(_menuToggle);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener('DOMContentLoaded', function () {
     var channelsListContainer = document.querySelector('#channels-list-container');
-    var list = (0, _list.renderChannelList)(channelsListContainer);
+    var channelsList = (0, _list.renderChannelList)(channelsListContainer);
     _config.config.forEach(function (newsChannel) {
-        return new _newsChannel2.default(newsChannel).render(list);
+        return new _newsChannel2.default(newsChannel).render(channelsList);
     });
     var chooseChannelButton = document.querySelector('#choose-channel-button');
-    (0, _toggleMenu.addToggle)();
+    //addToggle();
+    var toggles = document.querySelectorAll('[data-toggle-target]');
+    Array.from(toggles).forEach(function (toggle) {
+        return new _menuToggle2.default(toggle).createToggle();
+    });
 });
 
 /***/ }),
@@ -109,8 +115,11 @@ var config = exports.config = [{
     'title': 'Daily Mail',
     'source': 'daily-mail'
 }, {
-    'title': 'News 3',
-    'source': 'axios'
+    'title': 'Google News',
+    'source': 'google-news'
+}, {
+    'title': 'National Geographic',
+    'source': 'national-geographic'
 }];
 
 /***/ }),
@@ -146,13 +155,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _listItem = __webpack_require__(4);
-
-var _article = __webpack_require__(5);
-
-var _newsContainer = __webpack_require__(6);
+var _newsContainer = __webpack_require__(4);
 
 var _newsContainer2 = _interopRequireDefault(_newsContainer);
+
+var _listItem = __webpack_require__(6);
+
+var _article = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -161,7 +170,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-//import { articleTemplate } from '../templates/article.template';
 
 var NewsChannel = function (_NewsContainer) {
     _inherits(NewsChannel, _NewsContainer);
@@ -196,20 +204,19 @@ var NewsChannel = function (_NewsContainer) {
             });
         }
     }, {
-        key: 'render',
-        value: function render(container) {
-            var listItem = (0, _listItem.renderListItem)(container);
-            this.renderChannelButton(listItem);
-        }
-    }, {
         key: 'renderNews',
         value: function renderNews(data, container) {
-            //container.innerHTML = ``;
             var pageMarkup = '';
             data.forEach(function (article) {
                 pageMarkup += (0, _article.renderArticle)(article);
             });
             container.innerHTML = pageMarkup;
+        }
+    }, {
+        key: 'render',
+        value: function render(container) {
+            var listItem = (0, _listItem.renderListItem)(container);
+            this.renderChannelButton(listItem);
         }
     }]);
 
@@ -228,57 +235,26 @@ exports.default = NewsChannel;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.renderListItem = renderListItem;
-function renderListItem(list) {
-    var listItemElement = document.createElement('li');
-    var listItem = list.appendChild(listItemElement);
-
-    return listItem;
-}
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.renderArticle = renderArticle;
-function renderArticle(articleConfig) {
-    return "\n        <div class=\"article\">\n            <div class=\"article-image-container\">\n                <img src=" + articleConfig.urlToImage + " />\n            </div>\n            <div class=\"article-text\">\n                <h3>\n                    <a href=\"" + articleConfig.url + "\" target=\"_blank\">" + articleConfig.title + "</a>\n                </h3>\n                <div class=\"article-date\">\n                    " + new Date(articleConfig.publishedAt).getDate() + "-" + (new Date(articleConfig.publishedAt).getMonth() + 1) + "-" + new Date(articleConfig.publishedAt).getFullYear() + "\n                </div>\n                " + (articleConfig.author ? "\n                    <div class=\"article-author\">\n                        " + articleConfig.author + "\n                </div>" : " \n                    <div></div>\n                ") + "\n                <p class=\"article-description\">\n                    " + articleConfig.description + "\n                </p>\n            </div>\n        </div>\n    ";
-}
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _articlesApi = __webpack_require__(7);
+var _articlesApi = __webpack_require__(5);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var newsContainer = function () {
     function newsContainer() {
         _classCallCheck(this, newsContainer);
+
+        this.apiKey = '1de7e5223cf14337a6dd0e1330b80c7f';
     }
 
     _createClass(newsContainer, [{
         key: 'getArticles',
-        value: function getArticles(key, section) {
+        value: function getArticles(source, section) {
             var _this = this;
 
-            var articles = (0, _articlesApi.articlesApi)(key).then(function (response) {
+            var articles = (0, _articlesApi.articlesApi)(source, this.apiKey).then(function (response) {
                 return response.json();
             }).then(function (data) {
                 var container = _this.getArticlesContainer();
@@ -298,7 +274,7 @@ var newsContainer = function () {
 exports.default = newsContainer;
 
 /***/ }),
-/* 7 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -308,8 +284,41 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.articlesApi = articlesApi;
-function articlesApi(source) {
-    return fetch('https://newsapi.org/v2/top-headlines?sources=' + source + '&apiKey=1de7e5223cf14337a6dd0e1330b80c7f', { method: 'GET' });
+function articlesApi(source, apiKey) {
+    return fetch('https://newsapi.org/v2/top-headlines?sources=' + source + '&apiKey=' + apiKey, { method: 'GET' });
+}
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.renderListItem = renderListItem;
+function renderListItem(list) {
+    var listItemElement = document.createElement('li');
+    var listItem = list.appendChild(listItemElement);
+
+    return listItem;
+}
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.renderArticle = renderArticle;
+function renderArticle(articleConfig) {
+    return "\n        <div class=\"article\">\n            <div class=\"article-image-container\">\n                <img src=" + articleConfig.urlToImage + " />\n            </div>\n            <div class=\"article-text\">\n                <h3>\n                    <a href=\"" + articleConfig.url + "\" target=\"_blank\">" + articleConfig.title + "</a>\n                </h3>\n                <div class=\"article-date\">\n                    " + new Date(articleConfig.publishedAt).getDate() + "-" + (new Date(articleConfig.publishedAt).getMonth() + 1) + "-" + new Date(articleConfig.publishedAt).getFullYear() + "\n                </div>\n                " + (articleConfig.author ? "\n                    <div class=\"article-author\">\n                        " + articleConfig.author + "\n                    </div>" : " \n                    <div></div>\n                ") + "\n                <p class=\"article-description\">\n                    " + articleConfig.description + "\n                </p>\n            </div>\n        </div>\n    ";
 }
 
 /***/ }),
@@ -322,24 +331,61 @@ function articlesApi(source) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.addToggle = addToggle;
-function addToggle() {
-    var toggles = document.querySelectorAll('[data-toggle-target]');
-    Array.from(toggles).forEach(function (toggle) {
-        toggle.addEventListener('click', function (event) {
-            var toggledElement = document.getElementById(toggle.dataset.toggleTarget);
-            if (toggledElement.dataset.toggle === 'expanded') {
-                toggledElement.classList.add('collapsed');
-                toggledElement.classList.remove('expanded');
-                toggledElement.dataset.toggle = 'collapsed';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var MenuToggle = function () {
+    function MenuToggle(toggle) {
+        _classCallCheck(this, MenuToggle);
+
+        this.toggle = toggle;
+        this.toggledElement = document.getElementById(this.toggle.dataset.toggleTarget);
+        this.expandedClassName = 'expanded';
+        this.collapsedClassName = 'collapsed';
+        this.expanded = false;
+        this.collapsed = true;
+    }
+
+    _createClass(MenuToggle, [{
+        key: 'changeToggleState',
+        value: function changeToggleState() {
+            if (this.expanded) {
+                this.toggledElement.classList.add(this.collapsedClassName);
+                this.toggledElement.classList.remove(this.expandedClassName);
             } else {
-                toggledElement.classList.add('expanded');
-                toggledElement.classList.remove('collapsed');
-                toggledElement.dataset.toggle = 'expanded';
+                this.toggledElement.classList.add(this.expandedClassName);
+                this.toggledElement.classList.remove(this.collapsedClassName);
             }
-        });
-    });
-}
+            this.expanded = !this.expanded;
+            this.collapsed = !this.collapsed;
+
+            /* if (this.toggledElement.dataset.toggle === 'expanded') {
+                this.toggledElement.classList.add('collapsed');
+                this.toggledElement.classList.remove('expanded');
+                this.toggledElement.dataset.toggle = 'collapsed';
+            } else {
+                this.toggledElement.classList.add('expanded');
+                this.toggledElement.classList.remove('collapsed');
+                this.toggledElement.dataset.toggle = 'expanded';
+            } */
+        }
+    }, {
+        key: 'createToggle',
+        value: function createToggle() {
+            var _this = this;
+
+            this.toggle.addEventListener('click', function () {
+                _this.changeToggleState();
+            });
+        }
+    }]);
+
+    return MenuToggle;
+}();
+
+exports.default = MenuToggle;
 
 /***/ })
 /******/ ]);

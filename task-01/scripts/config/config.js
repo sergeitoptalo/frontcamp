@@ -8,7 +8,11 @@ export const config = [
         'source': 'daily-mail'
     },
     {
-        'title': 'News 3',
-        'source': 'axios'
+        'title': 'Google News',
+        'source': 'google-news'
     },
+    {
+        'title': 'National Geographic',
+        'source': 'national-geographic'
+    }
 ];

@@ -1,8 +1,6 @@
+import NewsContainer from '../containers/newsContainer';
 import { renderListItem } from '../containers/listItem';
 import { renderArticle } from '../templates/article.template';
-//import { articleTemplate } from '../templates/article.template';
-
-import NewsContainer from '../containers/newsContainer';
 
 export default class NewsChannel extends NewsContainer {
     constructor(channelConfig) {
@@ -24,17 +22,16 @@ export default class NewsChannel extends NewsContainer {
         button.addEventListener('click', () => { this.getArticles() });
     }
 
-    render(container) {
-        let listItem = renderListItem(container);
-        this.renderChannelButton(listItem);
-    }
-
     renderNews(data, container) {
-        //container.innerHTML = ``;
         let pageMarkup = ``;
         data.forEach(article => {
             pageMarkup += renderArticle(article);
         });
         container.innerHTML = pageMarkup;
+    }
+
+    render(container) {
+        let listItem = renderListItem(container);
+        this.renderChannelButton(listItem);
     }
 }

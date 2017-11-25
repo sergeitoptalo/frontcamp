@@ -1,3 +1,4 @@
+/*--- COMMON STYLES ---*/
 * {
     box-sizing: border-box;
 }
@@ -17,13 +18,14 @@ p {
     margin: 0;
 }
 
+/*--- FOOTER to bottom ---*/
 .page-wrapper {
     height: 100%;
 }
 
 .root {
-    min-height: 100%;
     box-sizing: border-box;
+    min-height: 100%;
     padding-bottom: 40px;
 }
 
@@ -36,12 +38,13 @@ p {
     padding: 12px;
 }
 
+/*--- HEADER ---*/
 .app-header {
     background-color: #ffa100;
+    box-shadow: -1px 5px 2px -5px rgba(0,0,0,0.75);
     padding: 20px;
     -webkit-box-shadow: -1px 5px 2px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: -1px 5px 2px -5px rgba(0,0,0,0.75);
-    box-shadow: -1px 5px 2px -5px rgba(0,0,0,0.75);
 }
 
 .header-logo {
@@ -50,6 +53,7 @@ p {
     text-transform: uppercase;
 }
 
+/*--- CHANNELS LIST ---*/
 .channels-list-container {
     float: left;
 }
@@ -80,13 +84,13 @@ p {
 }
 
 .choose-channel-button {
-    display: none;
     border: 0;
     border-radius: 0;
     background-color: #ffa100;
+    color: #fff;
+    display: none;
     font-family: 'Roboto', sans-serif;
     font-size: 12px;
-    color: #fff;
     padding: 8px;
     text-transform: uppercase;
 }
@@ -100,19 +104,18 @@ p {
 }
 
 .news-container {
-    width: 800px;
     margin: 10px auto;
+    width: 800px;
 }
 
 
 /*--- ARTICLE ---*/
-
 .article {
     background: #fff;
-    width: 100%;
     margin-bottom: 20px;
     overflow: hidden;
     padding: 10px;
+    width: 100%;
 }
 
 .article-image-container {
@@ -152,8 +155,8 @@ p {
 
 .article-author,
 .article-date {
-    font-size: 12px;
     color: #8a8a8a;
+    font-size: 12px;
 }
 
 
@@ -179,11 +182,11 @@ p {
     }
 
     .choose-channel-button {
+        box-shadow: 0px -4px 5px -4px rgba(0,0,0,0.75);
         display: block;
         width: 100%;
         -webkit-box-shadow: 0px -4px 5px -4px rgba(0,0,0,0.75);
         -moz-box-shadow: 0px -4px 5px -4px rgba(0,0,0,0.75);
-        box-shadow: 0px -4px 5px -4px rgba(0,0,0,0.75);
     }
 
     .channels-list-container .collapsed {
