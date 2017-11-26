@@ -87,12 +87,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 document.addEventListener('DOMContentLoaded', function () {
     var channelsListContainer = document.querySelector('#channels-list-container');
     var channelsList = (0, _list.renderChannelList)(channelsListContainer);
+
     _config.config.forEach(function (newsChannel) {
         return new _newsChannel2.default(newsChannel).render(channelsList);
     });
+
     var chooseChannelButton = document.querySelector('#choose-channel-button');
-    //addToggle();
     var toggles = document.querySelectorAll('[data-toggle-target]');
+
     Array.from(toggles).forEach(function (toggle) {
         return new _menuToggle2.default(toggle).createToggle();
     });
@@ -360,16 +362,6 @@ var MenuToggle = function () {
             }
             this.expanded = !this.expanded;
             this.collapsed = !this.collapsed;
-
-            /* if (this.toggledElement.dataset.toggle === 'expanded') {
-                this.toggledElement.classList.add('collapsed');
-                this.toggledElement.classList.remove('expanded');
-                this.toggledElement.dataset.toggle = 'collapsed';
-            } else {
-                this.toggledElement.classList.add('expanded');
-                this.toggledElement.classList.remove('collapsed');
-                this.toggledElement.dataset.toggle = 'expanded';
-            } */
         }
     }, {
         key: 'createToggle',
