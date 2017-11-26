@@ -1,14 +1,18 @@
 export const config = [
     {
         'title': 'BBC News',
-        'key': 1
+        'source': 'bbc-news'
     },
     {
-        'title': 'News 2',
-        'key': 2
+        'title': 'Daily Mail',
+        'source': 'daily-mail'
     },
     {
-        'title': 'News 3',
-        'key': 3
+        'title': 'Google News',
+        'source': 'google-news'
     },
+    {
+        'title': 'National Geographic',
+        'source': 'national-geographic'
+    }
 ];
