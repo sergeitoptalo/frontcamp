@@ -84,6 +84,8 @@ var _menuToggle2 = _interopRequireDefault(_menuToggle);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 document.addEventListener('DOMContentLoaded', function () {
     var channelsListContainer = document.querySelector('#channels-list-container');
     var channelsList = (0, _list.renderChannelList)(channelsListContainer);
@@ -95,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var chooseChannelButton = document.querySelector('#choose-channel-button');
     var toggles = document.querySelectorAll('[data-toggle-target]');
 
-    Array.from(toggles).forEach(function (toggle) {
+    [].concat(_toConsumableArray(toggles)).forEach(function (toggle) {
         return new _menuToggle2.default(toggle).createToggle();
     });
 });
@@ -176,13 +178,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var NewsChannel = function (_NewsContainer) {
     _inherits(NewsChannel, _NewsContainer);
 
-    function NewsChannel(channelConfig) {
+    function NewsChannel() {
+        var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : channelConfig,
+            title = _ref.title,
+            source = _ref.source;
+
         _classCallCheck(this, NewsChannel);
 
         var _this = _possibleConstructorReturn(this, (NewsChannel.__proto__ || Object.getPrototypeOf(NewsChannel)).call(this));
 
-        _this.title = channelConfig.title;
-        _this.source = channelConfig.source;
+        _this.title = title;
+        _this.source = source;
         _this.newsSection = null;
         return _this;
     }
@@ -260,7 +266,9 @@ var newsContainer = function () {
                 return response.json();
             }).then(function (data) {
                 var container = _this.getArticlesContainer();
-                section.renderNews(data.articles, container);
+                var articles = data.articles;
+
+                section.renderNews(articles, container);
             });
         }
     }, {
@@ -320,7 +328,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.renderArticle = renderArticle;
 function renderArticle(articleConfig) {
-    return "\n        <div class=\"article\">\n            <div class=\"article-image-container\">\n                <img src=" + articleConfig.urlToImage + " />\n            </div>\n            <div class=\"article-text\">\n                <h3>\n                    <a href=\"" + articleConfig.url + "\" target=\"_blank\">" + articleConfig.title + "</a>\n                </h3>\n                <div class=\"article-date\">\n                    " + new Date(articleConfig.publishedAt).getDate() + "-" + (new Date(articleConfig.publishedAt).getMonth() + 1) + "-" + new Date(articleConfig.publishedAt).getFullYear() + "\n                </div>\n                " + (articleConfig.author ? "\n                    <div class=\"article-author\">\n                        " + articleConfig.author + "\n                    </div>" : " \n                    <div></div>\n                ") + "\n                <p class=\"article-description\">\n                    " + articleConfig.description + "\n                </p>\n            </div>\n        </div>\n    ";
+    var urlToImage = articleConfig.urlToImage,
+        url = articleConfig.url,
+        title = articleConfig.title,
+        publishedAt = articleConfig.publishedAt,
+        author = articleConfig.author,
+        description = articleConfig.description;
+
+
+    return "\n        <div class=\"article\">\n            <div class=\"article-image-container\">\n                <img src=" + urlToImage + " />\n            </div>\n            <div class=\"article-text\">\n                <h3>\n                    <a href=\"" + url + "\" target=\"_blank\">" + title + "</a>\n                </h3>\n                <div class=\"article-date\">\n                    " + new Date(publishedAt).getDate() + "-" + (new Date(publishedAt).getMonth() + 1) + "-" + new Date(publishedAt).getFullYear() + "\n                </div>\n                " + (author ? "\n                    <div class=\"article-author\">\n                        " + author + "\n                    </div>" : " \n                    <div></div>\n                ") + "\n                <p class=\"article-description\">\n                    " + description + "\n                </p>\n            </div>\n        </div>\n    ";
 }
 
 /***/ }),

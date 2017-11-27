@@ -3,10 +3,10 @@ import { renderListItem } from '../containers/listItem';
 import { renderArticle } from '../templates/article.template';
 
 export default class NewsChannel extends NewsContainer {
-    constructor(channelConfig) {
+    constructor({ title, source } = channelConfig) {
         super();
-        this.title = channelConfig.title;
-        this.source = channelConfig.source;
+        this.title = title;
+        this.source = source;
         this.newsSection = null;
     }
 
