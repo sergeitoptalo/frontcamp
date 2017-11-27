@@ -1,25 +1,34 @@
 export function renderArticle(articleConfig) {
-        return `
+    let {
+        urlToImage,
+        url,
+        title,
+        publishedAt,
+        author,
+        description
+    } = articleConfig;
+
+    return `
         <div class="article">
             <div class="article-image-container">
-                <img src=${articleConfig.urlToImage} />
+                <img src=${urlToImage} />
             </div>
             <div class="article-text">
                 <h3>
-                    <a href="${articleConfig.url}" target="_blank">${articleConfig.title}</a>
+                    <a href="${url}" target="_blank">${title}</a>
                 </h3>
                 <div class="article-date">
-                    ${new Date(articleConfig.publishedAt).getDate()}-${new Date(articleConfig.publishedAt).getMonth() + 1}-${new Date(articleConfig.publishedAt).getFullYear()}
+                    ${new Date(publishedAt).getDate()}-${new Date(publishedAt).getMonth() + 1}-${new Date(publishedAt).getFullYear()}
                 </div>
-                ${articleConfig.author ? `
+                ${author ? `
                     <div class="article-author">
-                        ${articleConfig.author}
+                        ${author}
                     </div>` : ` 
                     <div></div>
                 `
-                }
+        }
                 <p class="article-description">
-                    ${articleConfig.description}
+                    ${description}
                 </p>
             </div>
         </div>

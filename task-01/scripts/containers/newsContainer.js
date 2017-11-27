@@ -12,7 +12,8 @@ export default class newsContainer {
         })
         .then(data => {
             let container = this.getArticlesContainer();
-            section.renderNews(data.articles, container);
+            let { articles } = data;
+            section.renderNews(articles, container);
         })
     }
 
