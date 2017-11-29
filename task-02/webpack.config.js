@@ -1,8 +1,9 @@
 var path = require('path');
 var webpack = require('webpack');
+require("babel-polyfill");
 
 module.exports = {
-    entry: './scripts/index.js',
+    entry: ["babel-polyfill", './scripts/index.js'],
     output: {
         path: path.resolve(__dirname, 'build'),
         publicPath: "/assets/",
