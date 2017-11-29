@@ -1,11 +1,11 @@
 var path = require('path');
 var webpack = require('webpack');
 require("babel-polyfill");
-require("element-dataset");
+require("whatwg-fetch");
 
 
 module.exports = {
-    entry: ["babel-polyfill", "element-dataset", './scripts/index.js'],
+    entry: ["babel-polyfill", "whatwg-fetch", './scripts/index.js'],
     output: {
         path: path.resolve(__dirname, 'build'),
         publicPath: "/assets/",
