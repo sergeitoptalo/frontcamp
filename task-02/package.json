@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "element-dataset": "^2.2.6",
     "gulp": "^3.9.1"
   }
 }
