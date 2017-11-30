@@ -1,7 +1,9 @@
+import elemDataset from 'elem-dataset';
+
 export default class MenuToggle {
     constructor(toggle) {
         this.toggle = toggle;
-        this.toggledElement = document.getElementById(this.toggle.dataset.toggleTarget);
+        this.toggledElement = document.getElementById(elemDataset(this.toggle).toggleTarget);
         this.expandedClassName = 'expanded';
         this.collapsedClassName = 'collapsed';
         this.expanded = false;
