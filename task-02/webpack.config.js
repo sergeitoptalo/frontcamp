@@ -5,7 +5,7 @@ require("whatwg-fetch");
 
 
 module.exports = {
-    entry: ["babel-polyfill", "whatwg-fetch", './scripts/index.js'],
+    entry: ["babel-polyfill", "whatwg-fetch", "./plugins/remove-console-log.plugin", './scripts/index.js'],
     output: {
         path: path.resolve(__dirname, 'build'),
         publicPath: "/assets/",

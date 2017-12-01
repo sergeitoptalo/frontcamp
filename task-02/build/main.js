@@ -3978,7 +3978,8 @@ module.exports = Math.scale || function scale(x, inLow, inHigh, outLow, outHigh)
 
 __webpack_require__(125);
 __webpack_require__(328);
-module.exports = __webpack_require__(329);
+__webpack_require__(329);
+module.exports = __webpack_require__(330);
 
 
 /***/ }),
@@ -10043,15 +10044,42 @@ module.exports = function (regExp, replace) {
 "use strict";
 
 
-var _config = __webpack_require__(330);
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-var _list = __webpack_require__(331);
+exports.default = function (_ref) {
+    var t = _ref.types;
 
-var _newsChannel = __webpack_require__(332);
+    return {
+        visitor: {
+            CallExpression: function CallExpression(path, _ref2) {
+                var options = _ref2.opts;
+
+                console.log(types);
+                console.log(path);
+                console.log(opts);
+            }
+        }
+    };
+};
+
+/***/ }),
+/* 330 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _config = __webpack_require__(331);
+
+var _list = __webpack_require__(332);
+
+var _newsChannel = __webpack_require__(333);
 
 var _newsChannel2 = _interopRequireDefault(_newsChannel);
 
-var _menuToggle = __webpack_require__(337);
+var _menuToggle = __webpack_require__(338);
 
 var _menuToggle2 = _interopRequireDefault(_menuToggle);
 
@@ -10076,7 +10104,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /***/ }),
-/* 330 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10100,7 +10128,7 @@ var config = exports.config = [{
 }];
 
 /***/ }),
-/* 331 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10118,7 +10146,7 @@ function renderChannelList(container) {
 }
 
 /***/ }),
-/* 332 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10132,13 +10160,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _newsContainer = __webpack_require__(333);
+var _newsContainer = __webpack_require__(334);
 
 var _newsContainer2 = _interopRequireDefault(_newsContainer);
 
-var _listItem = __webpack_require__(335);
+var _listItem = __webpack_require__(336);
 
-var _article = __webpack_require__(336);
+var _article = __webpack_require__(337);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10207,7 +10235,7 @@ var NewsChannel = function (_NewsContainer) {
 exports.default = NewsChannel;
 
 /***/ }),
-/* 333 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10219,7 +10247,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _articlesApi = __webpack_require__(334);
+var _articlesApi = __webpack_require__(335);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -10257,7 +10285,7 @@ var newsContainer = function () {
 exports.default = newsContainer;
 
 /***/ }),
-/* 334 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10272,7 +10300,7 @@ function articlesApi(source, apiKey) {
 }
 
 /***/ }),
-/* 335 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10290,7 +10318,7 @@ function renderListItem(list) {
 }
 
 /***/ }),
-/* 336 */
+/* 337 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10313,7 +10341,7 @@ function renderArticle(articleConfig) {
 }
 
 /***/ }),
-/* 337 */
+/* 338 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10325,7 +10353,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _elemDataset = __webpack_require__(338);
+var _elemDataset = __webpack_require__(339);
 
 var _elemDataset2 = _interopRequireDefault(_elemDataset);
 
@@ -10375,7 +10403,7 @@ var MenuToggle = function () {
 exports.default = MenuToggle;
 
 /***/ }),
-/* 338 */
+/* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
