@@ -13,5 +13,5 @@ document.addEventListener('DOMContentLoaded', () => {
     let toggles = document.querySelectorAll('[data-toggle-target]');
     
     [...toggles].forEach(toggle => new MenuToggle(toggle).createToggle());
-    //console.log('News app is running');
+    console.log('News app is running');
 });
