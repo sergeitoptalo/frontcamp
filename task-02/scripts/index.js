@@ -12,5 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let chooseChannelButton = document.querySelector('#choose-channel-button');
     let toggles = document.querySelectorAll('[data-toggle-target]');
     
-    [...toggles].forEach(toggle => new MenuToggle(toggle).createToggle())
+    [...toggles].forEach(toggle => new MenuToggle(toggle).createToggle());
+    console.log('News app is running');
 });
