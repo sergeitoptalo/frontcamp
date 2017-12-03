@@ -1,11 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
-require("babel-polyfill");
-require("whatwg-fetch");
-
+require('babel-polyfill');
+require('whatwg-fetch');
 
 module.exports = {
-    entry: ["babel-polyfill", "whatwg-fetch", "./plugins/remove-console-log.plugin", './scripts/index.js'],
+    entry: ['babel-polyfill', 'whatwg-fetch', './scripts/index.js'],
     output: {
         path: path.resolve(__dirname, 'build'),
         publicPath: "/assets/",
@@ -25,5 +24,5 @@ module.exports = {
     stats: {
         colors: true
     },
-    devtool: 'source-map'
+    devtool: 'source-map',
 };
