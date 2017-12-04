@@ -9352,7 +9352,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var toggles = document.querySelectorAll('[data-toggle-target]');
 
     [].concat(_toConsumableArray(toggles)).forEach(function (toggle) {return new _menuToggle2.default(toggle).createToggle();});
-
+    console.log('a');
 });
 
 /***/ }),
