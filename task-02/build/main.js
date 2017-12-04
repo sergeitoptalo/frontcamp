@@ -6221,7 +6221,7 @@ var onUnhandled = function onUnhandled(promise) {
         } else if (handler = global.onunhandledrejection) {
           handler({ promise: promise, reason: value });
         } else if ((console = global.console) && console.error) {
-          console.error('Unhandled promise rejection', value);
+
         }
       });
       // Browsers should not trigger `rejectionHandled` event if it was handled here, NodeJS - should
@@ -9352,7 +9352,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var toggles = document.querySelectorAll('[data-toggle-target]');
 
     [].concat(_toConsumableArray(toggles)).forEach(function (toggle) {return new _menuToggle2.default(toggle).createToggle();});
-    console.log('a');
+
 });
 
 /***/ }),
