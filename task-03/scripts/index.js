@@ -2,6 +2,7 @@ import { config } from './config/config';
 import { renderChannelList } from './containers/list';
 import NewsChannel from './components/newsChannel';
 import MenuToggle from './utilities/menuToggle';
+import '../styles/app.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
     let channelsListContainer = document.querySelector('#channels-list-container');
