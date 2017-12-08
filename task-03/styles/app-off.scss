@@ -1,0 +1,10 @@
+@import 'tools/colors';
+@import 'tools/shadows';
+@import 'base/typography';
+@import 'base/common';
+@import 'components/footer';
+@import 'components/header';
+
+.app-header {
+    background-color: gray;
+}

@@ -10,9 +10,15 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'build'),
         publicPath: "/build/",
-        filename: 'main.js'
+        filename: 'main.js',
+        chunkFilename: '[name].bundle.js'
     },
     watch: true,
+    resolveLoader: {
+        alias: {
+          'remove-number-attr-loader': path.join(__dirname, 'loaders', 'remove-number-attr-loader.js')
+        }
+      },
     module: {
         loaders: [
             {
@@ -21,6 +27,10 @@ module.exports = {
                 query: {
                     presets: ['es2015']
                 }
+            },
+            {
+                test: /\.json$/,
+                loader: 'remove-number-attr-loader',
             }
         ],
         rules: [
