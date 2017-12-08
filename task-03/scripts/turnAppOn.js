@@ -8,6 +8,14 @@ export default () => {
     let channelsListContainer = document.querySelector('#channels-list-container');
     let channelsList = renderChannelList(channelsListContainer);
 
+    let getConfig = fetch('./config/config.json')
+    .then(response => {
+        return response.json();
+    })
+    .then(data => {
+        console.log('data');
+    })
+
     config.forEach(newsChannel => new NewsChannel(newsChannel).render(channelsList));
 
     let chooseChannelButton = document.querySelector('#choose-channel-button');
