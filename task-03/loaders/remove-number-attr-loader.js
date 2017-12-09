@@ -1,3 +1,4 @@
 module.exports = function removeNumberAttrLoader(source) {
-    return JSON.stringify('a');
+    let a = JSON.stringify(source);
+    return `module.exports = ${a}`;
   }

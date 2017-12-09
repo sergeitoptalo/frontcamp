@@ -1,8 +1,16 @@
-import { config } from './config/config';
+//import { config } from './config/config';
 import { renderChannelList } from './containers/list';
 import NewsChannel from './components/newsChannel';
 import MenuToggle from './utilities/menuToggle';
 import '../styles/app-on.scss';
+
+let config = require ('./config/config.json');
+
+let b = JSON.parse(config);
+let array = [];
+Object.keys(b).forEach(key => {
+    array.push({ 'title': key, 'source': b[key]})
+})
 
 export default () => {
     let channelsListContainer = document.querySelector('#channels-list-container');

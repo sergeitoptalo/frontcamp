@@ -1,5 +1,6 @@
 
 import '../styles/app-off.scss';
+let config = require ('./config/config.json');
 
 if (!PRODUCTION) {
     console.log('DEVELOPMENT MODE');
