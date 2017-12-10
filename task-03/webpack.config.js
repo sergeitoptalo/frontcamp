@@ -29,12 +29,7 @@ module.exports = {
                 query: {
                     presets: ['es2015']
                 }
-            },
-/*             {
-                test: /\.md$/,
-                use: [{ loader: 'remove-number-attr-loader' }]
-                
-            } */
+            }
         ],
         rules: [
             {
@@ -62,7 +57,6 @@ module.exports = {
             {
                 test: /\.json$/,
                 loader: 'remove-number-attr-loader'
-                
             }
         ]
     },

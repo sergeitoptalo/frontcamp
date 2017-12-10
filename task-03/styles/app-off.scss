@@ -8,3 +8,21 @@
 .app-header {
     background-color: gray;
 }
+
+.choose-channel-button {
+    display: none;
+}
+
+.run-app-button {
+    background: lighten($orange, 50%);
+    cursor: pointer;
+    display: block;
+    font-size: 16px;
+    margin: 10px;
+    padding: 10px;
+    text-transform: uppercase;
+
+    &:hover {
+        background: $orange;
+    }
+}
