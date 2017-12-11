@@ -1,4 +1,3 @@
-
 import '../styles/app-off.scss';
 
 if (!PRODUCTION) {
@@ -10,9 +9,13 @@ if (PRODUCTION) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    let appOnOffButton = document.querySelector('#on-off-button');
-    appOnOffButton.onclick = e => import(/* webpackChunkName: "turnAppOn" */ './turnAppOn').then(module => {
+    let runAppButton = document.querySelector('#run-app-button');
+
+    let runAppCode = event => import(/* webpackChunkName: "runApp" */ './runApp').then(module => {
         var turnAppOn = module.default;
+        runAppButton.removeEventListener('click', runAppCode);
         turnAppOn();
     });
+
+    runAppButton.addEventListener('click', runAppCode);
 });

@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 require('babel-polyfill');
 require('whatwg-fetch');
+require('./loaders/remove-number-attr-loader.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
@@ -15,9 +16,10 @@ module.exports = {
     },
     watch: true,
     resolveLoader: {
-        alias: {
-          'remove-number-attr-loader': path.join(__dirname, 'loaders', 'remove-number-attr-loader.js')
-        }
+        modules: [
+          'node_modules',
+          path.resolve(__dirname, 'loaders')
+        ]
       },
     module: {
         loaders: [
@@ -27,10 +29,6 @@ module.exports = {
                 query: {
                     presets: ['es2015']
                 }
-            },
-            {
-                test: /\.json$/,
-                loader: 'remove-number-attr-loader',
             }
         ],
         rules: [
@@ -55,6 +53,10 @@ module.exports = {
                         }
                     ]
                 })
+            },
+            {
+                test: /\.json$/,
+                loader: 'remove-number-attr-loader'
             }
         ]
     },
