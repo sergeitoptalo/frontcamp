@@ -9573,14 +9573,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__styles_app_off_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__styles_app_off_scss__);
 
 
-if (!PRODUCTION) {
-    console.log('DEVELOPMENT MODE');
-}
-
-if (PRODUCTION) {
-    console.log('PRODUCTION MODE');
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     let runAppButton = document.querySelector('#run-app-button');
 
