@@ -1,0 +1,71 @@
+.channels-list-container {
+    float: left;
+}
+
+.channels-list-container ul {
+    margin: 0;
+    padding: 10px;
+}
+
+.channels-list-container ul li {
+    display: block;
+    list-style: none;
+}
+
+.channels-list-container ul li button {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    text-align: left;
+    width: 100%
+}
+
+.channels-list-container ul li button:hover {
+    background: $channels-list-button-hover;
+}
+
+.channels-list-container .expanded {
+    display: block;
+}
+
+.channels-list-container .collapsed {
+    display: block;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+    .channels-list-container {
+        background: #ffdda3;
+        display: none;
+    }
+
+    .channels-list-container.expanded {
+        display: block;
+        float: none;
+    }
+
+    .channels-list-container .collapsed {
+        display: none;
+    }
+
+    .choose-channel-button {
+        box-shadow: 0px -4px 5px -4px rgba(0,0,0,0.75);
+        display: block;
+        width: 100%;
+        -webkit-box-shadow: 0px -4px 5px -4px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px -4px 5px -4px rgba(0,0,0,0.75);
+    }
+
+    .channels-list-container .collapsed {
+        display: none;
+    }
+
+    .news-container {
+        padding: 10px 20px;
+        width: 100%;
+    }
+}

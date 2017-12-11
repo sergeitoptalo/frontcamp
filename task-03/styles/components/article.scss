@@ -1,0 +1,61 @@
+.article {
+    background: #fff;
+    margin-bottom: 20px;
+    overflow: hidden;
+    padding: 10px;
+    width: 100%;
+}
+
+.article-image-container {
+    display: table-cell;
+    font-size: 0;
+    padding-right: 10px;
+    vertical-align: top;
+}
+
+.article-image-container > img {
+    width: 200px;
+}
+
+.article-text {
+    display: table-cell;
+    width: 100%;
+}
+
+.article h3 {
+    font-size: 17px;
+    margin: 0 0 5px 0;
+}
+
+.article h3 a {
+    color: $orange;
+    text-decoration: none;
+}
+
+.article h3 a:hover {
+    text-decoration: underline;
+}
+
+.article-description {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.article-author,
+.article-date {
+    color: $additional-text-color;
+    font-size: 12px;
+}
+
+
+@media screen and (max-width: 600px) {
+    .article-image-container > img {
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .article-image-container {
+        display: none;
+    }
+}
