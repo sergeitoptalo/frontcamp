@@ -9,7 +9,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
     entry: ['babel-polyfill', 'whatwg-fetch', './scripts/index.js'],
     output: {
-        path: path.resolve(__dirname, 'build'),
+        path: path.resolve(__dirname, 'frontcamp/task-03/build'),
         publicPath: "build/",
         filename: 'main.js',
         chunkFilename: '[name].bundle.js'
