@@ -5,7 +5,7 @@ export default class AppView extends BaseView {
         return this.toHtml(
             `${state.appIsRunning ? 
             `app is running` :
-            `<button>Turn On</button>`
+            `<button data-action="click: RunApp">Turn On</button>`
             }
             `
         )
