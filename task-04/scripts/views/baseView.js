@@ -3,10 +3,19 @@ class BaseView {
         this.container;
     }
 
-    getElement(state) {
+    updateView(state) {
         let container = document.createElement('div');
         this.container = container;
-        this.container.appendChild(this.render(state))
+        this.container.appendChild(this.render(state));
+        let actionHolders = this.container.querySelectorAll('[data-action]');
+
+        actionHolders.forEach(element => {
+            let event = element.dataset.action.split(':')[0];
+            element.addEventListener(event, () => {
+                alert(event);
+            })
+        })
+
         return this.container;
     }
 

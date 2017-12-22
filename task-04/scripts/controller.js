@@ -19,7 +19,7 @@ export default class Controller {
         dispatcher.subscribe(actionResult => {
             let currentState = Object.assign({}, store.state);
         });
-        this.attachView(appView.getElement(store.state));
+        this.attachView(appView.updateView(store.state));
     }
 
     attachView(container) {
