@@ -1,4 +1,4 @@
-class RunApp {
+class AddChannels {
     constructor(dispatcher) {
         this.dispatcher = dispatcher;
     }
@@ -6,10 +6,10 @@ class RunApp {
     execute(data) {
         let _this = this;
         _this.dispatcher.dispatch({
-            actionType: 'run-app',
-            element: data.target
+            actionType: 'add-channels',
+            channels: data
         });
     };
 };
 
-module.exports = RunApp;
+module.exports = AddChannels;

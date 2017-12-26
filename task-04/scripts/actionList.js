@@ -1,5 +1,6 @@
 let actions = {
-    'RunApp': require('./actions/runApp.js')
+    'RunApp': require('./actions/runApp.js'),
+    'AddChannels': require('./actions/addChannels.js')
 }
 
 export default class ActionList {
@@ -12,7 +13,7 @@ export default class ActionList {
         this.actions[action] = new actions[action](this.dispatcher);
     }
 
-    getByName(actionName, event) {
-        this.actions[actionName].execute();
+    getActionByName(actionName, event) {
+        this.actions[actionName].execute(event);
     }
 }

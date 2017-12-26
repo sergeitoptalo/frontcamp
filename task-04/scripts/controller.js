@@ -4,22 +4,22 @@ import AppView from './views/appView.js';
 import ActionList from './actionList.js';
 
 export default class Controller {
-    constructor() {
-
-    }
-
     renderApp() {
         let dispatcher = new Dispatcher();
         let store = new Store({
             appIsRunning: false
         });
-        let appView = new AppView();
         let actionList = new ActionList(dispatcher);
+        window.actionList = actionList;
+        let appView = new AppView(actionList);
         actionList.register('RunApp');
+        actionList.register('AddChannels');
         dispatcher.subscribe(actionResult => {
             let currentState = Object.assign({}, store.state);
+            store.setNextState(actionResult);
+            this.attachView(appView.updateView(store.getState(), currentState));
         });
-        this.attachView(appView.updateView(store.state));
+        this.attachView(appView.updateView(store.getState()));
     }
 
     attachView(container) {

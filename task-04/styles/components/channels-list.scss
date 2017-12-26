@@ -27,11 +27,11 @@
     background: $channels-list-button-hover;
 }
 
-.channels-list-container .expanded {
+.channels-list-container.expanded {
     display: block;
 }
 
-.channels-list-container .collapsed {
+.channels-list-container.collapsed {
     display: block;
 }
 
@@ -48,7 +48,7 @@
         float: none;
     }
 
-    .channels-list-container .collapsed {
+    .channels-list-container.collapsed {
         display: none;
     }
 

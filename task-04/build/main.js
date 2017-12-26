@@ -1,6 +1,36 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	var parentJsonpFunction = window["webpackJsonp"];
+/******/ 	window["webpackJsonp"] = function webpackJsonpCallback(chunkIds, moreModules, executeModules) {
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [], result;
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(chunkIds, moreModules, executeModules);
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// objects to store loaded and loading chunks
+/******/ 	var installedChunks = {
+/******/ 		1: 0
+/******/ 	};
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -26,6 +56,55 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData === 0) {
+/******/ 			return new Promise(function(resolve) { resolve(); });
+/******/ 		}
+/******/
+/******/ 		// a Promise means "currently loading".
+/******/ 		if(installedChunkData) {
+/******/ 			return installedChunkData[2];
+/******/ 		}
+/******/
+/******/ 		// setup Promise in chunk cache
+/******/ 		var promise = new Promise(function(resolve, reject) {
+/******/ 			installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 		});
+/******/ 		installedChunkData[2] = promise;
+/******/
+/******/ 		// start chunk loading
+/******/ 		var head = document.getElementsByTagName('head')[0];
+/******/ 		var script = document.createElement('script');
+/******/ 		script.type = 'text/javascript';
+/******/ 		script.charset = 'utf-8';
+/******/ 		script.async = true;
+/******/ 		script.timeout = 120000;
+/******/
+/******/ 		if (__webpack_require__.nc) {
+/******/ 			script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 		}
+/******/ 		script.src = __webpack_require__.p + "" + ({"0":"runApp"}[chunkId]||chunkId) + ".bundle.js";
+/******/ 		var timeout = setTimeout(onScriptComplete, 120000);
+/******/ 		script.onerror = script.onload = onScriptComplete;
+/******/ 		function onScriptComplete() {
+/******/ 			// avoid mem leaks in IE.
+/******/ 			script.onerror = script.onload = null;
+/******/ 			clearTimeout(timeout);
+/******/ 			var chunk = installedChunks[chunkId];
+/******/ 			if(chunk !== 0) {
+/******/ 				if(chunk) {
+/******/ 					chunk[1](new Error('Loading chunk ' + chunkId + ' failed.'));
+/******/ 				}
+/******/ 				installedChunks[chunkId] = undefined;
+/******/ 			}
+/******/ 		};
+/******/ 		head.appendChild(script);
+/******/
+/******/ 		return promise;
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -58,6 +137,9 @@
 /******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/build/";
+/******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 124);
@@ -9488,6 +9570,9 @@ module.exports = function (regExp, replace) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__controller_js__ = __webpack_require__(329);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_app_off_scss__ = __webpack_require__(340);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_app_off_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__styles_app_off_scss__);
+
 
 
 if (!PRODUCTION) {
@@ -9508,32 +9593,30 @@ new __WEBPACK_IMPORTED_MODULE_0__controller_js__["a" /* default */]().renderApp(
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dispatcher_js__ = __webpack_require__(330);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_js__ = __webpack_require__(331);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_appView_js__ = __webpack_require__(332);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actionList_js__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_appView_js__ = __webpack_require__(333);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actionList_js__ = __webpack_require__(337);
 
 
 
 
 
 class Controller {
-    constructor() {
-
-    }
-
     renderApp() {
         let dispatcher = new __WEBPACK_IMPORTED_MODULE_0__dispatcher_js__["a" /* default */]();
         let store = new __WEBPACK_IMPORTED_MODULE_1__store_js__["a" /* default */]({
             appIsRunning: false
         });
-        let appView = new __WEBPACK_IMPORTED_MODULE_2__views_appView_js__["a" /* default */]();
         let actionList = new __WEBPACK_IMPORTED_MODULE_3__actionList_js__["a" /* default */](dispatcher);
+        window.actionList = actionList;
+        let appView = new __WEBPACK_IMPORTED_MODULE_2__views_appView_js__["a" /* default */](actionList);
         actionList.register('RunApp');
+        actionList.register('AddChannels');
         dispatcher.subscribe(actionResult => {
             let currentState = Object.assign({}, store.state);
-            store.nextState(actionResult);
-            //this.attachView(appView.getElement(store.getState(), currentState));
+            store.setNextState(actionResult);
+            this.attachView(appView.updateView(store.getState(), currentState));
         });
-        this.attachView(appView.getElement);
+        this.attachView(appView.updateView(store.getState()));
     }
 
     attachView(container) {
@@ -9582,9 +9665,26 @@ class Store {
         return Object.assign({}, this.state);;
     };
 
-    nextState(actionResult) {
+    setNextState(actionResult) {
+        switch (actionResult.actionType) {
+            case 'run-app': {
+                this.state.appIsRunning = true;
+                let runAppCode = event => __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 341)).then(module => {
+                    var turnAppOn = module.default;
+                    actionResult.element.removeEventListener('click', runAppCode);
+                    turnAppOn();
+                });
+                runAppCode();
+                break;
+            }
+            case 'add-channels': {
+                this.state.channels = actionResult.channels;
+                break;
+            }
 
-    };
+        }
+    }
+
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Store;
 ;
@@ -9592,22 +9692,42 @@ class Store {
 
 
 /***/ }),
-/* 332 */
+/* 332 */,
+/* 333 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseView__ = __webpack_require__(333);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseView___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__baseView__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseView_js__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__channelsList_js__ = __webpack_require__(336);
 
 
-class AppView extends __WEBPACK_IMPORTED_MODULE_0__baseView___default.a {
+
+class AppView extends __WEBPACK_IMPORTED_MODULE_0__baseView_js__["a" /* default */] {
     render(state) {
-        return this.render(
-            `${state.appIsRunning ? 
-            `app is running` :
-            `<button>Turn On</button>`
-            }
-            `
+        return this.toHtml(
+            `<div class="page-wrapper">
+            <div id="root" class="root">
+                <header class="${!state.appIsRunning ? `app-off `: ``}app-header">
+                    <div class="header-logo">
+                        News
+                    </div>
+                </header>
+                <button id="run-app-button" class="${!state.appIsRunning ? `app-off `: ``}run-app-button" data-action="click: RunApp">Run App</button>
+                <div id="channels-list-container" class="channels-list-container">
+                 ${state.channels ? Object(__WEBPACK_IMPORTED_MODULE_1__channelsList_js__["a" /* addChannelsListMarkup */])(state.channels) : ``}
+                </div>
+                <div>
+                    <button id="choose-channel-button" class="${!state.appIsRunning ? `app-off `: ``}choose-channel-button" data-toggle-target="channels-list-container">Choose channel</button>
+                </div>
+                <div id="news-container" class="news-container"></div>
+            </div>
+            <footer class="page-footer">
+                <p>
+                    &copy; Powered by
+                    <a href="https://newsapi.org" target="_blank">NewsAPI.org</a>
+                </p>
+            </footer>
+        </div>`
         )
     }
 }
@@ -9616,36 +9736,119 @@ class AppView extends __WEBPACK_IMPORTED_MODULE_0__baseView___default.a {
 
 
 /***/ }),
-/* 333 */
-/***/ (function(module, exports) {
-
-class BaseView {
-    constructor() {
-        this.container;
-    }
-
-    getElement() {
-        let container = document.createElement('div');
-        this.container = container;
-        return this.container;
-    }
-
-    render(htmlString) {
-        let div = document.createElement('div');
-        div.innerHTML = htmlString;
-    }
-}
-
-module.exports = BaseView;
-
-
-/***/ }),
 /* 334 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_statesComparsion__ = __webpack_require__(335);
+
+
+class BaseView {
+    constructor(actionList) {
+        this.container;
+        //this.actionList = actionList;
+    }
+
+    updateView(state, currentState) {
+        let _this = this;
+
+        if (currentState) {
+            this.state = currentState;
+        }
+
+        if (Object(__WEBPACK_IMPORTED_MODULE_0__utilities_statesComparsion__["a" /* statesComparsion */])(this.state, state)) {
+            return this.container;
+        }
+
+        document.body.innerHTML = '';
+        let container = document.createElement('div');
+        this.container = container;
+        this.container.appendChild(this.render(state));
+        let actionHolders = this.container.querySelectorAll('[data-action]');
+
+        actionHolders.forEach(element => {
+            let event = element.dataset.action.split(':')[0];
+            let action = element.dataset.action.split(':')[1].trim();
+            
+            element.addEventListener(event, (evt) => {
+                evt.preventDefault();
+                actionList.getActionByName(action, evt);
+            })
+        })
+
+        return this.container;
+    }
+
+    toHtml(htmlString) {
+        let div = document.createElement('div');
+        div.innerHTML = htmlString;
+        return div;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = BaseView;
+
+
+
+/***/ }),
+/* 335 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return statesComparsion; });
+function statesComparsion(a, b) {
+    if (a === b) {
+        return true;
+    }
+
+    if (a == null || typeof (a) != "object" ||
+        b == null || typeof (b) != "object") {
+        return false;
+    }
+
+    var propertiesInA = 0, propertiesInB = 0;
+    for (var property in a) {
+        propertiesInA += 1;
+    }
+    for (var property in b) {
+        propertiesInB += 1;
+        if (!(property in a) || !statesComparsion(a[property], b[property])) {
+            return false;
+        }
+    }
+    return propertiesInA == propertiesInB;
+}
+
+
+
+
+/***/ }),
+/* 336 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return addChannelsListMarkup; });
+function addChannelsListMarkup(channels) {
+    let result = ``;
+    channels.forEach(channel => {
+        result += `
+            <li>${channel.title}</li>
+        `
+    });
+
+    return `<ul>${result}</ul>`;
+}
+
+
+
+
+/***/ }),
+/* 337 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 let actions = {
-    'RunApp': __webpack_require__(335)
+    'RunApp': __webpack_require__(338),
+    'AddChannels': __webpack_require__(339)
 }
 
 class ActionList {
@@ -9658,8 +9861,8 @@ class ActionList {
         this.actions[action] = new actions[action](this.dispatcher);
     }
 
-    getByName(actionName, event) {
-        this.actions[actionName].execute();
+    getActionByName(actionName, event) {
+        this.actions[actionName].execute(event);
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = ActionList;
@@ -9667,7 +9870,7 @@ class ActionList {
 
 
 /***/ }),
-/* 335 */
+/* 338 */
 /***/ (function(module, exports) {
 
 class RunApp {
@@ -9675,14 +9878,44 @@ class RunApp {
         this.dispatcher = dispatcher;
     }
 
-    execute(event) {
+    execute(data) {
         let _this = this;
-        _this.dispatcher.dispatch({ actionType: 'run-app' });
+        _this.dispatcher.dispatch({
+            actionType: 'run-app',
+            element: data.target
+        });
     };
 };
 
 module.exports = RunApp;
 
+
+/***/ }),
+/* 339 */
+/***/ (function(module, exports) {
+
+class AddChannels {
+    constructor(dispatcher) {
+        this.dispatcher = dispatcher;
+    }
+
+    execute(data) {
+        let _this = this;
+        _this.dispatcher.dispatch({
+            actionType: 'add-channels',
+            channels: data
+        });
+    };
+};
+
+module.exports = AddChannels;
+
+
+/***/ }),
+/* 340 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

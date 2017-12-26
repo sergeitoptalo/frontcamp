@@ -1,4 +1,5 @@
 import Controller from './controller.js';
+import '../styles/app-off.scss';
 
 if (!PRODUCTION) {
     console.log('DEVELOPMENT MODE');

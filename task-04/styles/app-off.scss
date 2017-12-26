@@ -5,15 +5,15 @@
 @import 'components/footer';
 @import 'components/header';
 
-.app-header {
+.app-off.app-header {
     background-color: gray;
 }
 
-.choose-channel-button {
+.app-off.choose-channel-button {
     display: none;
 }
 
-.run-app-button {
+.app-off.run-app-button {
     background: lighten($orange, 50%);
     cursor: pointer;
     display: block;
