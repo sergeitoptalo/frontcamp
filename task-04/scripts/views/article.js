@@ -22,13 +22,12 @@ function renderArticles(articles) {
                 <div class="article-date">
                     ${new Date(publishedAt).getDate()}-${new Date(publishedAt).getMonth() + 1}-${new Date(publishedAt).getFullYear()}
                 </div>
-                ${author ? `
-                    <div class="article-author">
+                ${author 
+                    ? `<div class="article-author">
                         ${author}
-                    </div>` : ` 
-                    <div></div>
-                `
-    }
+                    </div>`
+                    : `<div></div>`
+                }
                 <p class="article-description">
                     ${description}
                 </p>
