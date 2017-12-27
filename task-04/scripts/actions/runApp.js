@@ -3,11 +3,11 @@ class RunApp {
         this.dispatcher = dispatcher;
     }
 
-    execute(data) {
+    execute(actionData) {
         let _this = this;
         _this.dispatcher.dispatch({
             actionType: 'run-app',
-            element: data.target
+            element: actionData.event.target
         });
     };
 };

@@ -19,11 +19,18 @@ export default class Store {
                 runAppCode();
                 break;
             }
+
             case 'add-channels': {
                 this.state.channels = actionResult.channels;
                 break;
             }
 
+            case 'get-news': {
+                this.state.currentChannel = actionResult.source;
+                this.state.articles = actionResult.articles;
+
+                break;
+            }
         }
     }
 

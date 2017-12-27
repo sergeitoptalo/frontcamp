@@ -2,7 +2,9 @@ function addChannelsListMarkup(channels) {
     let result = ``;
     channels.forEach(channel => {
         result += `
-            <li>${channel.title}</li>
+            <li>
+                <button data-action="click: GetNews" data-channel="${channel.source}">${channel.title}</button>
+            </li>
         `
     });
 

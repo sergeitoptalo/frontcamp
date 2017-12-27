@@ -1,4 +1,5 @@
 import { statesComparsion } from '../utilities/statesComparsion';
+import { getElementAttributes } from '../utilities/getElementAttributes';
 
 export default class BaseView {
     constructor(actionList) {
@@ -24,12 +25,12 @@ export default class BaseView {
         let actionHolders = this.container.querySelectorAll('[data-action]');
 
         actionHolders.forEach(element => {
-            let event = element.dataset.action.split(':')[0];
-            let action = element.dataset.action.split(':')[1].trim();
-            
-            element.addEventListener(event, (evt) => {
-                evt.preventDefault();
-                actionList.getActionByName(action, evt);
+            let actionData = getElementAttributes(element);
+
+            element.addEventListener(actionData.actionEvent, (event) => {
+                event.preventDefault();
+                actionData.event = event;
+                actionList.getActionByName(actionData.action, actionData);
             })
         })
 

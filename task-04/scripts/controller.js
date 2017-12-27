@@ -14,6 +14,7 @@ export default class Controller {
         let appView = new AppView(actionList);
         actionList.register('RunApp');
         actionList.register('AddChannels');
+        actionList.register('GetNews');
         dispatcher.subscribe(actionResult => {
             let currentState = Object.assign({}, store.state);
             store.setNextState(actionResult);

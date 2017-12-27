@@ -2,7 +2,7 @@ import NewsContainer from '../containers/newsContainer';
 import { renderListItem } from '../containers/listItem';
 import { renderArticle } from '../templates/article.template';
 
-export default class NewsChannel extends NewsContainer {
+export default class NewsChannel  {
     constructor({ title, source } = channelConfig) {
         super();
         this.title = title;

@@ -1,6 +1,5 @@
 let config = require('./config/config.json');
 import { renderChannelList } from './containers/list';
-import NewsChannel from './components/newsChannel';
 import MenuToggle from './utilities/menuToggle';
 import '../styles/app-on.scss';
 
@@ -10,7 +9,7 @@ export default () => {
         configArray.push({ 'title': key, 'source': config[key] })
     });
 
-    actionList.getActionByName('AddChannels', configArray);
+    actionList.getActionByName('AddChannels', { channels: configArray });
     let chooseChannelButton = document.querySelector('#choose-channel-button');
     let toggles = document.querySelectorAll('[data-toggle-target]');
 
