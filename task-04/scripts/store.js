@@ -28,7 +28,6 @@ export default class Store {
             case 'get-news': {
                 this.state.currentChannel = actionResult.source;
                 this.state.articles = actionResult.articles;
-
                 break;
             }
         }

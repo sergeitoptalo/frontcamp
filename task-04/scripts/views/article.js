@@ -1,13 +1,4 @@
 function renderArticles(articles) {
-/*     let {
-        urlToImage,
-        url,
-        title,
-        publishedAt,
-        author,
-        description
-    } = articleConfig; */
-
     let result = ``;
 
     let articleTEmplate = 

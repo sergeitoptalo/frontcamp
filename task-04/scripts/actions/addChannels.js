@@ -3,11 +3,11 @@ class AddChannels {
         this.dispatcher = dispatcher;
     }
 
-    execute(payload) {
+    execute({ channels } = actionData) {
         let _this = this;
         _this.dispatcher.dispatch({
             actionType: 'add-channels',
-            channels: payload.channels
+            channels: channels
         });
     };
 };

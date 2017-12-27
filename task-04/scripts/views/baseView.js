@@ -4,7 +4,6 @@ import { getElementAttributes } from '../utilities/getElementAttributes';
 export default class BaseView {
     constructor(actionList) {
         this.container;
-        //this.actionList = actionList;
     }
 
     updateView(state, currentState) {
@@ -22,6 +21,7 @@ export default class BaseView {
         let container = document.createElement('div');
         this.container = container;
         this.container.appendChild(this.render(state));
+        
         let actionHolders = this.container.querySelectorAll('[data-action]');
 
         actionHolders.forEach(element => {

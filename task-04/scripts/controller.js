@@ -9,17 +9,22 @@ export default class Controller {
         let store = new Store({
             appIsRunning: false
         });
+
         let actionList = new ActionList(dispatcher);
         window.actionList = actionList;
+
         let appView = new AppView(actionList);
+
         actionList.register('RunApp');
         actionList.register('AddChannels');
         actionList.register('GetNews');
+
         dispatcher.subscribe(actionResult => {
             let currentState = Object.assign({}, store.state);
             store.setNextState(actionResult);
             this.attachView(appView.updateView(store.getState(), currentState));
         });
+        
         this.attachView(appView.updateView(store.getState()));
     }
 
