@@ -4,30 +4,30 @@ import { renderArticles } from './article.js';
 
 export default class AppView extends BaseView {
     render({ appIsRunning, channels, articles } = state) {
-        return this.toHtml(
-            `<div class="page-wrapper">
+        return this.toHtml(`
+        <div class="page-wrapper">
             <div id="root" class="root">
                 <header class="${!appIsRunning ? `app-off `: ``}app-header">
                     <div class="header-logo">
                         News
                     </div>
                 </header>
-                ${!appIsRunning ? `
-                <button id="run-app-button" class="${!appIsRunning ? `app-off `: ``}run-app-button" data-action="click: RunApp">Run App</button>
-                ` : ``}
+                ${!appIsRunning 
+                    ? `<button id="run-app-button" class="${!appIsRunning ? `app-off `: ``}run-app-button" data-action="click: RunApp">Run App</button>`
+                    : ``
+                }
                 <div id="channels-list-container" class="channels-list-container">
                  ${channels ? addChannelsListMarkup(channels) : ``}
                 </div>
                 <div>
                     <button id="choose-channel-button" class="${!appIsRunning ? `app-off `: ``}choose-channel-button" data-toggle-target="channels-list-container">Choose channel</button>
                 </div>
-                ${articles ?
-                    `<div id="news-container" class="news-container">
+                ${articles 
+                    ? `<div id="news-container" class="news-container">
                             ${renderArticles(articles)}
                     </div>`
                     : ``
                 }
-                
             </div>
             <footer class="page-footer">
                 <p>
