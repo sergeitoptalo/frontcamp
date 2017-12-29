@@ -1,7 +1,11 @@
-const newsApp = (state = {'appOff': true }, action) => {
+const newsApp = (state = {'appIsRunning': false }, action) => {
     switch (action.type) {
         case 'RUN_APP': {
-            state['appOff'] = false;
+            state['appIsRunning'] = true;
+            return state;
+        }
+        case 'SET_CONFIGURATION': {
+            state['channels'] = action.configuration;
             return state;
         }
         default:

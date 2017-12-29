@@ -1,9 +1,19 @@
-import BaseView from './baseView.js';
-import { addChannelsListMarkup } from './channelsList.js';
-import { renderArticles } from './article.js';
+let BaseView = require ('./baseView.js');
+/*import { addChannelsListMarkup } from './channelsList.js';
+import { renderArticles } from './article.js'; */
 
-export default class AppView extends BaseView {
-    render({ appIsRunning, channels, articles } = state) {
+class AppView extends BaseView {
+    constructor(store) {
+        super();
+        this.store = store;
+    }
+
+    renderAppView(state) {
+        
+    }
+
+
+    /* render({ appIsRunning, channels, articles } = state) {
         return this.toHtml(`
         <div class="page-wrapper">
             <div id="root" class="root">
@@ -37,5 +47,7 @@ export default class AppView extends BaseView {
             </footer>
         </div>`
         )
-    }
+    } */
 }
+
+module.exports = AppView;

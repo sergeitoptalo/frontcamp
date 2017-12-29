@@ -1,7 +1,9 @@
 import appOff from './views/baseView.js';
-let views = {
-    'appOff': require('./views/baseView.js')
-}
+import appView from './views/appView.js';
+/* let views = {
+    'appOff': require('./views/baseView.js'),
+    'runApp': require('./views/appView.js'),
+} */
 
 export default class ViewController {
     constructor(store) {
@@ -12,21 +14,33 @@ export default class ViewController {
     renderInitialView() {
         document.body.innerHTML = `
         <header style="background:green">Header</header>
-        <div id="root"></div>
+            <div id="root"></div>
         <footer style="background:gray">Footer</footer>
         `;
     }
 
     render(store) {
         let state = store.getState();
+
+        if (state.appIsRunning) {
+            let runAppCode = event => import(/* webpackChunkName: "runApp" */ './runApp').then(module => {
+                var turnAppOn = module.default;
+                //actionResult.element.removeEventListener('click', runAppCode);
+                turnAppOn(this.store);
+            });
+            runAppCode();
+            
+        }
+
         let root = document.querySelector('#root');
         root.innerHTML = '';
-        Object.keys(state).forEach(key => {
+
+        this.renderAppView();
+
+        /* Object.keys(state).forEach(key => {
             if(state[key]) {
-                let a = views[key];
-                let b = Object.keys(state);
-                new a().render(root);
+                new views[key](store).render(root);
             }
-        })
+        }) */
     }
 };
