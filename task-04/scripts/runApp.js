@@ -1,5 +1,4 @@
 let config = require('./config/config.json');
-import { renderChannelList } from './containers/list';
 import MenuToggle from './utilities/menuToggle';
 import '../styles/app-on.scss';
 

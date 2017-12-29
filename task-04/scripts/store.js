@@ -1,11 +1,29 @@
 export default class Store {
-    constructor(state) {
-        this.state = state;
+    constructor(reducer) {
+        this.state;
+        this.reducer = reducer;
+        this.subscribers = [];
     }
 
     getState() {
-        return Object.assign({}, this.state);;
+        return this.state;
     };
+
+    dispatch(action) {
+        let newState = this.reducer(this.state, action);
+        this.state = newState;
+        this.subscribers.forEach(fn => fn(this));
+    }
+
+    subscribe(listener) {
+        this.subscribers.push(listener);
+        return () => {
+            this.subscribers.filter(subscriber => subscriber !== listener)
+        }
+    }
+
+
+
 
     setNextState(actionResult) {
         switch (actionResult.actionType) {

@@ -1,4 +1,14 @@
-import { statesComparsion } from '../utilities/statesComparsion';
+class BaseView {
+    render(root) {
+        let elementNode = document.createElement('div');
+        let element = root.appendChild(elementNode);
+        element.innerHTML = `<button>Run App </button>`;
+    }
+}
+
+module.exports = BaseView;
+
+/* import { statesComparsion } from '../utilities/statesComparsion';
 import { getElementAttributes } from '../utilities/getElementAttributes';
 
 export default class BaseView {
@@ -42,4 +52,4 @@ export default class BaseView {
         div.innerHTML = htmlString;
         return div;
     }
-}
+} */
