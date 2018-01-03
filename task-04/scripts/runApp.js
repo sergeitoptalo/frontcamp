@@ -8,10 +8,9 @@ export default (store) => {
         configArray.push({ 'title': key, 'source': config[key] })
     });
     store.dispatch({ type: 'SET_CONFIGURATION', configuration: configArray });
-    //actionList.getActionByName('AddChannels', { channels: configArray });
     
-    //let chooseChannelButton = document.querySelector('#choose-channel-button');
-    //let toggles = document.querySelectorAll('[data-toggle-target]');
+    let chooseChannelButton = document.querySelector('#choose-channel-button');
+    let toggles = document.querySelectorAll('[data-toggle-target]');
 
-    //[...toggles].forEach(toggle => new MenuToggle(toggle).createToggle());
+    [...toggles].forEach(toggle => new MenuToggle(toggle).createToggle());
 }

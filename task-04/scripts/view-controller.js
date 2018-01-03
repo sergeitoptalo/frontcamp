@@ -1,46 +1,61 @@
 import appOff from './views/baseView.js';
 import appView from './views/appView.js';
-/* let views = {
-    'appOff': require('./views/baseView.js'),
-    'runApp': require('./views/appView.js'),
-} */
+let { articlesApi } = require('./api/articlesApi.js');
+import { getAppTemplate } from './views/templates/appTemplate.js';
+
 
 export default class ViewController {
     constructor(store) {
         this.store = store;
-        this.renderInitialView();
+        this.actionHolders = [];
     }
 
-    renderInitialView() {
-        document.body.innerHTML = `
-        <header style="background:green">Header</header>
-            <div id="root"></div>
-        <footer style="background:gray">Footer</footer>
-        `;
+    renderView() {
+        let state = this.store.getState();
+        document.body.innerHTML = getAppTemplate(state);
+        let actionHolders = document.querySelectorAll('[data-action]');
+        this.actionHolders = actionHolders;
+        actionHolders.forEach(holder => {
+            let actionAttributes = holder.dataset.action.split(':');
+            let event = actionAttributes[0].trim();
+            let actionType = actionAttributes[1].trim();
+            holder.addEventListener(event, () => {
+                let source = holder.dataset.source;
+                if (source) {
+                    this.store.dispatch({ type: actionType, source: source });
+                } else {
+                    this.store.dispatch({ type: actionType })
+                }
+            })
+        })
     }
 
-    render(store) {
-        let state = store.getState();
+    render() {
+        let state = this.store.getState();
 
-        if (state.appIsRunning) {
+        if (state.appIsRunning && !state.channels) {
             let runAppCode = event => import(/* webpackChunkName: "runApp" */ './runApp').then(module => {
                 var turnAppOn = module.default;
                 //actionResult.element.removeEventListener('click', runAppCode);
                 turnAppOn(this.store);
             });
             runAppCode();
-            
         }
 
-        let root = document.querySelector('#root');
-        root.innerHTML = '';
+        if (!state.currentChannel) {
+            this.renderView();
 
-        this.renderAppView();
-
-        /* Object.keys(state).forEach(key => {
-            if(state[key]) {
-                new views[key](store).render(root);
-            }
-        }) */
+        } else {
+            let news = articlesApi(state.currentChannel)
+            .then(response => {
+                return response.json()
+            }).then(data => {
+                return data;
+            }).then(data => {
+                this.store.dispatch({type: "GET_NEWS_SUCCESS", articles: data.articles})
+            }).then(() => {
+                this.renderView();
+            })
+        }
     }
 };
