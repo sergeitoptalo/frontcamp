@@ -10,29 +10,24 @@ function getAppTemplate(state) {
             </div>
         </header>
         <button id="run-app-button" class="${state.appIsRunning ? '' : 'app-off '} run-app-button" data-action="click: RUN_APP">Run App</button>
-        
-        
             <div id="channels-list-container" class="channels-list-container">
-            ${state.channels ? `<ul>
+            ${state.channels ?
+            `<ul>
                 ${state.channels.map(channel => `<li><button data-action="click: GET_NEWS" data-source="${channel.source}">${channel.title}</button></li>`)}
-                </ul>`
-                : ``}
+            </ul>`
+            : ``}
             </div>
             ${state.appIsRunning ?
-                `
-            <div>
+            `<div>
                 <button class="choose-channel-button" data-toggle-target="channels-list-container">Choose channel</button>
-            </div>
-            ` : 
+            </div>` :
             ``
-            }
+        }
         ${state.articles ?
-            `
-        <div id="news-container" class="news-container">
-            ${renderArticles(state.articles)}
-        </div>
-        ` :
-        ``
+            `<div id="news-container" class="news-container">
+                ${renderArticles(state.articles)}
+            </div>` :
+            ``
         }
     </div>
     <footer class="page-footer">

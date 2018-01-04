@@ -5,8 +5,7 @@ function addChannelsListMarkup(channels) {
         result += `
             <li>
                 <button data-action="click: GetNews" data-channel="${source}">${title}</button>
-            </li>
-        `
+            </li>`
     });
 
     return `

@@ -1,24 +1,25 @@
 const newsApp = (state = { 'appIsRunning': false }, action) => {
     switch (action.type) {
         case 'RUN_APP': {
-            state['appIsRunning'] = true;
-            return state;
+            return Object.assign({}, state, { appIsRunning: true });
         }
+
         case 'SET_CONFIGURATION': {
-            state['channels'] = action.configuration;
-            return state;
+            return Object.assign({}, state, { channels: action.configuration });
         }
+
         case 'GET_NEWS': {
             state['currentChannel'] = action.source;
-            return state;
+            return Object.assign({}, state, { currentChannel: action.source });
         }
+
         case 'GET_NEWS_SUCCESS': {
-            state['articles'] = action.articles;
             delete state['currentChannel'];
-            return state;
+            return Object.assign({}, state, { articles: action.articles });
         }
+
         default:
-            return state;
+            return Object.assign({}, state);
     }
 }
 

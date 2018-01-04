@@ -1,7 +1,5 @@
-import appOff from './views/baseView.js';
-import appView from './views/appView.js';
-let { articlesApi } = require('./api/articlesApi.js');
 import { getAppTemplate } from './views/templates/appTemplate.js';
+let { articlesApi } = require('./api/articlesApi.js');
 
 
 export default class ViewController {
