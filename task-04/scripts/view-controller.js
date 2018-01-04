@@ -13,6 +13,7 @@ export default class ViewController {
         document.body.innerHTML = getAppTemplate(state);
         let actionHolders = document.querySelectorAll('[data-action]');
         this.actionHolders = actionHolders;
+        
         actionHolders.forEach(holder => {
             let actionAttributes = holder.dataset.action.split(':');
             let event = actionAttributes[0].trim();
@@ -42,7 +43,6 @@ export default class ViewController {
 
         if (!state.currentChannel) {
             this.renderView();
-
         } else {
             let news = articlesApi(state.currentChannel)
             .then(response => {
