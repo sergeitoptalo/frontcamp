@@ -1,0 +1,28 @@
+@import 'tools/colors';
+@import 'tools/shadows';
+@import 'base/typography';
+@import 'base/common';
+@import 'components/footer';
+@import 'components/header';
+
+.app-off.app-header {
+    background-color: gray;
+}
+
+.app-off.choose-channel-button {
+    display: none;
+}
+
+.app-off.run-app-button {
+    background: lighten($orange, 50%);
+    cursor: pointer;
+    display: block;
+    font-size: 16px;
+    margin: 10px;
+    padding: 10px;
+    text-transform: uppercase;
+
+    &:hover {
+        background: $orange;
+    }
+}

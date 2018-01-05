@@ -1,0 +1,17 @@
+body .app-header {
+    background-color: #282828;
+    box-shadow: $header-shadow;
+    padding: 20px;
+    -webkit-box-shadow: $header-shadow;
+    -moz-box-shadow: $header-shadow;
+}
+
+.header-logo {
+    color: $white;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.run-app-button {
+    display: none;
+}
