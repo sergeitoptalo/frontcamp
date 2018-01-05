@@ -1,16 +1,26 @@
+import ApiDecorator from './utilities/apiDecorator.js';
+import Proxy from './utilities/proxy.js';
+import ArticlesApi from './api/articlesApi.js';
+import ToggleFactory from './utilities/toggleFactory/toggleFactory.js';
 import { getAppTemplate } from './views/templates/appTemplate.js';
 let { articlesApi } = require('./api/articlesApi.js');
+let apiConfig = require('./config/apiConfig.json');
 
 
 export default class ViewController {
     constructor(store) {
         this.store = store;
+        this.toggleFactory = new ToggleFactory();
         this.actionHolders = [];
+        this.proxy;
     }
 
     renderView() {
         let state = this.store.getState();
         document.body.innerHTML = getAppTemplate(state);
+
+        this.toggleFactory.getPageToggles();
+
         let actionHolders = document.querySelectorAll('[data-action]');
         this.actionHolders = actionHolders;
         
@@ -39,20 +49,17 @@ export default class ViewController {
                 turnAppOn(this.store);
             });
             runAppCode();
+
+            let apiDecorator = new ApiDecorator(new ArticlesApi(), apiConfig.apiKey);
+            this.proxy = new Proxy(apiDecorator);
         }
 
         if (!state.currentChannel) {
             this.renderView();
         } else {
-            let news = articlesApi(state.currentChannel)
-            .then(response => {
-                return response.json()
-            }).then(data => {
-                return data;
-            }).then(data => {
-                this.store.dispatch({type: "GET_NEWS_SUCCESS", articles: data.articles})
-            }).then(() => {
-                this.renderView();
+            let news = this.proxy.getData(state.currentChannel)
+            .then(data => {
+                this.store.dispatch({type: "GET_NEWS_SUCCESS", articles: data })
             })
         }
     }

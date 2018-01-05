@@ -13,7 +13,7 @@ function getAppTemplate(state) {
             <div id="channels-list-container" class="channels-list-container">
             ${state.channels ?
                 `<ul>
-                    ${state.channels.map(channel => `<li><button data-action="click: GET_NEWS" data-source="${channel.source}">${channel.title}</button></li>`)}
+                    ${state.channels.reduce((markup, channel) => markup + `<li><button data-action="click: GET_NEWS" data-source="${channel.source}">${channel.title}</button></li>`, ``)}
                 </ul>`
                 : ``
             }

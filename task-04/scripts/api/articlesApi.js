@@ -1,7 +1,8 @@
-export function articlesApi(source) {
-    let apiKey = '1de7e5223cf14337a6dd0e1330b80c7f'
-    return fetch(
-        `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${apiKey}`,
-        { method: 'GET' }
-    );
+export default class ArticlesApi {
+    getData(source, key) {
+        return fetch(
+            `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${key}`,
+            { method: 'GET' }
+        );
+    }
 }

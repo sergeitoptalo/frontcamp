@@ -8,6 +8,11 @@ const newsApp = (state = { 'appIsRunning': false }, action) => {
             return Object.assign({}, state, { channels: action.configuration });
         }
 
+        case 'SET_API': {
+            state[action.title] = action.api;
+            return Object.assign({}, state);
+        }
+
         case 'GET_NEWS': {
             state['currentChannel'] = action.source;
             return Object.assign({}, state, { currentChannel: action.source });
