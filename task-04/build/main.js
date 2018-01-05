@@ -9597,14 +9597,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-if (!PRODUCTION) {
-    console.log('DEVELOPMENT MODE');
-}
-
-if (PRODUCTION) {
-    console.log('PRODUCTION MODE');
-}
-
 let initialState = {
     'appOff': true
 }
