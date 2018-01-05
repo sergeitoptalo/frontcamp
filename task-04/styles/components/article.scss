@@ -1,5 +1,6 @@
 .article {
-    background: #fff;
+    background: #282828;
+    color: #fff;
     margin-bottom: 20px;
     overflow: hidden;
     padding: 10px;
@@ -28,7 +29,7 @@
 }
 
 .article h3 a {
-    color: $orange;
+    color: #fff;
     text-decoration: none;
 }
 
@@ -37,7 +38,7 @@
 }
 
 .article-description {
-    font-size: 14px;
+    font-size: 13px;
     margin: 5px 0;
 }
 
