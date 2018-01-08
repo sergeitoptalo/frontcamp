@@ -9437,13 +9437,6 @@ var _viewController = __webpack_require__(332);var _viewController2 = _interopRe
 var _reducer = __webpack_require__(344);
 __webpack_require__(345);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
-if (!PRODUCTION) {
-    console.log('DEVELOPMENT MODE');
-}
-
-if (PRODUCTION) {
-    console.log('PRODUCTION MODE');
-}
 
 var initialState = {
     'appOff': true };
@@ -9628,7 +9621,7 @@ Object.defineProperty(exports, "__esModule", { value: true });var _createClass =
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _elemDataset = __webpack_require__(336);var _elemDataset2 = _interopRequireDefault(_elemDataset);
 var _toggle = __webpack_require__(337);var _toggle2 = _interopRequireDefault(_toggle);
-var _isNodesEqual = __webpack_require__(339);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+var _isNodesEqual = __webpack_require__(339);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
 
 ToggleFactory = function () {
     function ToggleFactory() {_classCallCheck(this, ToggleFactory);
@@ -9637,7 +9630,7 @@ ToggleFactory = function () {
 
         {
             var toggles = document.querySelectorAll('[data-toggle-target]');
-            this.currentToggles = toggles;
+            this.currentToggles = [].concat(_toConsumableArray(toggles));
             this.createToggles();
         } }, { key: 'createToggles', value: function createToggles()
 
