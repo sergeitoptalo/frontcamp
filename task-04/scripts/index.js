@@ -3,6 +3,7 @@ import ViewController from './view-controller.js';
 import { newsApp as reducer } from './reducer.js';
 import '../styles/app-off.scss';
 
+
 let initialState = {
     'appOff': true
 }
