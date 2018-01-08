@@ -9,7 +9,7 @@ export default class ToggleFactory {
 
     getPageToggles() {
         let toggles = document.querySelectorAll('[data-toggle-target]');
-        this.currentToggles = toggles;
+        this.currentToggles = [...toggles];
         this.createToggles();
     }
 
