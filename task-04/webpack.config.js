@@ -17,10 +17,11 @@ module.exports = {
     },
     resolveLoader: {
         modules: [
-          'node_modules',
-          path.resolve(__dirname, 'loaders')
+            'node_modules',
+            path.resolve(__dirname, 'loaders')
         ]
-      },
+    },
+    watch: true,
     module: {
         loaders: [
             {
@@ -60,7 +61,7 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin("styles.css"),
-      ],
+    ],
     stats: {
         colors: true
     },

@@ -14,15 +14,19 @@
 }
 
 .app-off.run-app-button {
-    background: lighten($orange, 50%);
+    background: $red;
+    border: 1px solid transparent;
+    color: #fff;
     cursor: pointer;
     display: block;
     font-size: 16px;
+    font-weight: bold;
     margin: 10px;
     padding: 10px;
     text-transform: uppercase;
 
     &:hover {
-        background: $orange;
+        background: darken($red, 20%);
+        border: 1px solid $red;
     }
 }
