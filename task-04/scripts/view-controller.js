@@ -24,7 +24,7 @@ export default class ViewController {
         let actionHolders = document.querySelectorAll('[data-action]');
         this.actionHolders = actionHolders;
         
-        actionHolders.forEach(holder => {
+        [...actionHolders].forEach(holder => {
             let actionAttributes = holder.dataset.action.split(':');
             let event = actionAttributes[0].trim();
             let actionType = actionAttributes[1].trim();

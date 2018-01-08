@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = "/frontcamp/task-04" + __webpack_require__.p + "" + ({}[chunkId]||chunkId) + ".main.js";
+/******/ 		script.src = __webpack_require__.p + "" + ({}[chunkId]||chunkId) + ".main.js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -9487,7 +9487,7 @@ Object.defineProperty(exports, "__esModule", { value: true });var _createClass =
 var _proxy = __webpack_require__(334);var _proxy2 = _interopRequireDefault(_proxy);
 var _articlesApi = __webpack_require__(124);var _articlesApi2 = _interopRequireDefault(_articlesApi);
 var _toggleFactory = __webpack_require__(335);var _toggleFactory2 = _interopRequireDefault(_toggleFactory);
-var _appTemplate = __webpack_require__(340);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var _require =
+var _appTemplate = __webpack_require__(340);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var _require =
 __webpack_require__(124),articlesApi = _require.articlesApi;
 var apiConfig = __webpack_require__(342);var
 
@@ -9509,7 +9509,7 @@ ViewController = function () {
             var actionHolders = document.querySelectorAll('[data-action]');
             this.actionHolders = actionHolders;
 
-            actionHolders.forEach(function (holder) {
+            [].concat(_toConsumableArray(actionHolders)).forEach(function (holder) {
                 var actionAttributes = holder.dataset.action.split(':');
                 var event = actionAttributes[0].trim();
                 var actionType = actionAttributes[1].trim();
