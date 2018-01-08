@@ -43,11 +43,8 @@ export default class ViewController {
         let state = this.store.getState();
 
         if (state.appIsRunning && !state.channels) {
-            let runAppCode = event => import(/* webpackChunkName: "runApp" */ './runApp').then(module => {
-                var turnAppOn = module.default;
-                //actionResult.element.removeEventListener('click', runAppCode);
-                turnAppOn(this.store);
-            });
+            let runAppCode = event => require.ensure([], require => require('./runApp.js').default(this.store));
+
             runAppCode();
 
             let apiDecorator = new ApiDecorator(new ArticlesApi(), apiConfig.apiKey);
