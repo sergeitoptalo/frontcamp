@@ -3,6 +3,13 @@ import ViewController from './view-controller.js';
 import { newsApp as reducer } from './reducer.js';
 import '../styles/app-off.scss';
 
+if (!PRODUCTION) {
+    console.log('DEVELOPMENT MODE');
+}
+
+if (PRODUCTION) {
+    console.log('PRODUCTION MODE');
+}
 
 let initialState = {
     'appOff': true

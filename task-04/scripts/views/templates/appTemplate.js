@@ -1,30 +1,30 @@
 import { renderArticles } from './article.js';
 
-function getAppTemplate(state) {
-    return `
+const getAppTemplate = ({ appIsRunning, channels, articles } = state) => 
+    `
     <div class="page-wrapper">
         <div id="root" class="root">
-            <header class="${state.appIsRunning ? '' : 'app-off '} app-header">
+            <header class="${appIsRunning ? '' : 'app-off '} app-header">
                 <div class="header-logo">
                     News
                 </div>
             </header>
-            <button id="run-app-button" class="${state.appIsRunning ? '' : 'app-off '} run-app-button" data-action="click: RUN_APP">Run App</button>
+            <button id="run-app-button" class="${appIsRunning ? '' : 'app-off '} run-app-button" data-action="click: runApp">Run App</button>
             <div id="channels-list-container" class="channels-list-container">
-            ${state.channels ?
+            ${channels ?
                 `<ul>
-                    ${state.channels.reduce((markup, channel) => markup + `<li><button data-action="click: GET_NEWS" data-source="${channel.source}">${channel.title}</button></li>`, ``)}
+                    ${channels.reduce((markup, { source, title } = channel) => markup + `<li><button data-action="click: getNews" data-source="${source}">${title}</button></li>`, ``)}
                 </ul>`
                 : ``
             }
             </div>
-            ${state.appIsRunning ?
+            ${appIsRunning ?
             `<div>
                 <button class="choose-channel-button" data-toggle-target="channels-list-container">Choose channel</button>
             </div>` : ``}
-            ${state.articles ?
+            ${articles ?
                 `<div id="news-container" class="news-container">
-                    ${renderArticles(state.articles)}
+                    ${renderArticles(articles)}
                 </div>` : ``
             }
             </div>
@@ -35,6 +35,5 @@ function getAppTemplate(state) {
                 </p>
             </footer>
     </div>`
-}
 
 export { getAppTemplate };

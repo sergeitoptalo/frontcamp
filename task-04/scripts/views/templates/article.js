@@ -1,17 +1,11 @@
-function renderArticles(articles) {
-    let result = ``;
-
-    let articleTEmplate = 
-    articles.forEach(({
-        urlToImage,
-        url,
-        title,
-        publishedAt,
-        author,
-        description
-    } = article) => {
-        result += `
-        <div class="article">
+export const renderArticles = (articles) => articles.map(({ 
+    urlToImage,
+    url,
+    title,
+    publishedAt,
+    author,
+    description} = article) => 
+        `<div class="article">
             <div class="article-image-container">
             ${urlToImage ? `
                 <img src=${urlToImage} />
@@ -41,12 +35,4 @@ function renderArticles(articles) {
                 </p>
                 ` : ``}
             </div>
-        </div>
-    `
-    })
-
-
-    return result;
-}
-
-export { renderArticles };
+        </div>`).join('');
