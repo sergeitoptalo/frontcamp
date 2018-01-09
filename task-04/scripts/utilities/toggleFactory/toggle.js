@@ -5,10 +5,9 @@ export default class Toggle extends ToggleContainer {
         super();
         this.toggle = toggle;
         this.toggledElement = null;
+        this.expanded = false;
         this.expandedClassName = 'expanded';
         this.collapsedClassName = 'collapsed';
-        this.expanded = false;
-        this.collapsed = true;
     }
 
     createToggle() {

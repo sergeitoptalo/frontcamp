@@ -9549,6 +9549,7 @@ ViewController = function () {
         this.toggleFactory = new _toggleFactory2.default();
         this.actionHolders = [];
         this.proxy;
+        this.currentChannel = null;
     }_createClass(ViewController, [{ key: 'renderView', value: function renderView()
 
         {var _this = this;
@@ -9569,6 +9570,11 @@ ViewController = function () {
                     _this.store.dispatch(actions[action](source));
                 });
             });
+
+            if (this.currentChannel) {
+                var currentChannelButton = document.querySelector('[data-source=' + this.currentChannel + ']');
+                currentChannelButton.classList.add('active');
+            }
         } }, { key: 'render', value: function render()
 
         {var _this2 = this;
@@ -9586,9 +9592,9 @@ ViewController = function () {
             if (!state.currentChannel) {
                 this.renderView();
             } else {
+                this.currentChannel = state.currentChannel;
                 var news = this.proxy.getData(state.currentChannel).
                 then(function (data) {
-                    document.querySelector('data-source=' + state.currentChannel);
                     _this2.store.dispatch(actions.getNewsSuccess(data));
                 });
             }
@@ -9760,10 +9766,9 @@ Toggle = function (_ToggleContainer) {_inherits(Toggle, _ToggleContainer);
 
         _this.toggle = toggle;
         _this.toggledElement = null;
-        _this.expandedClassName = 'expanded';
-        _this.collapsedClassName = 'collapsed';
         _this.expanded = false;
-        _this.collapsed = true;return _this;
+        _this.expandedClassName = 'expanded';
+        _this.collapsedClassName = 'collapsed';return _this;
     }_createClass(Toggle, [{ key: 'createToggle', value: function createToggle()
 
         {var _this2 = this;
@@ -9792,7 +9797,6 @@ Object.defineProperty(exports, "__esModule", { value: true });var _createClass =
                 this.toggledElement.classList.remove(this.collapsedClassName);
             }
             this.expanded = !this.expanded;
-            this.collapsed = !this.collapsed;
         } }]);return ToggleContainer;}();exports.default = ToggleContainer;
 
 /***/ }),
