@@ -2,6 +2,7 @@ import ApiDecorator from './utilities/apiDecorator.js';
 import Proxy from './utilities/proxy.js';
 import ArticlesApi from './api/articlesApi.js';
 import ToggleFactory from './utilities/toggleFactory/toggleFactory.js';
+import * as actions from './actions/actions.js';
 import { getAppTemplate } from './views/templates/appTemplate.js';
 let { articlesApi } = require('./api/articlesApi.js');
 let apiConfig = require('./config/apiConfig.json');
@@ -13,6 +14,7 @@ export default class ViewController {
         this.toggleFactory = new ToggleFactory();
         this.actionHolders = [];
         this.proxy;
+        this.currentChannel = null;
     }
 
     renderView() {
@@ -23,20 +25,21 @@ export default class ViewController {
 
         let actionHolders = document.querySelectorAll('[data-action]');
         this.actionHolders = actionHolders;
-        
+
         actionHolders.forEach(holder => {
             let actionAttributes = holder.dataset.action.split(':');
             let event = actionAttributes[0].trim();
-            let actionType = actionAttributes[1].trim();
+            let action = actionAttributes[1].trim();
             holder.addEventListener(event, () => {
                 let source = holder.dataset.source;
-                if (source) {
-                    this.store.dispatch({ type: actionType, source: source });
-                } else {
-                    this.store.dispatch({ type: actionType })
-                }
+                this.store.dispatch(actions[action](source));
             })
         })
+
+        if (this.currentChannel) {
+            let currentChannelButton = document.querySelector(`[data-source=${this.currentChannel}]`);
+            currentChannelButton.classList.add('active');
+        }
     }
 
     render() {
@@ -44,7 +47,7 @@ export default class ViewController {
 
         if (state.appIsRunning && !state.channels) {
             let runAppCode = event => require.ensure([], require => require('./runApp.js').default(this.store));
-            
+
             runAppCode();
 
             let apiDecorator = new ApiDecorator(new ArticlesApi(), apiConfig.apiKey);
@@ -54,10 +57,11 @@ export default class ViewController {
         if (!state.currentChannel) {
             this.renderView();
         } else {
+            this.currentChannel = state.currentChannel;
             let news = this.proxy.getData(state.currentChannel)
-            .then(data => {
-                this.store.dispatch({type: "GET_NEWS_SUCCESS", articles: data })
-            })
+                .then(data => {
+                    this.store.dispatch(actions.getNewsSuccess(data));
+                })
         }
     }
 };

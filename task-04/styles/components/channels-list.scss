@@ -33,6 +33,10 @@
     background: $channels-list-button-hover;
 }
 
+.channels-list-container ul li button.active {
+    background: $channels-list-button-hover;
+}
+
 .channels-list-container.expanded {
     display: block;
 }
