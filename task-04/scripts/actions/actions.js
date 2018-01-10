@@ -1,36 +1,28 @@
 const runApp = () => {
     return {
         type: 'RUN_APP',
-        payload: {
-            appIsRunning: true
-        }
+        appIsRunning: true
     }
 }
 
 const setChannelsConfiguration = (channels) => {
     return {
         type: 'SET_CHANNELS_CONFIGURATION',
-        payload: {
-            channels
-        }
+        channels
     }
 }
 
 const getNews = (source) => {
     return {
         type: 'GET_NEWS',
-        payload: {
-            currentChannel: source
-        }
+        currentChannel: source
     }
 }
 
 const getNewsSuccess = (articles) => {
     return {
         type: 'GET_NEWS_SUCCESS',
-        payload: {
-            articles
-        }
+        articles
     }
 }
 

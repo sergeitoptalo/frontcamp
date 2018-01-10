@@ -3765,36 +3765,28 @@ Object.defineProperty(exports, "__esModule", { value: true });var _createClass =
 Object.defineProperty(exports, "__esModule", { value: true });var runApp = function runApp() {
     return {
         type: 'RUN_APP',
-        payload: {
-            appIsRunning: true } };
-
+        appIsRunning: true };
 
 };
 
 var setChannelsConfiguration = function setChannelsConfiguration(channels) {
     return {
         type: 'SET_CHANNELS_CONFIGURATION',
-        payload: {
-            channels: channels } };
-
+        channels: channels };
 
 };
 
 var getNews = function getNews(source) {
     return {
         type: 'GET_NEWS',
-        payload: {
-            currentChannel: source } };
-
+        currentChannel: source };
 
 };
 
 var getNewsSuccess = function getNewsSuccess(articles) {
     return {
         type: 'GET_NEWS_SUCCESS',
-        payload: {
-            articles: articles } };
-
+        articles: articles };
 
 };exports.
 
@@ -6359,7 +6351,7 @@ var onUnhandled = function onUnhandled(promise) {
         } else if (handler = global.onunhandledrejection) {
           handler({ promise: promise, reason: value });
         } else if ((console = global.console) && console.error) {
-          console.error('Unhandled promise rejection', value);
+
         }
       });
       // Browsers should not trigger `rejectionHandled` event if it was handled here, NodeJS - should
@@ -9481,11 +9473,11 @@ var _reducer = __webpack_require__(345);
 __webpack_require__(346);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 if (!PRODUCTION) {
-    console.log('DEVELOPMENT MODE');
+
 }
 
 if (PRODUCTION) {
-    console.log('PRODUCTION MODE');
+
 }
 
 var initialState = {
@@ -9925,27 +9917,27 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var newsApp = function newsApp() {var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { 'appIsRunning': false };var action = arguments[1];
+Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var newsApp = function newsApp() {var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { appIsRunning: false };var action = arguments[1];
     switch (action.type) {
         case 'RUN_APP':{
-                return Object.assign({}, state, action.payload);
+                return _extends({}, state, { appIsRunning: action.appIsRunning });
             }
 
         case 'SET_CHANNELS_CONFIGURATION':{
-                return Object.assign({}, state, action.payload);
+                return _extends({}, state, { channels: action.channels });
             }
 
         case 'GET_NEWS':{
-                return Object.assign({}, state, action.payload);
+                return _extends({}, state, { currentChannel: action.currentChannel });
             }
 
         case 'GET_NEWS_SUCCESS':{
                 delete state['currentChannel'];
-                return Object.assign({}, state, action.payload);
+                return _extends({}, state, { articles: action.articles });
             }
 
         default:
-            return Object.assign({}, state);}
+            return state;}
 
 };exports.
 
