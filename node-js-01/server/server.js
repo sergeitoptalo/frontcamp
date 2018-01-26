@@ -2,8 +2,6 @@ const express = require('express');
 const app = express();
 let articles = require('./articles/blogs.json');
 
-app.use(express.static(__dirname));
-
 //app.get('*', (req, res) => { let art = Object.keys(articles); res.send(res.params)});
 
 app.get('/', (req, res) => {
