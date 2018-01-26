@@ -2,7 +2,7 @@ export default class App {
     constructor(blogsContainer, blogTextContainer) {
         this.blogs = [];
         this.blogsContainer = blogsContainer;
-        this.blogTextContainer = blogsContainer;
+        this.blogTextContainer = blogTextContainer;
     }
 
     getBlogs() {
@@ -14,17 +14,33 @@ export default class App {
             })
             .then(data => {
                 let result = Object.keys(data).forEach(blog => this.blogs.push(data[blog]))
-                this.render(
+                this.render(this.blogsContainer, 
                     `
-                        ${this.blogs.map((blog, index) => `<div><a href="blogs/${index}">${blog.title}</a></div>`).join('')}
+                        ${this.blogs.map((blog, index) => `<div><button data-blog="blogs/${index}">${blog.title}</button></div>`).join('')}
                     `
                 );
+                let blogsLinks = this.blogsContainer.querySelectorAll('[data-blog]');
+                [...blogsLinks].forEach(link => link.addEventListener('click', () => { 
+                    let url = link.dataset.blog;
+                    this.getBlog(url);
+                }));
             })
     }
 
-    render() {
-        this.blogsContainer.innerHTML = `
-            ${this.blogs.map((blog, index) => `<div><a href="blogs/${index}">${blog.title}</a></div>`).join('')}
-        `
+    getBlog(url) {
+        let blog = fetch(url, {
+            method: 'GET'
+        })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            let text = this.blogs[data].text;
+            this.render(this.blogTextContainer, text);
+        })
+    }
+
+    render(container, markup) {
+        container.innerHTML = markup;
     }
 }
