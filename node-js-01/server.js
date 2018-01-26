@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-let articles = require('./articles/blogs.json');
+let articles = require('./server/blogs.json');
 
 app.use(express.static(__dirname));
 
@@ -24,3 +24,4 @@ app.delete('/blogs', (req, res) => {
 })
 
 app.listen(8080, () => console.log('Running'));
+
