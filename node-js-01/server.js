@@ -1,29 +1,15 @@
 const express = require('express');
 const app = express();
+const routes = require('./server/routes');
 let articles = require('./server/blogs.json');
 
-app.use(express.static(__dirname));
+//app.use(express.static(__dirname));
+app.use('/', routes);
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
+app.set('view engine', 'pug');
 
-app.get('/blogs', (req, res) => res.send(articles));
-
-app.get('/blogs/:id', (req, res) => {
-    res.send(req.params.id);
-});
-
-app.post('/blogs', (req, res) => {
-    res.send(req.method)
-});
-
-app.put('/blogs', (req, res) => {
-    res.send(req.method)
-})
-
-app.delete('/blogs', (req, res) => {
-    res.send(req.method)
+app.get('/bb', function (req, res) {
+    res.render('pageNotFound', { title: 'Hey', message: 'Page not found' })
 })
 
 app.listen(8080, () => console.log('Running'));

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "pug": "^2.0.0-rc.4"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
