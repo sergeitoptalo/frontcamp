@@ -3,12 +3,15 @@ const blogs = require('./blogs.json');
 let logger = require('../logger');
 
 routes.get('/', (req, res) => {
-    res.status(200).json({ message: 'Connected!' });
+    res.status(200).render('index', { title: 'NodeJS part 1', message: 'Task 7 - NodeJS' });
     log(req);
 });
 
 routes.get('/blogs', (req, res) => {
-    res.status(200).json(blogs);
+    let blogsIds = Object.keys(blogs);
+    let blogsTitles = [];
+    blogsIds.forEach(blog => blogsTitles.push(blogs[blog].title));
+    res.status(200).render('blogs', { title: 'Blogs', blogs: blogsTitles, urls: blogsIds });
     log(req);
 });
 
@@ -17,7 +20,12 @@ routes.get('/blogs/:id', (req, res) => {
     if (!blogs[blogId]) {
         res.status(404).render('pageNotFound', { title: 'Error', message: 'There is no such blog' })
     } else {
-        res.status(200).json(blogs[blogId]);
+        res.status(200).render('blog', {
+            title: blogId,
+            header: blogs[blogId].title,
+            text: blogs[blogId].text,
+            date: blogs[blogId].date
+        });
     }
     log(req);
 });
