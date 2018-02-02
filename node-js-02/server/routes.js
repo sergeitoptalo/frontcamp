@@ -1,18 +1,15 @@
 const routes = require('express').Router();
-const blogs = require('./blogs.json');
-let logger = require('../logger');
+const Blog = require ('./schema');
 
-routes.get('/', (req, res) => {
-    res.status(200).render('index', { title: 'NodeJS part 1', message: 'Task 7 - NodeJS' });
-    log(req);
-});
+/* routes.get('/', (req, res) => {
+    res.status(200).sendFile('index.html', { root:  __dirname });
+}); */
 
-routes.get('/blogs', (req, res) => {
+/* routes.get('/blogs', (req, res) => {
     let blogsIds = Object.keys(blogs);
     let blogsTitles = [];
     blogsIds.forEach(blog => blogsTitles.push(blogs[blog].title));
     res.status(200).render('blogs', { title: 'Blogs', blogs: blogsTitles, urls: blogsIds });
-    log(req);
 });
 
 routes.get('/blogs/:id', (req, res) => {
@@ -27,37 +24,36 @@ routes.get('/blogs/:id', (req, res) => {
             date: blogs[blogId].date
         });
     }
-    log(req);
 });
 
 routes.post('/blogs', (req, res) => {
     res.status(200).json({ type: req.method });
-    log(req);
+}); */
+
+routes.post('/add-blog', (req, res) => {
+    const note = req.body;
+    const blog = new Blog(req.body);
+    blog.save(note, (err, result) => {
+        if (err) {
+            res.send({ 'error': 'An error has occurred' });
+        } else {
+            res.send('added');
+        }
+    });
 });
 
-routes.put('/blogs/:id', (req, res) => {
+/* routes.put('/blogs/:id', (req, res) => {
     let blogId = req.params.id;
     res.status(200).json({ type: req.method, id: blogId });
-    log(req);
 });
 
 routes.delete('/blogs/:id', (req, res) => {
     let blogId = req.params.id;
     res.status(200).json({ type: req.method, id: blogId });
-    log(req);
 });
 
 routes.use(function (req, res, next) {
     res.status(404).render('pageNotFound', { title: 'Error', message: 'Page not found' })
-})
-
-let log = (req) => {
-    logger.log({
-        level: 'info',
-        url: req.headers.host + req.url,
-        method: req.method,
-        date: new Date()
-    });
-}
+}) */
 
 module.exports = routes;
