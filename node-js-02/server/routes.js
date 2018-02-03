@@ -2,16 +2,6 @@ const routes = require('express').Router();
 const Blog = require('./schema').Blog;
 const passport = require('passport');
 
-
-/* routes.get('/', (req, res) => {
-    if (!req.isAuthenticated()) {
-        res.redirect('/loginPage');
-    } else {
-        req.logout();
-        res.status(200).render('index');
-    }
-}) */
-
 routes.get('/', (req, res) => {
     console.log(req.isAuthenticated());
     Blog.aggregate([
@@ -30,14 +20,35 @@ routes.get('/', (req, res) => {
 
             }
         }
-    ]
-        , (err, blogs) => {
-            res.status(200).render('index', { blogs: blogs });
-        })
+    ], (err, blogs) => {
+        let isAuthenticated = req.isAuthenticated();
+        res.status(200).render('index', { blogs: blogs, isAuthenticated: isAuthenticated });
+    })
 });
 
 routes.get('/loginPage', (req, res) => {
     res.status(200).render('loginPage');
+})
+
+routes.get('/logout', (req, res) => {
+    req.logout();
+    res.status(200).redirect('/');
+})
+
+routes.get('/addBlogPage', (req, res) => {
+    res.status(200).render('form');
+})
+
+routes.post('/create-blog', (req, res) => {
+    req.body.date = new Date();
+    const blog = new Blog(req.body);
+    blog.save(req.body, (err, result) => {
+        if (err) {
+            res.send({ 'error': 'An error has occurred' });
+        } else {
+            res.status(200).redirect('/');
+        }
+    });
 })
 
 routes.post('/loginHandler', passport.authenticate('local', {
@@ -74,19 +85,37 @@ routes.get('/blogs', (req, res) => {
 
             }
         }
-    ]
-        , (err, blogs) => {
-            res.send(blogs);
-        })
+    ], (err, blogs) => {
+        res.send(blogs);
+    })
 });
 
-routes.get('/blogs/:id', (req, res) => {
+routes.get('/blogs/:id', (req, res, next) => {
     let blogId = req.params.id;
+    let isAuthenticated = req.isAuthenticated();
     Blog.findById(blogId, (err, blog) => {
         if (err) {
-            res.send({ 'error': 'An error has occurred' });
+            next(err);
         } else {
-            res.send(blog);
+            res.status(200).render('blog', {
+                blog: blog,
+                isAuthenticated: isAuthenticated
+            });
+        }
+    });
+});
+
+routes.get('/blogs/edit/:id', (req, res, next) => {
+    let blogId = req.params.id;
+    let isEditing = true;
+    Blog.findById(blogId, (err, blog) => {
+        if (err) {
+            next(err);
+        } else {
+            res.status(200).render('form', {
+                blog: blog,
+                isEditing: isEditing
+            });
         }
     });
 });

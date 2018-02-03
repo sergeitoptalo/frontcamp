@@ -15,9 +15,19 @@ passport.use(new LocalStrategy({
 },
     function (username, password, done) {
         User.findOne({ login: username }, function (err, user) {
-            if (err) { console.log(err); return done(err); }
-            if (!user) { console.log(user); return done(null, false); }
-            if (!user.verifyPassword(password, user.password)) { console.log(user); return done(null, false); }
+            if (err) {
+                next(err);
+                console.log(err);
+                return done(err);
+            }
+            if (!user) {
+                console.log(user);
+                return done(null, false);
+            }
+            if (!user.verifyPassword(password, user.password)) {
+                console.log(user);
+                return done(null, false);
+            }
             console.log(user);
             return done(null, user);
         });
@@ -47,6 +57,11 @@ app.set('view engine', 'pug');
 app.set("views", path.join(__dirname, "./views"));
 
 app.use('/', routes);
+
+app.use(function (err, req, res, next) {
+    console.error(err)
+    res.status(500).send('Something broke!')
+})
 
 app.listen(8080, () => console.log('Running'));
 

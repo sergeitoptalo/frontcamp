@@ -5,8 +5,15 @@ html
     title= title
   body
     - var values = blogs
+    - var authorised = isAuthenticated
     div
-        a(href="/loginPage") Login
+        if authorised
+            div
+                a(href="/logout") Logout
+            div
+                a(href="/addBlogPage") Add blog
+        else 
+            a(href="/loginPage") Login
     ul
         each blog in values
             li

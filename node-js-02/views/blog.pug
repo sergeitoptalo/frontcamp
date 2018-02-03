@@ -1,0 +1,15 @@
+html
+  head
+    style
+      include styles.css
+    title= title
+  body
+    - var authorised = isAuthenticated
+    div
+        a(href="/") Back
+    if authorised
+        div
+            a(href="/blogs/edit/" + blog.id) Edit Blog
+    div= blog.title
+    div= blog.author
+    div= blog.text
