@@ -1,0 +1,13 @@
+html
+  head
+    style
+      include styles.css
+    title= title
+  body
+    form(method='POST' action='/loginHandler')
+          div.form-group
+            label(for='login') Login
+            input#login.form-control(type='text' name='login')
+            label(for='password') Password
+            input#pw.form-control(type='password' name='password')
+            button.btn.btn-primary(type='submit') Login

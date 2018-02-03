@@ -1,0 +1,13 @@
+html
+  head
+    style
+      include styles.css
+    title= title
+  body
+    - var values = blogs
+    div
+        a(href="/loginPage") Login
+    ul
+        each blog in values
+            li
+            a(href="/blogs/" + blog._id.id)= blog._id.title

@@ -11,6 +11,19 @@ const blogSchema = new Schema({
     text: String
 });
 
+const userSchema = new Schema({
+    userName: String,
+    login: String,
+    password: String
+});
+
+
+userSchema.methods.verifyPassword = function verifyPassword(password, userPassword) {
+    return password === userPassword;
+};
+
+const User = mongoose.model('User', userSchema)
 const Blog = mongoose.model('Blog', blogSchema);
 
-module.exports = Blog;
+
+module.exports = { Blog, User };
