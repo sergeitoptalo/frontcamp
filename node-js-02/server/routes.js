@@ -51,10 +51,22 @@ routes.post('/create-blog', (req, res) => {
     });
 })
 
-routes.post('/loginHandler', passport.authenticate('local', {
+/* routes.post('/loginHandler', passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/loginPage'
-}))
+})) */
+
+routes.post('/loginHandler', function (req, res, next) {
+    passport.authenticate('local', function (err, user, message) {
+        if (!user) {
+            return res.status(200).render('loginPage', { message: message });
+        }
+        req.logIn(user, function (err) {
+            if (err) { return next(err); }
+            return res.redirect('/');
+        });
+    })(req, res, next)
+})
 
 routes.post('/add-user', (req, res) => {
     const user = new User(req.body);

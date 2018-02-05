@@ -22,11 +22,11 @@ passport.use(new LocalStrategy({
             }
             if (!user) {
                 console.log(user);
-                return done(null, false);
+                return done(null, false, 'Login is incorrect');
             }
             if (!user.verifyPassword(password, user.password)) {
                 console.log(user);
-                return done(null, false);
+                return done(null, false, 'Passord is incorrect');
             }
             console.log(user);
             return done(null, user);
