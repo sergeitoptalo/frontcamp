@@ -4,23 +4,21 @@ html
       include styles.css
     title= title
   body
-    form(method='POST' action='/create-blog')
-          div.form-group
-            label(for='title') Title
-            if isEditing
-                input#login.form-control(type='text' name='title' value=blog.title)
-            else
-                input#login.form-control(type='text' name='title')
-            label(for='password') Author
-            if isEditing
+    if isEditing
+        form(method='POST' action='/update-blog/' + blog.id)
+            div
+                label(for='title') Title
+                input(type='text' name='title' value=blog.title)
+                label(for='password') Author
                 input#login.form-control(type='text' name='author' value=blog.author)
-            else
-                input#login.form-control(type='text' name='author')
-            if isEditing
                 textarea(class="add-blog-text" name="text")=blog.text
-            else
-                textarea(class="add-blog-text" name="text")
-            if isEditing
-                button.btn.btn-primary(type='submit') edit Blog
-            else
-                button.btn.btn-primary(type='submit') add Blog
+                button(type='submit') edit Blog
+    else
+            form(method='POST' action='/create-blog')
+                div
+                    label(for='title') Title
+                    input(type='text' name='title')
+                    label(for='password') Author
+                    input#login.form-control(type='text' name='author')
+                    textarea(class="add-blog-text" name="text")
+                    button(type='submit') add Blog

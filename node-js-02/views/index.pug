@@ -6,15 +6,13 @@ html
   body
     - var values = blogs
     - var authorised = isAuthenticated
-    div
-        if authorised
-            div
-                a(href="/logout") Logout
-            div
-                a(href="/addBlogPage") Add blog
-        else 
-            a(href="/loginPage") Login
-    ul
-        each blog in values
-            li
-            a(href="/blogs/" + blog._id.id)= blog._id.title
+    include components/header.pug
+    main
+        ul(class="blogs-list")
+            each blog in values
+                li
+                    if authorised
+                        a(href="/delete/" + blog._id.id class="delete-button")
+                        a(href="/blogs/edit/" + blog._id.id class="edit-blog-button")
+                    a(href="/blogs/" + blog._id.id)= blog._id.title
+                    div= blog._id.date

@@ -1,0 +1,168 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.app-header {
+    background: rgb(53,106,160); /* Old browsers */
+    background: -moz-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(53,106,160,1) 0%,rgba(53,106,160,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(53,106,160,1) 0%,rgba(53,106,160,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#356aa0', endColorstr='#356aa0',GradientType=1 ); /* IE6-9 */
+    padding: 20px;
+}
+
+.app-header:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+.logo {
+    color: #fff;
+    float: left;
+    font-size: 30px;
+}
+
+.login-section {
+    float: right;
+}
+
+/* BUTTONS */
+.button {
+    border: 1px solid transparent;
+    border-radius: 20px;
+    cursor: pointer;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.add-blog-button {
+    background: #fff;
+    color: rgb(53,106,160);
+    float: left;
+    margin-right: 10px;
+}
+
+.login-button,
+.logout-button {
+    border-color: #fff;
+    color: #fff;
+    float: right;
+}
+
+.back-button {
+    float: left;
+    background: #a1a1a1;
+    color: #fff;
+}
+
+.edit-blog-button {
+    color: #868686;
+    cursor: pointer;
+    float: right;
+    padding: 5px 10px;
+}
+
+.edit-blog-button:after {
+    color: #868686;
+    content: '\1F589';
+    font-size: 23px;
+}
+
+.delete-button {
+    color: #868686;
+    float: right;
+    padding: 5px 15px;
+}
+
+.delete-button:before {
+    content: '\1F5D1';
+    color: #868686;
+    cursor: pointer;
+    font-size: 23px;
+}
+
+main {
+    padding: 20px;
+}
+
+.blogs-list {
+    margin: 0 auto;
+    width: 900px;
+}
+
+.blogs-list li {
+    list-style: none;
+    padding: 20px;
+}
+
+.blogs-list li:hover {
+    background: rgb(241, 241, 241);
+}
+
+.blogs-list li a {
+    color: rgb(53,106,160);
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.blogs-list li a:hover {
+    text-decoration: underline;
+}
+
+.blog-container {
+    margin: 0 auto;
+    padding: 20px;
+    width: 1000px;
+}
+
+/* BLOG */
+.blog-controls:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+h2.blog-title {
+    font-size: 30px;
+    color: rgb(53,106,160);
+}
+
+.blog-text {
+    margin-top: 30px;
+}
+
+form {
+    border: 1px solid rgb(187, 213, 230);
+    margin: 20px auto;
+    padding: 30px;
+    width: 800px;
+}
+
+form label,
+form input,
+form textarea {
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+}
+
+form input {
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+form textarea {
+    height: 500px;
+}
+

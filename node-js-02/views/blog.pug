@@ -4,12 +4,17 @@ html
       include styles.css
     title= title
   body
+    - var values = blogs
     - var authorised = isAuthenticated
-    div
-        a(href="/") Back
-    if authorised
-        div
-            a(href="/blogs/edit/" + blog.id) Edit Blog
-    div= blog.title
-    div= blog.author
-    div= blog.text
+    include components/header.pug
+    div(class="blog-container")
+      div(class="blog-controls")
+        a(href="/" class="button back-button") Back
+        if authorised
+          div
+            a(href="/delete/" + blog.id class="button delete-button")
+            a(href="/blogs/edit/" + blog.id class="button edit-blog-button")
+      div(class="blog-text")
+        h2(class="blog-title")= blog.title
+        div= blog.author
+        div= blog.text

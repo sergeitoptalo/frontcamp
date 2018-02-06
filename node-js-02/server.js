@@ -14,7 +14,7 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
 },
     function (username, password, done) {
-        User.findOne({ login: username }, function (err, user) {
+        User.findOne({ login: username }, function (err, user, next) {
             if (err) {
                 next(err);
                 console.log(err);
@@ -22,10 +22,12 @@ passport.use(new LocalStrategy({
             }
             if (!user) {
                 console.log(user);
+                next(err);
                 return done(null, false);
             }
             if (!user.verifyPassword(password, user.password)) {
                 console.log(user);
+                next(err);
                 return done(null, false);
             }
             console.log(user);
@@ -60,7 +62,7 @@ app.use('/', routes);
 
 app.use(function (err, req, res, next) {
     console.error(err)
-    res.status(500).send('Something broke!')
+    res.status(500).send(err.message)
 })
 
 app.listen(8080, () => console.log('Running'));
