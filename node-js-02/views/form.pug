@@ -12,7 +12,8 @@ html
                 label(for='password') Author
                 input#login.form-control(type='text' name='author' value=blog.author)
                 textarea(class="add-blog-text" name="text")=blog.text
-                button(type='submit') edit Blog
+                button(type='submit' class="button update-button") Update
+                a(href="/" class="button cancel-button") Cancel
     else
             form(method='POST' action='/create-blog')
                 div
@@ -21,4 +22,5 @@ html
                     label(for='password') Author
                     input#login.form-control(type='text' name='author')
                     textarea(class="add-blog-text" name="text")
-                    button(type='submit') add Blog
+                    button(type='submit' class="button update-button") add Blog
+                    a(href="/" class="button cancel-button") Cancel

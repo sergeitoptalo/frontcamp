@@ -15,4 +15,5 @@ html
                         a(href="/delete/" + blog._id.id class="delete-button")
                         a(href="/blogs/edit/" + blog._id.id class="edit-blog-button")
                     a(href="/blogs/" + blog._id.id)= blog._id.title
-                    div= blog._id.date
+                    div(class="date")
+                      span= blog._id.date

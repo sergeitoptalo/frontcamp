@@ -3,7 +3,6 @@ const Blog = require('./schema').Blog;
 const passport = require('passport');
 
 routes.get('/', (req, res) => {
-    console.log(req.isAuthenticated());
     Blog.aggregate([
         {
             $group: {
@@ -31,18 +30,6 @@ routes.get('/', (req, res) => {
 
 routes.get('/loginPage', (req, res) => {
     res.status(200).render('loginPage');
-})
-
-/* routes.post('/loginHandler', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/loginPage'
-})) */
-
-routes.post('/loginHandler', function (req, res, next) {
-    passport.authenticate('local', (res, req, next) => {
-        res.status(200).redirect('suc');
-    })
-    res.status(200).redirect('err');
 })
 
 routes.get('/logout', (req, res) => {
@@ -75,15 +62,12 @@ routes.get('/delete/:id', (req, res) => {
             res.status(200).redirect('/');
         }
     });
-/* routes.post('/loginHandler', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/loginPage'
-})) */
+})
 
 routes.post('/loginHandler', function (req, res, next) {
     passport.authenticate('local', function (err, user, message) {
         if (!user) {
-            return res.status(200).render('loginPage', { message: message });
+            return res.render('loginPage', { message: message.message });
         }
         req.logIn(user, function (err) {
             if (err) { return next(err); }
@@ -104,7 +88,6 @@ routes.post('/add-user', (req, res) => {
 });
 
 routes.get('/blogs', (req, res) => {
-    console.log(req.isAuthenticated());
     Blog.aggregate([
         {
             $group: {
@@ -183,6 +166,5 @@ routes.post('/add-blog', (req, res) => {
         }
     });
 });
-
 
 module.exports = routes;

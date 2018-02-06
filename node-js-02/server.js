@@ -17,18 +17,14 @@ passport.use(new LocalStrategy({
         User.findOne({ login: username }, function (err, user, next) {
             if (err) {
                 next(err);
-                console.log(err);
                 return done(err);
             }
             if (!user) {
-                console.log(user);
-                return done(null, false, 'Login is incorrect');
+                return done(null, false, { message: 'Login is incorrect' });
             }
             if (!user.verifyPassword(password, user.password)) {
-                console.log(user);
-                return done(null, false, 'Passord is incorrect');
+                return done(null, false, { message: 'Passord is incorrect' });
             }
-            console.log(user);
             return done(null, user);
         });
     }
@@ -59,8 +55,11 @@ app.set("views", path.join(__dirname, "./views"));
 app.use('/', routes);
 
 app.use(function (err, req, res, next) {
-    console.error(err)
-    res.status(500).send(err.message)
+    if (req.route.path === "/blogs/:id") {
+        let message = `Blog with id ${err.stringValue} does not exist`
+        res.render('errorPage', { message: message })
+    }
+    res.render('errorPage', { message: err.message })
 })
 
 app.listen(8080, () => console.log('Running'));

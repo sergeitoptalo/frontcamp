@@ -16,5 +16,10 @@ html
             a(href="/blogs/edit/" + blog.id class="button edit-blog-button")
       div(class="blog-text")
         h2(class="blog-title")= blog.title
-        div= blog.author
-        div= blog.text
+        div(class="blog-info")
+          div(class="date")= new Date(blog.date).toDateString()
+            if blog.updated
+              span(class="updated") Updated: 
+                span= new Date(blog.updated).toDateString()
+          div(class="author")= blog.author
+        div(class="blog-text")= blog.text

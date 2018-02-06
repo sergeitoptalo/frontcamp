@@ -8,7 +8,8 @@ const blogSchema = new Schema({
     title: String,
     author: String,
     date: Date,
-    text: String
+    text: String,
+    updated: Date
 });
 
 const userSchema = new Schema({
