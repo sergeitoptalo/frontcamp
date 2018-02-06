@@ -28,65 +28,8 @@ routes.get('/', (req, res) => {
     })
 });
 
-routes.get('/loginPage', (req, res) => {
-    res.status(200).render('loginPage');
-})
 
-routes.get('/logout', (req, res) => {
-    req.logout();
-    res.status(200).redirect('/');
-})
-
-routes.get('/addBlogPage', (req, res) => {
-    res.status(200).render('form', { isEditing: false });
-})
-
-routes.post('/create-blog', (req, res) => {
-    req.body.date = new Date();
-    const blog = new Blog(req.body);
-    blog.save(req.body, (err, result) => {
-        if (err) {
-            res.send({ 'error': 'An error has occurred' });
-        } else {
-            res.status(200).redirect('/');
-        }
-    });
-})
-
-routes.get('/delete/:id', (req, res) => {
-    let blogId = req.params.id;
-    Blog.findByIdAndRemove(blogId, req.body, function (err, docs) {
-        if (err) {
-            res.send({ 'error': 'An error has occurred' });
-        } else {
-            res.status(200).redirect('/');
-        }
-    });
-})
-
-routes.post('/loginHandler', function (req, res, next) {
-    passport.authenticate('local', function (err, user, message) {
-        if (!user) {
-            return res.render('loginPage', { message: message.message });
-        }
-        req.logIn(user, function (err) {
-            if (err) { return next(err); }
-            return res.redirect('/');
-        });
-    })(req, res, next)
-})
-
-routes.post('/add-user', (req, res) => {
-    const user = new User(req.body);
-    user.save(req.body, (err, result) => {
-        if (err) {
-            res.send({ 'error': 'An error has occurred' });
-        } else {
-            res.send('user added');
-        }
-    });
-});
-
+/* Get all blogs */
 routes.get('/blogs', (req, res) => {
     Blog.aggregate([
         {
@@ -128,6 +71,60 @@ routes.get('/blogs/:id', (req, res, next) => {
     });
 });
 
+
+/* Login */
+routes.get('/loginPage', (req, res) => {
+    res.status(200).render('loginPage');
+});
+
+routes.get('/logout', (req, res) => {
+    req.logout();
+    res.status(200).redirect('/');
+});
+
+routes.post('/loginHandler', function (req, res, next) {
+    passport.authenticate('local', function (err, user, message) {
+        if (!user) {
+            return res.render('loginPage', { message: message.message });
+        }
+        req.logIn(user, function (err) {
+            if (err) { return next(err); }
+            return res.redirect('/');
+        });
+    })(req, res, next)
+});
+
+
+/* Add blog */
+routes.get('/addBlogPage', (req, res) => {
+    res.status(200).render('form', { isEditing: false });
+});
+
+routes.post('/add-blog', (req, res) => {
+    const blog = new Blog(req.body);
+    blog.save(req.body, (err, result) => {
+        if (err) {
+            res.send({ 'error': 'An error has occurred' });
+        } else {
+            res.send('added');
+        }
+    });
+});
+
+routes.post('/create-blog', (req, res) => {
+    req.body.date = new Date();
+    const blog = new Blog(req.body);
+    blog.save(req.body, (err, result) => {
+        if (err) {
+            res.send({ 'error': 'An error has occurred' });
+        } else {
+            res.status(200).redirect('/');
+        }
+    });
+});
+
+
+/* Update blog */
 routes.get('/blogs/edit/:id', (req, res, next) => {
     let blogId = req.params.id;
     let isEditing = true;
@@ -143,7 +140,6 @@ routes.get('/blogs/edit/:id', (req, res, next) => {
     });
 });
 
-
 routes.post('/update-blog/:id', (req, res) => {
     let blogId = req.params.id;
     req.body.updated = new Date();
@@ -154,15 +150,29 @@ routes.post('/update-blog/:id', (req, res) => {
             res.status(200).redirect('/');
         }
     });
-})
+});
 
-routes.post('/add-blog', (req, res) => {
-    const blog = new Blog(req.body);
-    blog.save(req.body, (err, result) => {
+
+/* Delete blog */
+routes.get('/delete/:id', (req, res) => {
+    let blogId = req.params.id;
+    Blog.findByIdAndRemove(blogId, req.body, function (err, docs) {
         if (err) {
             res.send({ 'error': 'An error has occurred' });
         } else {
-            res.send('added');
+            res.status(200).redirect('/');
+        }
+    });
+});
+
+
+routes.post('/add-user', (req, res) => {
+    const user = new User(req.body);
+    user.save(req.body, (err, result) => {
+        if (err) {
+            res.send({ 'error': 'An error has occurred' });
+        } else {
+            res.send('user added');
         }
     });
 });
