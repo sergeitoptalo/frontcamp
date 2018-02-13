@@ -1,7 +1,12 @@
 const routes = require('express').Router();
 const Blog = require('./schema').Blog;
 const passport = require('passport');
+const handleRender = require('./handleRender.jsx');
 
+routes.get('/', handleRender);
+
+
+/*   
 routes.get('/', (req, res) => {
     Blog.aggregate([
         {
@@ -29,7 +34,6 @@ routes.get('/', (req, res) => {
 });
 
 
-/* Get all blogs */
 routes.get('/blogs', (req, res) => {
     Blog.aggregate([
         {
@@ -72,7 +76,7 @@ routes.get('/blogs/:id', (req, res, next) => {
 });
 
 
-/* Login */
+
 routes.get('/loginPage', (req, res) => {
     res.status(200).render('loginPage');
 });
@@ -95,7 +99,7 @@ routes.post('/loginHandler', function (req, res, next) {
 });
 
 
-/* Add blog */
+
 routes.get('/addBlogPage', (req, res) => {
     res.status(200).render('form', { isEditing: false });
 });
@@ -124,7 +128,7 @@ routes.post('/create-blog', (req, res) => {
 });
 
 
-/* Update blog */
+
 routes.get('/blogs/edit/:id', (req, res, next) => {
     let blogId = req.params.id;
     let isEditing = true;
@@ -153,7 +157,7 @@ routes.post('/update-blog/:id', (req, res) => {
 });
 
 
-/* Delete blog */
+
 routes.get('/delete/:id', (req, res) => {
     let blogId = req.params.id;
     Blog.findByIdAndRemove(blogId, req.body, function (err, docs) {
@@ -175,6 +179,6 @@ routes.post('/add-user', (req, res) => {
             res.send('user added');
         }
     });
-});
+}); */
 
 module.exports = routes;
