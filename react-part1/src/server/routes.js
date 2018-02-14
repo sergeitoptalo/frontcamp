@@ -53,14 +53,15 @@ routes.post('/loginHandler', function (req, res, next) {
             //return res.render('loginPage', { message: message.message });
         }
         req.logIn(user, function (err) {
-            if (err) { return next(err); }
+            //if (err) { return next(err); }
             //return res.redirect('/');
+
         });
         let data = {};
         let isAuthenticated = req.isAuthenticated();
         data.message = message;
         data.isAuthenticated = isAuthenticated;
-        res.status(200).send(data);
+        return res.json({ message: message, isAuthenticated: isAuthenticated });
         //return handleRender(req, res, JSON.stringify(data));
 
     })(req, res, next)

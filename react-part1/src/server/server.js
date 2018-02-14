@@ -61,7 +61,9 @@ app.use('/', routes);
     }
     res.render('errorPage', { message: err.message })
 }) */
-
+app.use(function (err, req, res, next) {
+    res.json({ message: err.message })
+}) 
 //app.use(express.static('public'));
 
 app.listen(8080, () => console.log('Running'));
