@@ -7,13 +7,14 @@ let Schema = mongoose.Schema;
 const postSchema = new Schema({
     author: String,
     date: Date,
-    text: String
+    postText: String
 });
 
 const userSchema = new Schema({
     userName: String,
     login: String,
-    password: String
+    password: String,
+    posts: Array
 });
 
 

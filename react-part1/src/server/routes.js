@@ -1,21 +1,69 @@
 const routes = require('express').Router();
-const Blog = require('./schema').Blog;
+const Post = require('./schema').Post;
 const passport = require('passport');
 const handleRender = require('./handleRender.jsx');
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import App from '../client/app.jsx';
 import Form from '../client/components/form.jsx';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
 //routes.get('/*', handleRender);
-routes.get('/', (req, res) => {
+/* routes.get('/', (req, res) => {
     let page = handleRender(<App name="All posts" />);
     res.send(page);
 });
-
-routes.get('/add-post', (req, res) => {
+ */
+/* routes.get('/add-post', (req, res) => {
     let page = handleRender(<Form />);
     res.send(page);
+}); */
+
+routes.get('/*', handleRender);
+
+routes.post('/create-post', (req, res) => {
+    req.body.date = new Date();
+    const post = new Post(req.body);
+    post.save(req.body, (err, result) => {
+        if (err) {
+            res.send({ 'error': 'An error has occurred' });
+        } else {
+            /* res.status(200).json({
+                success:true,
+                redirectUrl: '/'
+            }) */
+            //res.redirect('/');
+            handleRender(req, res);
+        }
+    });
+});
+
+/* routes.get('/login', (req, res) => {
+    res.status(200).render('loginPage');
+}); */
+
+routes.get('/logout', (req, res) => {
+    req.logout();
+    res.status(200).redirect('/');
+});
+
+routes.post('/loginHandler', function (req, res, next) {
+    passport.authenticate('local', function (err, user, message) {
+        if (!user) {
+            //return res.render('loginPage', { message: message.message });
+        }
+        req.logIn(user, function (err) {
+            if (err) { return next(err); }
+            //return res.redirect('/');
+        });
+        let data = {};
+        let isAuthenticated = req.isAuthenticated();
+        data.message = message;
+        data.isAuthenticated = isAuthenticated;
+        res.status(200).send(data);
+        //return handleRender(req, res, JSON.stringify(data));
+
+    })(req, res, next)
 });
 
 /*   

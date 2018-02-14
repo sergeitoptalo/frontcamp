@@ -1,11 +1,12 @@
 import React from 'react';
 
-export default class Form extends React.Component {
+export default class RegistrationForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            author: '',
-            postText: ''
+            name: '',
+            login: '',
+            password: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -24,7 +25,7 @@ export default class Form extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        fetch('/create-post', {
+        fetch('/register-user', {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers: {
@@ -38,24 +39,34 @@ export default class Form extends React.Component {
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
+                <div className="form-group">
                         <label>
-                            Author</label>
+                            Name</label>
                         <input
-                            name="author"
+                            name="userName"
                             type="text"
                             onChange={this.handleChange}
                             className="form-control" />
                     </div>
                     <div className="form-group">
-                        <textarea
-                            name="postText"
-                            className="form-control"
-                            rows="5"
-                            onChange={this.handleChange}>
-                        </textarea>
+                        <label>
+                            Login</label>
+                        <input
+                            name="login"
+                            type="text"
+                            onChange={this.handleChange}
+                            className="form-control" />
                     </div>
-                    <input type="submit" value="Add" className="btn btn-primary" />
+                    <div className="form-group">
+                        <label>
+                            Password</label>
+                        <input
+                            name="password"
+                            type="password"
+                            onChange={this.handleChange}
+                            className="form-control" />
+                    </div>
+                    <input type="submit" value="Register" className="btn btn-primary" />
                 </form>
             </div>
         )

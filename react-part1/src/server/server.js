@@ -54,13 +54,13 @@ app.set("views", path.join(__dirname, "./views"));
 
 app.use('/', routes);
 
-app.use(function (err, req, res, next) {
+/* app.use(function (err, req, res, next) {
     if (req.route.path === "/blogs/:id") {
         let message = `Blog with id ${err.stringValue} does not exist`
         res.render('errorPage', { message: message })
     }
     res.render('errorPage', { message: err.message })
-})
+}) */
 
 //app.use(express.static('public'));
 
