@@ -1,13 +1,13 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const routes = require('./src/server/routes');
+const routes = require('./server/routes');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('cookie-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('./src/server/schema').User;
+const User = require('./server/schema').User;
 
 passport.use(new LocalStrategy({
     usernameField: 'login',
@@ -48,8 +48,7 @@ app.use(session({ secret: 'SECRET' }))
 
 app.use(passport.initialize());
 app.use(passport.session());
-//app.use(express.static(__dirname));
-app.use(express.static('public'));
+app.use(express.static(__dirname));
 app.set('view engine', 'pug');
 app.set("views", path.join(__dirname, "./views"));
 

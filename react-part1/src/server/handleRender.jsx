@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 
-import App from '../src/app.jsx';
+import App from '../client/app.jsx';
 
 function renderFullPage(html) {
     return `
@@ -15,16 +15,20 @@ function renderFullPage(html) {
 </head>
 
 <body>
-    <div id="root">${html}</div>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <div id="root">${html} </div>
+   
 </body>
 </html>
     `
 }
 
-function handleRender(req, res) {
-    const html = renderToString(<App/>);
+/* function handleRender(req, res) {
+    const html = renderToString(<App name="React"/>);
     res.send(renderFullPage(html));
+} */
+function handleRender(component) {
+    const html = renderToString(component);
+    return renderFullPage(html);
 }
 
 module.exports = handleRender;
