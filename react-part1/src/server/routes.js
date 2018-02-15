@@ -1,5 +1,6 @@
 const routes = require('express').Router();
 const Post = require('./schema').Post;
+const User = require('./schema').User;
 const passport = require('passport');
 const handleRender = require('./handleRender.jsx');
 import React from 'react';
@@ -9,18 +10,47 @@ import Form from '../client/components/form.jsx';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
 
-routes.get('/', handleRender);
+routes.get('/posts', function (req, res) {
+    /* Post.find({}, function (err, posts) {
+        res.send(posts);
+    }); */
+    Post.find({}).
+        populate('author').
+        exec(function (err, posts) {
+            res.send(posts);
+        });
+});
 
 routes.post('/create-post', (req, res) => {
     req.body.date = new Date();
-    const post = new Post(req.body);
-    post.save(req.body, (err, result) => {
-        if (err) {
-            res.send({ 'error': 'An error has occurred' });
-        } else {
-            handleRender(req, res);
-        }
+
+    const user = User.findById(req.body.author, (err, user) => {
+        
+            const post = new Post({
+                postText: req.body.postText,
+                date: req.body.date,
+                author: user._id
+            });
+
+
+            post.save(function (err) {
+                if (err) return err.message;
+                user.posts.push(post);
+                user.save();
+            });
+            
+
+
     });
+});
+
+routes.get('/author/:id', (req, res) => {
+    let authorId = req.params.id;
+    User.findById(authorId)
+        .populate('posts')
+        .exec(function (err, author) {
+            res.send(author);
+        });
 });
 
 routes.get('/logout', (req, res) => {
@@ -35,8 +65,21 @@ routes.post('/loginHandler', function (req, res, next) {
         });
 
         let isAuthenticated = req.isAuthenticated();
-        return res.json({ message: message, isAuthenticated: isAuthenticated });
+        return res.json({ user: user, message: message, isAuthenticated: isAuthenticated });
     })(req, res, next)
 });
+
+routes.post('/register-user', function (req, res, next) {
+    const user = new User(req.body);
+    user.save(req.body, (err, result) => {
+        if (err) {
+            res.send({ 'error': 'An error has occurred' });
+        } else {
+            res.send('added');
+        }
+    });
+});
+
+routes.get('/*', handleRender);
 
 module.exports = routes;

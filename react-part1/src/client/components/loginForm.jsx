@@ -5,6 +5,7 @@ export default class LoginForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            user: null,
             login: '',
             password: '',
             message: '',
@@ -42,7 +43,7 @@ export default class LoginForm extends React.Component {
                 if (data.message) {
                     this.setState({ message: data.message.message })
                 }
-                this.setState({ isAuthenticated: data.isAuthenticated })
+                this.setState({ user: data.user, isAuthenticated: data.isAuthenticated })
             })
     }
 
@@ -76,7 +77,7 @@ export default class LoginForm extends React.Component {
                 {this.state.isAuthenticated ?
                     <Redirect to={{
                         pathname: '/',
-                        state: { isAuthenticated: this.state.isAuthenticated }
+                        state: { user: this.state.user, isAuthenticated: this.state.isAuthenticated }
                     }} />
                     : ``
                 }

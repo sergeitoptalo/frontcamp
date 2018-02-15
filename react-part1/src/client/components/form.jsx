@@ -12,6 +12,12 @@ export default class Form extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentDidMount() {
+        if (this.props.location.params && this.props.location.params.user) {
+            this.setState({ author: this.props.location.params.user._id });
+        }
+    }
+
     handleChange(event) {
         const target = event.target;
         const value = target.value;
@@ -38,15 +44,6 @@ export default class Form extends React.Component {
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label>
-                            Author</label>
-                        <input
-                            name="author"
-                            type="text"
-                            onChange={this.handleChange}
-                            className="form-control" />
-                    </div>
                     <div className="form-group">
                         <textarea
                             name="postText"

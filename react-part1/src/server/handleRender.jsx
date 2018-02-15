@@ -13,7 +13,6 @@ function renderFullPage(html, isAuthenticated) {
                 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
                 <meta http-equiv="X-UA-Compatible" content="ie=edge">
                 <title>React part 1</title>
-                <script>window.__IS_AUTHENTICATED__ = ${isAuthenticated}</script>
             </head>
             <body>
                 <div id="root">${html} </div>
@@ -27,17 +26,18 @@ function renderFullPage(html, isAuthenticated) {
 function handleRender(req, res, data) {
     const context = {};
     let isAuthenticated = req.isAuthenticated();
+
     const app = (
         <StaticRouter location={req.url} context={context}>
             <App />
         </StaticRouter>
     );
+
     const html = renderToString(app);
     if (context.url) {
         return res.redirect(context.url);
     }
     res.send(renderFullPage(html, isAuthenticated));
 }
-
 
 module.exports = handleRender;

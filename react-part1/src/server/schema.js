@@ -5,7 +5,10 @@ mongoose.connect('mongodb://toptalo:zavani74@cluster0-shard-00-00-s1vg1.mongodb.
 let Schema = mongoose.Schema;
 
 const postSchema = new Schema({
-    author: String,
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     date: Date,
     postText: String
 });
@@ -14,7 +17,10 @@ const userSchema = new Schema({
     userName: String,
     login: String,
     password: String,
-    posts: Array
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+    }]
 });
 
 
