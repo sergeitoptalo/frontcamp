@@ -40,9 +40,9 @@ function handleRender(req, res, data) {
     );
     const html = renderToString(app);
 
-    /* if (context.url) {
+    if (context.url) {
         return res.redirect(context.url);
-    } */
+    }
     res.send(renderFullPage(html));
 }
 
