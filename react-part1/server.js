@@ -48,24 +48,9 @@ app.use(session({ secret: 'SECRET' }))
 
 app.use(passport.initialize());
 app.use(passport.session());
-//app.use(express.static(__dirname));
 app.use(express.static('public'));
-app.set('view engine', 'pug');
-app.set("views", path.join(__dirname, "./views"));
 
 app.use('/', routes);
-
-/* app.use(function (err, req, res, next) {
-    if (req.route.path === "/blogs/:id") {
-        let message = `Blog with id ${err.stringValue} does not exist`
-        res.render('errorPage', { message: message })
-    }
-    res.render('errorPage', { message: err.message })
-}) */
-/* app.use(function (err, req, res, next) {
-    res.json({ message: err.message })
-})  */
-//app.use(express.static('public'));
 
 app.listen(8080, () => console.log('Running'));
 

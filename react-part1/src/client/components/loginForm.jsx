@@ -74,7 +74,10 @@ export default class LoginForm extends React.Component {
                     {this.state.message}
                 </div>
                 {this.state.isAuthenticated ?
-                    <Redirect to="/" />
+                    <Redirect to={{
+                        pathname: '/',
+                        state: { isAuthenticated: this.state.isAuthenticated }
+                    }} />
                     : ``
                 }
             </div>
