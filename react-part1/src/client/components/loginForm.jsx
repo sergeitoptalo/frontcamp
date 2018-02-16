@@ -28,7 +28,7 @@ export default class LoginForm extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        fetch('/loginHandler', {
+        fetch('/api/loginHandler', {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers: {
@@ -43,44 +43,58 @@ export default class LoginForm extends React.Component {
                 if (data.message) {
                     this.setState({ message: data.message.message })
                 }
+                //let isAuthenticated = data.isAuthenticated;
+                sessionStorage.setItem('isAuthenticated', data.isAuthenticated);
+                sessionStorage.setItem('user', JSON.stringify(data.user._id));
+                sessionStorage.setItem('userName', JSON.stringify(data.user.userName));
                 this.setState({ user: data.user, isAuthenticated: data.isAuthenticated })
             })
     }
 
     render() {
         return (
-            <div className="container">
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label>
-                            Login</label>
-                        <input
-                            name="login"
-                            type="text"
-                            onChange={this.handleChange}
-                            className="form-control" />
+            <div className="container m-3">
+                <div className="row justify-content-md-center">
+                    <div className="col col-lg-5">
+                        <form onSubmit={this.handleSubmit} className="p-4 bg-white rounded border">
+                            {this.state.message ?
+                                <div className="alert alert-danger" role="alert">
+                                    {this.state.message}
+                                </div>
+                                : ``
+                            }
+                            <div className="form-group">
+                                <label>
+                                    Login</label>
+                                <input
+                                    name="login"
+                                    type="text"
+                                    onChange={this.handleChange}
+                                    className="form-control" />
+                            </div>
+                            <div className="form-group">
+                                <label>
+                                    Password</label>
+                                <input
+                                    name="password"
+                                    type="password"
+                                    onChange={this.handleChange}
+                                    className="form-control" />
+                            </div>
+                            <div className="form-group d-flex justify-content-between align-items-center">
+                                <input type="submit" value="Login" className="btn btn-primary" />
+                                <Link to="/registration">Registration</Link>
+                            </div>
+                        </form>
+                        {this.state.isAuthenticated ?
+                            <Redirect to={{
+                                pathname: '/',
+                                state: { user: this.state.user, isAuthenticated: this.state.isAuthenticated }
+                            }} />
+                            : ``
+                        }
                     </div>
-                    <div className="form-group">
-                        <label>
-                            Password</label>
-                        <input
-                            name="password"
-                            type="password"
-                            onChange={this.handleChange}
-                            className="form-control" />
-                    </div>
-                    <input type="submit" value="Add" className="btn btn-primary" />
-                </form>
-                <div>
-                    {this.state.message}
                 </div>
-                {this.state.isAuthenticated ?
-                    <Redirect to={{
-                        pathname: '/',
-                        state: { user: this.state.user, isAuthenticated: this.state.isAuthenticated }
-                    }} />
-                    : ``
-                }
             </div>
         )
     }

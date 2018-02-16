@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const routes = require('./src/server/routes');
+const apiRoutes = require('./src/server/apiRoutes');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('cookie-session');
@@ -50,7 +51,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('public'));
 
-app.use('/', routes);
+app.use('/api/', apiRoutes);
+app.use('*', routes);
 
 app.listen(8080, () => console.log('Running'));
 

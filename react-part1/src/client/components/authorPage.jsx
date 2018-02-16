@@ -16,12 +16,12 @@ export default class AuthorPage extends React.Component {
         if (this.props.match.params.id) {
             this.setState({ id: this.props.match.params.id });
 
-            fetch(`/author/${this.props.match.params.id}`, { method: 'GET' })
+            fetch(`/api/author/${this.props.match.params.id}`, { method: 'GET' })
                 .then(response => {
-                    return response.json()
+                    return response.json();
                 })
                 .then(data => {
-                    this.setState({ author: data })
+                    this.setState({ author: data });
                 });
         }
     }

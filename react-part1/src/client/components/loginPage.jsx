@@ -17,7 +17,6 @@ export default class LoginPage extends React.Component {
         return (
             <div className="container">
                 <LoginForm />
-                <Link to="/registration">Registration</Link>
             </div>
         )
     }

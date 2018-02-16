@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
 export default class Form extends React.Component {
     constructor(props) {
@@ -42,19 +43,27 @@ export default class Form extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <textarea
-                            name="postText"
-                            className="form-control"
-                            rows="5"
-                            onChange={this.handleChange}>
-                        </textarea>
+            <Fragment>
+                <div className="container">
+                    <div className="row justify-content-md-center m-3">
+                        <div className="col col-lg-5">
+                            <h4 className="mt-3 mb-3">Add post</h4>
+                            <form onSubmit={this.handleSubmit}>
+                                <div className="form-group">
+                                    <textarea
+                                        name="postText"
+                                        className="form-control"
+                                        rows="5"
+                                        onChange={this.handleChange}>
+                                    </textarea>
+                                </div>
+                                <input type="submit" value="Add" className="btn btn-primary" />
+                                <Link to="/" className="btn btn-light ml-1">Cancel</Link>
+                            </form>
+                        </div>
                     </div>
-                    <input type="submit" value="Add" className="btn btn-primary" />
-                </form>
-            </div>
+                </div>
+            </Fragment>
         )
     }
 }
