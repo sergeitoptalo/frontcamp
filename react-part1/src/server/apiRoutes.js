@@ -36,6 +36,17 @@ apiRoutes.post('/create-post', (req, res) => {
     });
 });
 
+apiRoutes.delete('/delete-post/:id', (req, res) => {
+    let blogId = req.params.id;
+    Blog.findByIdAndRemove(blogId, req.body, function (err, post) {
+        if (err) {
+            res.send({ 'error': 'An error has occurred' });
+        } else {
+            res.send(post);
+        }
+    });
+});
+
 apiRoutes.get('/author/:id', (req, res) => {
     let authorId = req.params.id;
     User.findById(authorId)

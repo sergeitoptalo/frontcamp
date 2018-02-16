@@ -9,8 +9,11 @@ export default class MainPage extends React.Component {
         this.state = {
             isAuthenticated: false,
             user: null,
-            posts: []
+            posts: [],
+            loaded: false
         }
+
+        this.deletePost = this.deletePost.bind(this);
     }
 
     logout() {
@@ -24,9 +27,14 @@ export default class MainPage extends React.Component {
     }
 
     componentDidMount() {
+        if (!this.state.loaded) {
+            this.setState({ loaded: true });
+        }
+
         if (this.props.location.state && this.props.location.state.isAuthenticated) {
             this.setState({ user: this.props.location.state.user, isAuthenticated: this.props.location.state.isAuthenticated });
         }
+
         fetch('/api/posts', { method: 'GET' })
             .then(response => {
                 return response.json();
@@ -34,9 +42,29 @@ export default class MainPage extends React.Component {
             .then(data => {
                 this.setState({ posts: data })
             })
+
     }
 
+/*     deletePost(postId) {
+        fetch(`/api/delete-post/${postId}`, { method: 'DELETE' })
+            .then(
+                fetch('/api/posts', { method: 'GET' })
+                    .then(response => {
+                        return response.json();
+                    })
+                    .then(data => {
+                        this.setState({ posts: data })
+                    })
+            )
+    } */
+
     render() {
+        let userFromStorage = null;
+
+        if (this.state.loaded) {
+            userFromStorage = sessionStorage.getItem('user') !== 'undefined' ? JSON.parse(sessionStorage.getItem('user')) : null;
+        }
+
         return (
             <Fragment>
                 <div className="container mt-3">
@@ -48,7 +76,17 @@ export default class MainPage extends React.Component {
                                     <div className="card">
                                         <div className="card-body">
                                             <Link to={`/author/${post.author._id}`}>{post.author.userName}</Link>
-                                            <small className="card-subtitle text-secondary float-right">{dateObject.date}, {dateObject.time}</small>
+                                            {userFromStorage
+                                                ? post.author._id === userFromStorage
+                                                    ? <button
+                                                        className="btn btn-light btn-sm position-absolute"
+                                                        style={{ top: '2px', right: '2px' }}
+                                                        onClick={this.deletePost}>
+                                                        <i className="fas fa-trash text-secondary"></i>
+                                                    </button>
+                                                    : ``
+                                                : ``}
+                                            <small className="card-subtitle text-secondary float-right mr-4">{dateObject.date}, {dateObject.time}</small>
                                             <p className="card-text"> {post.postText}</p>
                                         </div>
                                     </div>
