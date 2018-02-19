@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-//import { render } from 'react-dom';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import Post from './post/post';
 
@@ -30,7 +29,7 @@ export default class MainPage extends React.Component {
     }
 
     handleDelete() {
-        this.renderPosts();       
+        this.renderPosts();
     }
 
     componentDidMount() {

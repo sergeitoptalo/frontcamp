@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
-//import { render } from 'react-dom';
 import LoginForm from './loginForm.jsx';
-//import RegistrationPage from '../registrationPage/registrationPage.jsx';
 
 
 export default class LoginPage extends React.Component {

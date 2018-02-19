@@ -6,6 +6,7 @@ import LoginPage from './components/loginPage/loginPage.jsx';
 import AuthorPage from './components/authorPage.jsx';
 import RegistrationPage from './components/registrationPage/registrationPage.jsx';
 import AddPostPage from './components/addPostPage.jsx';
+import PostPage from './components/post/postPage.jsx';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -86,6 +87,7 @@ export default class App extends React.Component {
                         <Route path="/login" component={LoginPage} />
                         <Route path="/registration" component={RegistrationPage} />
                         <Route path="/author/:id" component={AuthorPage} />
+                        <Route path="/post/:id" component={PostPage} />
                         <Redirect to="/" />
                     </Switch>
                 </div>

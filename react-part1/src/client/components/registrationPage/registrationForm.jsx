@@ -50,14 +50,16 @@ export default class RegistrationForm extends React.Component {
     }
 
     render() {
+        let { message, isRegistered } = this.state;
+
         return (
             <div className="container m-3">
                 <div className="row justify-content-md-center">
                     <div className="col col-lg-5">
                         <form onSubmit={this.handleSubmit} className="p-4 bg-white rounded border">
-                            {this.state.message ?
+                            {message ?
                                 <div className="alert alert-danger" role="alert">
-                                    {this.state.message}
+                                    {message}
                                 </div>
                                 : ``
                             }
@@ -68,13 +70,6 @@ export default class RegistrationForm extends React.Component {
                                     type={'text'}
                                     onChange={this.handleChange}
                                 />
-                                {/* <label>
-                                    Name</label>
-                                <input
-                                    name="userName"
-                                    type="text"
-                                    onChange={this.handleChange}
-                                    className="form-control" /> */}
                             </div>
                             <div className="form-group">
                                 <Input
@@ -83,13 +78,6 @@ export default class RegistrationForm extends React.Component {
                                     type={'text'}
                                     onChange={this.handleChange}
                                 />
-                                {/* <label>
-                                    Login</label>
-                                <input
-                                    name="login"
-                                    type="text"
-                                    onChange={this.handleChange}
-                                    className="form-control" /> */}
                             </div>
                             <div className="form-group">
                                 <Input
@@ -98,20 +86,13 @@ export default class RegistrationForm extends React.Component {
                                     type={'password'}
                                     onChange={this.handleChange}
                                 />
-                                {/* <label>
-                                    Password</label>
-                                <input
-                                    name="password"
-                                    type="password"
-                                    onChange={this.handleChange}
-                                    className="form-control" /> */}
                             </div>
                             <div>
                                 <input type="submit" value="Register" className="btn btn-primary" />
                                 <Link to="/login" className="btn btn-light ml-1">Cancel</Link>
                             </div>
                         </form>
-                        {this.state.isRegistered ?
+                        {isRegistered ?
                             <Redirect to={{
                                 pathname: '/login'
                             }} />

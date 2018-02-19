@@ -3,6 +3,8 @@ import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
 import Post from './post/post';
 
+import { getAuthor } from '../api/authorApi';
+
 export default class AuthorPage extends React.Component {
     constructor(props) {
         super(props);
@@ -18,7 +20,7 @@ export default class AuthorPage extends React.Component {
         if (this.props.match.params.id) {
             this.setState({ id: this.props.match.params.id });
 
-            fetch(`/api/author/${this.props.match.params.id}`, { method: 'GET' })
+            getAuthor(this.props.match.params.id)
                 .then(response => {
                     return response.json();
                 })
@@ -29,17 +31,17 @@ export default class AuthorPage extends React.Component {
     }
 
     render() {
+        let { author } = this.state;
         return (
             <div>
-                {this.state.author ? 
-                this.state.author.posts.map((post, index) => {
-                    return (
-                        <div key={index}>{post.postText}</div>
-                    )
-                })
-                : (<div>No posts</div>)
-            }
-                </div>
+                {author
+                    ? (<h2>{author.userName}</h2>)
+                    : ``}
+                {author && author.posts.length > 0 ?
+                    author.posts.map((post, index) => <Post key={index} post={post} />)
+                    : (<div>No posts</div>)
+                }
+            </div>
         )
     }
 }

@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-//import { render } from 'react-dom';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import { getFullDate } from '../../utilities/getFullDate';
 
@@ -36,7 +35,8 @@ export default class Post extends React.Component {
         return (
             <div className="row justify-content-md-center mb-2">
                 <div className="col col-sm-6">
-                    <div className="card">
+                    <Link to={`/post/${_id}`}>post</Link>
+                    <div className="card" style={{ 'display': 'block' }}>
                         <div className="card-body">
                             <Link to={`/author/${author._id}`}>{userName}</Link>
                             {userFromStorage
@@ -53,13 +53,9 @@ export default class Post extends React.Component {
                             <p className="card-text"> {postText}</p>
                         </div>
                     </div>
+
                 </div>
-                {/*                 {this.state.redirect ?
-                            <Redirect to={{
-                                pathname: '/'
-                            }} />
-                            : ``
-                        } */}
+
             </div>
         )
     }

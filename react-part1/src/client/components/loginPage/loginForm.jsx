@@ -3,6 +3,8 @@ import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
 import Input from '../formComponents/input';
 
+import { loginHandler } from '../../api/loginApi';
+
 export default class LoginForm extends React.Component {
     constructor(props) {
         super(props);
@@ -30,14 +32,7 @@ export default class LoginForm extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        fetch('/api/loginHandler', {
-            method: 'POST',
-            body: JSON.stringify(this.state),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
+        loginHandler(this.state)
             .then(response => {
                 return response.json()
             })
@@ -54,14 +49,15 @@ export default class LoginForm extends React.Component {
     }
 
     render() {
+        let { message, isAuthenticated, user } = this.state;
         return (
             <div className="container m-3">
                 <div className="row justify-content-md-center">
                     <div className="col col-lg-5">
                         <form onSubmit={this.handleSubmit} className="p-4 bg-white rounded border">
-                            {this.state.message ?
+                            {message ?
                                 <div className="alert alert-danger" role="alert">
-                                    {this.state.message}
+                                    {message}
                                 </div>
                                 : ``
                             }
@@ -72,14 +68,6 @@ export default class LoginForm extends React.Component {
                                     type={'text'}
                                     onChange={this.handleChange}
                                 />
-
-                                {/* <label>
-                                    Login</label>
-                                <input
-                                    name="login"
-                                    type="text"
-                                    onChange={this.handleChange}
-                                    className="form-control" /> */}
                             </div>
                             <div className="form-group">
                                 <Input
@@ -88,13 +76,6 @@ export default class LoginForm extends React.Component {
                                     type={'password'}
                                     onChange={this.handleChange}
                                 />
-                                {/* <label>
-                                    Password</label>
-                                <input
-                                    name="password"
-                                    type="password"
-                                    onChange={this.handleChange}
-                                    className="form-control" /> */}
                             </div>
                             <div className="form-group d-flex justify-content-between align-items-center">
                                 <div>
@@ -104,10 +85,10 @@ export default class LoginForm extends React.Component {
                                 <Link to="/registration">Registration</Link>
                             </div>
                         </form>
-                        {this.state.isAuthenticated ?
+                        {isAuthenticated ?
                             <Redirect to={{
                                 pathname: '/',
-                                state: { user: this.state.user, isAuthenticated: this.state.isAuthenticated }
+                                state: { user: user, isAuthenticated: isAuthenticated }
                             }} />
                             : ``
                         }

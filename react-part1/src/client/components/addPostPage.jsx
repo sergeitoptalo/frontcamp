@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
+import { createPost } from '../api/postApi';
+
 export default class Form extends React.Component {
     constructor(props) {
         super(props);
@@ -15,7 +17,7 @@ export default class Form extends React.Component {
 
     componentDidMount() {
         if (this.props.location.params && this.props.location.params.user) {
-            this.setState({ author: this.props.location.params.user._id });
+            this.setState({ author: this.props.location.params.user });
         } else {
             this.setState({ author: JSON.parse(sessionStorage.getItem('user')) });
         }
@@ -33,14 +35,7 @@ export default class Form extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        fetch('/api/create-post', {
-            method: 'POST',
-            body: JSON.stringify(this.state),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        });
+        createPost(this.state);
     }
 
     render() {
