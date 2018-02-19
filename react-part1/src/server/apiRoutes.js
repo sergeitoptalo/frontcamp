@@ -2,12 +2,12 @@ const apiRoutes = require('express').Router();
 const Post = require('./schema').Post;
 const User = require('./schema').User;
 const passport = require('passport');
-const handleRender = require('./handleRender.jsx');
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import App from '../client/app.jsx';
-import Form from '../client/components/form.jsx';
-import { Route, Link, Switch, Redirect } from 'react-router-dom';
+//const handleRender = require('./handleRender.jsx');
+//import React from 'react';
+//import { renderToString } from 'react-dom/server';
+//import App from '../client/app.jsx';
+//import Form from '../client/components/form.jsx';
+//import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
 apiRoutes.get('/posts', function (req, res) {
     Post.find({}).
@@ -37,8 +37,8 @@ apiRoutes.post('/create-post', (req, res) => {
 });
 
 apiRoutes.delete('/delete-post/:id', (req, res) => {
-    let blogId = req.params.id;
-    Blog.findByIdAndRemove(blogId, req.body, function (err, post) {
+    let postId = req.params.id;
+    Post.findByIdAndRemove(postId, function (err, post) {
         if (err) {
             res.send({ 'error': 'An error has occurred' });
         } else {
@@ -55,7 +55,6 @@ apiRoutes.get('/author/:id', (req, res) => {
             res.send(author);
         });
 });
-
 
 apiRoutes.post('/register-user', function (req, res, next) {
     const user = new User(req.body);
@@ -74,7 +73,6 @@ apiRoutes.post('/loginHandler', function (req, res, next) {
         });
 
         let isAuthenticated = req.isAuthenticated();
-        //handleRender(req, res);
         return res.json({ user: user, message: message, isAuthenticated: isAuthenticated });
     })(req, res, next)
 });

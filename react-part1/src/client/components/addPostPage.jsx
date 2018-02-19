@@ -16,6 +16,8 @@ export default class Form extends React.Component {
     componentDidMount() {
         if (this.props.location.params && this.props.location.params.user) {
             this.setState({ author: this.props.location.params.user._id });
+        } else {
+            this.setState({ author: JSON.parse(sessionStorage.getItem('user')) });
         }
     }
 
@@ -31,7 +33,7 @@ export default class Form extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        fetch('/create-post', {
+        fetch('/api/create-post', {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers: {

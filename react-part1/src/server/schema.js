@@ -23,7 +23,6 @@ const userSchema = new Schema({
     }]
 });
 
-
 userSchema.methods.verifyPassword = function verifyPassword(password, userPassword) {
     return password === userPassword;
 };

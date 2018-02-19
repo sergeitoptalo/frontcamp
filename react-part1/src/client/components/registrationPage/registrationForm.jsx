@@ -1,4 +1,7 @@
 import React from 'react';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
+
+import Input from '../formComponents/input';
 
 export default class RegistrationForm extends React.Component {
     constructor(props) {
@@ -7,7 +10,8 @@ export default class RegistrationForm extends React.Component {
             name: '',
             login: '',
             password: '',
-            message: ''
+            message: '',
+            isRegistered: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -34,7 +38,12 @@ export default class RegistrationForm extends React.Component {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }
-            });
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        this.setState({ isRegistered: true });
+                    }
+                });
         } else {
             this.setState({ message: 'All fields must be filled' })
         }
@@ -53,34 +62,61 @@ export default class RegistrationForm extends React.Component {
                                 : ``
                             }
                             <div className="form-group">
-                                <label>
+                                <Input
+                                    label={'Name'}
+                                    name={'userName'}
+                                    type={'text'}
+                                    onChange={this.handleChange}
+                                />
+                                {/* <label>
                                     Name</label>
                                 <input
                                     name="userName"
                                     type="text"
                                     onChange={this.handleChange}
-                                    className="form-control" />
+                                    className="form-control" /> */}
                             </div>
                             <div className="form-group">
-                                <label>
+                                <Input
+                                    label={'Login'}
+                                    name={'login'}
+                                    type={'text'}
+                                    onChange={this.handleChange}
+                                />
+                                {/* <label>
                                     Login</label>
                                 <input
                                     name="login"
                                     type="text"
                                     onChange={this.handleChange}
-                                    className="form-control" />
+                                    className="form-control" /> */}
                             </div>
                             <div className="form-group">
-                                <label>
+                                <Input
+                                    label={'Password'}
+                                    name={'password'}
+                                    type={'password'}
+                                    onChange={this.handleChange}
+                                />
+                                {/* <label>
                                     Password</label>
                                 <input
                                     name="password"
                                     type="password"
                                     onChange={this.handleChange}
-                                    className="form-control" />
+                                    className="form-control" /> */}
                             </div>
-                            <input type="submit" value="Register" className="btn btn-primary" />
+                            <div>
+                                <input type="submit" value="Register" className="btn btn-primary" />
+                                <Link to="/login" className="btn btn-light ml-1">Cancel</Link>
+                            </div>
                         </form>
+                        {this.state.isRegistered ?
+                            <Redirect to={{
+                                pathname: '/login'
+                            }} />
+                            : ``
+                        }
                     </div>
                 </div>
             </div>

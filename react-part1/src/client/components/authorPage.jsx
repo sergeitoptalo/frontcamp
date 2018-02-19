@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
+import Post from './post/post';
+
 export default class AuthorPage extends React.Component {
     constructor(props) {
         super(props);

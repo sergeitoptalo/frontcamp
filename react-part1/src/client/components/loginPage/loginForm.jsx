@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
+import Input from '../formComponents/input';
+
 export default class LoginForm extends React.Component {
     constructor(props) {
         super(props);
@@ -43,7 +45,7 @@ export default class LoginForm extends React.Component {
                 if (data.message) {
                     this.setState({ message: data.message.message })
                 }
-                //let isAuthenticated = data.isAuthenticated;
+
                 sessionStorage.setItem('isAuthenticated', data.isAuthenticated);
                 sessionStorage.setItem('user', JSON.stringify(data.user._id));
                 sessionStorage.setItem('userName', JSON.stringify(data.user.userName));
@@ -64,25 +66,41 @@ export default class LoginForm extends React.Component {
                                 : ``
                             }
                             <div className="form-group">
-                                <label>
+                                <Input
+                                    label={'Login'}
+                                    name={'login'}
+                                    type={'text'}
+                                    onChange={this.handleChange}
+                                />
+
+                                {/* <label>
                                     Login</label>
                                 <input
                                     name="login"
                                     type="text"
                                     onChange={this.handleChange}
-                                    className="form-control" />
+                                    className="form-control" /> */}
                             </div>
                             <div className="form-group">
-                                <label>
+                                <Input
+                                    label={'Password'}
+                                    name={'password'}
+                                    type={'password'}
+                                    onChange={this.handleChange}
+                                />
+                                {/* <label>
                                     Password</label>
                                 <input
                                     name="password"
                                     type="password"
                                     onChange={this.handleChange}
-                                    className="form-control" />
+                                    className="form-control" /> */}
                             </div>
                             <div className="form-group d-flex justify-content-between align-items-center">
-                                <input type="submit" value="Login" className="btn btn-primary" />
+                                <div>
+                                    <input type="submit" value="Login" className="btn btn-primary" />
+                                    <Link to="/" className="btn btn-light ml-1">Cancel</Link>
+                                </div>
                                 <Link to="/registration">Registration</Link>
                             </div>
                         </form>

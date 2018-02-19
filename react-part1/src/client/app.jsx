@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
 import MainPage from './components/mainPage.jsx';
-import LoginPage from './components/loginPage.jsx';
+import LoginPage from './components/loginPage/loginPage.jsx';
 import AuthorPage from './components/authorPage.jsx';
-import RegistrationPage from './components/registrationPage.jsx';
-import Form from './components/form.jsx';
+import RegistrationPage from './components/registrationPage/registrationPage.jsx';
+import AddPostPage from './components/addPostPage.jsx';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -21,7 +21,6 @@ export default class App extends React.Component {
     }
 
     componentDidMount() {
-        //let isAuthenticated = JSON.parse(sessionStorage.getItem('isAuthenticated'));
         this.setState({ loaded: true }, () => this.setSessionInfo());
     }
 
@@ -55,8 +54,10 @@ export default class App extends React.Component {
 
         if (this.state.loaded) {
             isAuthenticated = JSON.parse(sessionStorage.getItem('isAuthenticated'));
-            user = JSON.parse(sessionStorage.getItem('user'));
-            userName = JSON.parse(sessionStorage.getItem('userName'));
+            if (isAuthenticated) {
+                user = JSON.parse(sessionStorage.getItem('user'));
+                userName = JSON.parse(sessionStorage.getItem('userName'));
+            }
         }
 
         return (
@@ -68,7 +69,7 @@ export default class App extends React.Component {
                             {user ?
                                 <Fragment>
                                     <h2 className="d-inline align-middle"><i className="fas fa-user-circle text-white"></i></h2>
-                                    <Link to={`/author/${this.state.user}`} className="ml-2 text-white">{this.state.userName}</Link>
+                                    <Link to={`/author/${user}`} className="ml-2 text-white">{userName}</Link>
                                     <Link to={{ pathname: '/add-post', params: { user: user } }} className="ml-4 btn btn-warning">Add post</Link>
                                 </Fragment>
                                 : ``
@@ -81,7 +82,7 @@ export default class App extends React.Component {
                 <div>
                     <Switch>
                         <Route exact path="/" component={MainPage} />
-                        <Route path="/add-post" component={Form} />
+                        <Route path="/add-post" component={AddPostPage} />
                         <Route path="/login" component={LoginPage} />
                         <Route path="/registration" component={RegistrationPage} />
                         <Route path="/author/:id" component={AuthorPage} />

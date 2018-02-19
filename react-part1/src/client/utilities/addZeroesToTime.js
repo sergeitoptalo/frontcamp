@@ -1,4 +1,4 @@
-function addZeroesToTime(date) {
+let addZeroesToTime = (date) => {
     let givenDate = new Date(date);
     let minutes = givenDate.getMinutes();
     let hours = givenDate.getHours();

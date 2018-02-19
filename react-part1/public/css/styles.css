@@ -5,3 +5,12 @@
 body {
     background-color: #f8f9fa!important;
 }
+
+form label {
+    display: block;
+}
+
+form label > input {
+    margin-top: 10px;
+}
+

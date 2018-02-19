@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Input = ({ label, name, type, onChange, className } = props) => (
+const Input = ({ label, name, type, onChange } = props) => (
     <label>
         {label}
-        <input type="text" onChange={onChange} />
+        <input type={type} name={name} onChange={onChange} className="form-control" />
     </label>
 );
 
