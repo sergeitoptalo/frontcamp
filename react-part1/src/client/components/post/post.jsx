@@ -26,9 +26,9 @@ export default class Post extends React.Component {
     }
 
     render() {
-        let { _id, date, postText } = this.state.post;
-        let author = this.state.post.author;
-        let { userName } = this.state.post.author;
+        let { _id, date, postText } = this.props.post;
+        let author = this.props.post.author;
+        let { userName } = this.props.post.author;
         let dateObject = getFullDate(date);
         let userFromStorage = sessionStorage.getItem('user') !== 'undefined' ? JSON.parse(sessionStorage.getItem('user')) : null;
 
@@ -40,7 +40,7 @@ export default class Post extends React.Component {
                         <div className="card-body">
                             <Link to={`/author/${author._id}`}>{userName}</Link>
                             {userFromStorage
-                                ? author._id === userFromStorage
+                                ? author._id === userFromStorage || author === userFromStorage
                                     ? <button
                                         className="btn btn-light btn-sm position-absolute"
                                         style={{ top: '2px', right: '2px' }}

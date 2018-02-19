@@ -43,14 +43,14 @@ export default class Form extends React.Component {
             <Fragment>
                 <div className="container">
                     <div className="row justify-content-md-center m-3">
-                        <div className="col col-lg-5">
+                        <div className="col col-lg-8">
                             <h4 className="mt-3 mb-3">Add post</h4>
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
                                     <textarea
                                         name="postText"
                                         className="form-control"
-                                        rows="5"
+                                        rows="8"
                                         onChange={this.handleChange}>
                                     </textarea>
                                 </div>

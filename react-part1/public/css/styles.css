@@ -18,3 +18,14 @@ body .row {
     margin: 0;
 }
 
+body .post-page .card {
+    font-size: larger;
+    padding: 20px 30px 30px;
+}
+
+body .author-page-post,
+body .author-page-post:hover {
+    color: initial;
+    text-decoration: none;
+}
+

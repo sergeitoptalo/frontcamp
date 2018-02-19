@@ -33,7 +33,7 @@ export default class AuthorPage extends React.Component {
     render() {
         let { author } = this.state;
         return (
-            <div>
+            <div className="container mt-3">
                 {author
                     ? (<h2>{author.userName}</h2>)
                     : ``}

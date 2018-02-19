@@ -17,6 +17,16 @@ apiRoutes.get('/posts', function (req, res) {
         });
 });
 
+apiRoutes.get('/post/:id', function (req, res) {
+    let postId = req.params.id;
+    Post.findById(postId)
+        .populate('author')
+        .exec(function (err, post) {
+            res.send(post);
+        });
+});
+
+
 apiRoutes.post('/create-post', (req, res) => {
     req.body.date = new Date();
 

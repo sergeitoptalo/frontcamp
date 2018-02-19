@@ -1,27 +1,47 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
 import Post from './post';
+
+import { getPost } from '../../api/postApi';
 
 export default class PostPage extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            id: null
+            post: {
+                _id: null,
+                postText: null,
+                date: null,
+                author: {
+                    userName: null
+                }
+            }
         }
     }
 
     componentDidMount() {
         if (this.props.match.params.id) {
-            this.setState({ id: this.props.match.params.id });
+            getPost(this.props.match.params.id)
+                .then(response => {
+                    return response.json()
+                })
+                .then(data => {
+                    this.setState({ post: data });
+                })
         }
     }
 
     render() {
-        let { author } = this.state;
+        let { post } = this.state;
+
         return (
-            <Post />
+            <Fragment>
+                <div className="post-page container mt-4">
+                    <Post post={post} />
+                </div>
+            </Fragment>
         )
     }
 }

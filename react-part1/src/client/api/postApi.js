@@ -1,5 +1,7 @@
 let getAllPosts = () => fetch('/api/posts', { method: 'GET' });
 
+let getPost = (postId) => fetch(`/api/post/${postId}`, { method: 'GET'});
+
 let createPost = (state) => fetch('/api/create-post', {
     method: 'POST',
     body: JSON.stringify(state),
@@ -9,4 +11,4 @@ let createPost = (state) => fetch('/api/create-post', {
     }
 });
 
-module.exports = { getAllPosts, createPost };
+module.exports = { getAllPosts, getPost, createPost };
