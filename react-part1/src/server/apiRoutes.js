@@ -2,12 +2,7 @@ const apiRoutes = require('express').Router();
 const Post = require('./schema').Post;
 const User = require('./schema').User;
 const passport = require('passport');
-//const handleRender = require('./handleRender.jsx');
-//import React from 'react';
-//import { renderToString } from 'react-dom/server';
-//import App from '../client/app.jsx';
-//import Form from '../client/components/form.jsx';
-//import { Route, Link, Switch, Redirect } from 'react-router-dom';
+
 
 apiRoutes.get('/posts', function (req, res) {
     Post.find({}).
@@ -26,23 +21,25 @@ apiRoutes.get('/post/:id', function (req, res) {
         });
 });
 
-
 apiRoutes.post('/create-post', (req, res) => {
     req.body.date = new Date();
 
     const user = User.findById(req.body.author, (err, user) => {
-            const post = new Post({
-                postText: req.body.postText,
-                date: req.body.date,
-                author: user._id
-            });
+        const post = new Post({
+            postText: req.body.postText,
+            date: req.body.date,
+            author: user._id
+        });
 
-            post.save(function (err) {
-                if (err) return err.message;
-                user.posts.push(post);
-                user.save();
-            });
-            
+        post.save(function (err) {
+            if (err) {
+                return err.message;
+            };
+            user.posts.push(post);
+            user.save();
+            res.json('Post was added');
+        });
+
     });
 });
 
@@ -66,6 +63,9 @@ apiRoutes.get('/author/:id', (req, res) => {
         });
 });
 
+
+// REGISTRATION
+
 apiRoutes.post('/register-user', function (req, res, next) {
     const user = new User(req.body);
     user.save(req.body, (err, result) => {
@@ -76,6 +76,9 @@ apiRoutes.post('/register-user', function (req, res, next) {
         }
     });
 });
+
+
+// LOGIN
 
 apiRoutes.post('/loginHandler', function (req, res, next) {
     passport.authenticate('local', function (err, user, message) {

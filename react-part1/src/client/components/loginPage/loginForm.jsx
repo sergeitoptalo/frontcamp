@@ -49,7 +49,8 @@ export default class LoginForm extends React.Component {
     }
 
     render() {
-        let { message, isAuthenticated, user } = this.state;
+        const { message, isAuthenticated, user } = this.state;
+        
         return (
             <div className="container m-3">
                 <div className="row justify-content-md-center">

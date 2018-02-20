@@ -1,6 +1,6 @@
 let getAllPosts = () => fetch('/api/posts', { method: 'GET' });
 
-let getPost = (postId) => fetch(`/api/post/${postId}`, { method: 'GET'});
+let getPost = (postId) => fetch(`/api/post/${postId}`, { method: 'GET' });
 
 let createPost = (state) => fetch('/api/create-post', {
     method: 'POST',

@@ -50,7 +50,7 @@ export default class RegistrationForm extends React.Component {
     }
 
     render() {
-        let { message, isRegistered } = this.state;
+        const { message, isRegistered } = this.state;
 
         return (
             <div className="container m-3">

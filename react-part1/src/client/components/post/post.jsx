@@ -15,7 +15,7 @@ export default class Post extends React.Component {
     }
 
     deletePost() {
-        fetch(`/api/delete-post/${this.state.post._id}`, { method: 'DELETE' })
+        fetch(`/api/delete-post/${this.props.post._id}`, { method: 'DELETE' })
             .then(response => {
                 return response.json();
             })
@@ -26,16 +26,22 @@ export default class Post extends React.Component {
     }
 
     render() {
-        let { _id, date, postText } = this.props.post;
-        let author = this.props.post.author;
-        let { userName } = this.props.post.author;
-        let dateObject = getFullDate(date);
-        let userFromStorage = sessionStorage.getItem('user') !== 'undefined' ? JSON.parse(sessionStorage.getItem('user')) : null;
+        const { _id, date, postText } = this.props.post;
+        const author = this.props.post.author;
+        const { userName } = this.props.post.author;
+        const dateObject = getFullDate(date);
+        const { single } = this.props;
+        const userFromStorage = sessionStorage.getItem('user') !== 'undefined' ? JSON.parse(sessionStorage.getItem('user')) : null;
 
         return (
             <div className="row justify-content-md-center mb-2">
                 <div className="col col-sm-6">
-                    <Link to={`/post/${_id}`}>post</Link>
+                    {!single ?
+                        <Link to={`/post/${_id}`} className="position-absolute" style={{ 'bottom': '2px', 'right': '25px', 'zIndex': '100' }}>
+                            <i className="fas fa-expand"></i>
+                        </Link>
+                        : ``
+                    }
                     <div className="card" style={{ 'display': 'block' }}>
                         <div className="card-body">
                             <Link to={`/author/${author._id}`}>{userName}</Link>

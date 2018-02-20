@@ -8,7 +8,8 @@ export default class Form extends React.Component {
         super(props);
         this.state = {
             author: '',
-            postText: ''
+            postText: '',
+            message: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -24,6 +25,10 @@ export default class Form extends React.Component {
     }
 
     handleChange(event) {
+        if (this.state.message) {
+            this.setState({ message: '' })
+        }
+
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -35,10 +40,20 @@ export default class Form extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        createPost(this.state);
+        createPost(this.state)
+            .then(response => {
+                if (response.status === 200) {
+                    return response.json();
+                }
+            })
+            .then(data => {
+                this.setState({ message: data, postText: '' });
+            })
     }
 
     render() {
+        const { message, postText } = this.state;
+
         return (
             <Fragment>
                 <div className="container">
@@ -51,12 +66,19 @@ export default class Form extends React.Component {
                                         name="postText"
                                         className="form-control"
                                         rows="8"
+                                        value={postText}
                                         onChange={this.handleChange}>
                                     </textarea>
                                 </div>
                                 <input type="submit" value="Add" className="btn btn-primary" />
                                 <Link to="/" className="btn btn-light ml-1">Cancel</Link>
                             </form>
+                            {message ?
+                                <div className="alert alert-success mt-3" role="alert">
+                                    {message}
+                                </div>
+                                : ``
+                            }
                         </div>
                     </div>
                 </div>

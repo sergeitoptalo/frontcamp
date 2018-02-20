@@ -1,4 +1,4 @@
-function monthNameFromNumber(monthNumber) {
+let monthNameFromNumber = (monthNumber) => {
     const month = [
         '',
         'January',

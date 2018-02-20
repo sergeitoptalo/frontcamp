@@ -24,7 +24,7 @@ export default class MainPage extends React.Component {
             return response.json();
         })
         .then(data => {
-            this.setState({ posts: data })
+            this.setState({ posts: data.reverse() })
         })
     }
 

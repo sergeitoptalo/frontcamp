@@ -19,6 +19,12 @@ export default class PostPage extends React.Component {
                 }
             }
         }
+
+        this.handleDelete = this.handleDelete.bind(this);
+    }
+
+    handleDelete() {
+        this.props.history.goBack();
     }
 
     componentDidMount() {
@@ -34,12 +40,12 @@ export default class PostPage extends React.Component {
     }
 
     render() {
-        let { post } = this.state;
+        const { post } = this.state;
 
         return (
             <Fragment>
                 <div className="post-page container mt-4">
-                    <Post post={post} />
+                    <Post post={post} handleDelete={this.handleDelete} single={true} />
                 </div>
             </Fragment>
         )
