@@ -11,10 +11,14 @@
     "mongoose": "^5.0.3",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "prop-types": "^15.6.1",
     "pug": "^2.0.0-rc.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
     "winston": "^3.0.0-rc1"
   },
   "devDependencies": {
@@ -32,9 +36,9 @@
     "webpack-dev-server": "^2.11.1"
   },
   "scripts": {
-    "inspect": "nodemon --inspect ./server.js --exec babel-node --presets env,react --watch src ",
+    "inspect": "nodemon --inspect ./src/server --exec babel-node --presets env,react --watch src ",
     "build": "webpack -d",
-    "start": "npm run build && babel-node ./server.js"
+    "start": "npm run build && babel-node ./src/server"
   },
   "author": "",
   "license": "ISC"

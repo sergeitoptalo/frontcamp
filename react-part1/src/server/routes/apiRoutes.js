@@ -1,6 +1,6 @@
 const apiRoutes = require('express').Router();
-const Post = require('./schema').Post;
-const User = require('./schema').User;
+const Post = require('../schema/schema').Post;
+const User = require('../schema/schema').User;
 const passport = require('passport');
 
 
@@ -96,4 +96,4 @@ apiRoutes.get('/logout', (req, res) => {
     return res.json({ isAuthenticated: isAuthenticated });
 });
 
-module.exports = apiRoutes;
+module.exports = { apiRoutes };

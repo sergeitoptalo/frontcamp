@@ -1,27 +1,51 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-import { renderFullPage } from './views/pageTemplate';
+import configureStore from '../client/store';
 
-import App from '../client/app.jsx';
+import App from '../client/app';
 
-function handleRender(req, res) {
-    const context = {};
-
-    const app = (
-        <StaticRouter location={req.url} context={context}>
-            <App />
-        </StaticRouter>
-    );
-
-    const html = renderToString(app);
-
-    if (context.url) {
-        return res.redirect(context.url);
-    }
-
-    return res.send(renderFullPage(html));
+function renderFullPage(html, preloadedState) {
+  return `
+      <!doctype html>
+      <html>
+        <head>
+          <meta charset=utf-8>
+          <title>React Server Side Rendering</title>
+        </head>
+        <body>
+          <div id="root">${html}</div>
+          <script>
+            window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+          </script>
+          <script src="/js/bundle.js"></script>
+        </body>
+      </html>
+  `;
 }
 
-module.exports = handleRender;
+function handleRender(req, res) {
+  const store = configureStore();
+  const context = {};
+  const app = (
+    <Provider store={store}>
+      <StaticRouter location={req.url} context={context} >
+        <App name="World" />
+      </StaticRouter>
+    </Provider>
+  );
+
+  const html = renderToString(app);
+
+  if (context.url) {
+    // Somewhere a `<Redirect>` was rendered
+    return res.redirect(context.url);
+  }
+
+  const preloadedState = store.getState();
+  return res.send(renderFullPage(html, preloadedState));
+}
+
+export default handleRender;
