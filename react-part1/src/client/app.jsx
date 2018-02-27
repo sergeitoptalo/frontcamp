@@ -6,22 +6,22 @@ import HomePage from './pages/HomePage';
 import UsersPage from './pages/UsersPage';
 
 const App = ({ name }) => (
-  <div>
-    <div>Hello <b>{name}</b></div>
-    <ul>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/users">Users</Link></li>
-    </ul>
-    <Switch>
-      <Route exact path="/" component={HomePage} />
-      <Route path="/users" component={UsersPage} />
-      <Redirect to="/" />
-    </Switch>
-  </div>
+    <div>
+        <div>Hello <b>{name}</b></div>
+        <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/users">Users</Link></li>
+        </ul>
+        <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/users" component={UsersPage} />
+            <Redirect to="/" />
+        </Switch>
+    </div>
 );
 
 App.propTypes = {
-  name: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
 };
 
 export default App;

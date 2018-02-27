@@ -6,45 +6,49 @@ import { getPosts } from '../actions/posts';
 
 
 class MainPage extends React.Component {
-  constructor(props) {
-    super(props);
-    /*     this.state = {
-          posts: [],
-          loading: false
-        } */
-  }
-  static defaultProps = {
-    posts: [],
-    loading: false,
-  };
+    constructor(props) {
+        super(props);
+        /*     this.state = {
+              posts: [],
+              loading: false
+            } */
+    }
+    static defaultProps = {
+        posts: [],
+        loading: false,
+    };
 
-  componentDidMount() {
-    this.props.getPosts();
-  }
+    static getData() {
+        return dispatch(getPosts());
+    }
 
-  render() {
-    const { posts, loading } = this.props;
-    
-    return (
-      <div>
-        <h2>UsersPage</h2>
-        {loading
-          ? <div>Loading...</div>
-          : <div>
-            {posts.map((post, index) => <div key={index}>{post.postText}</div>)}
-          </div>
-        }
-      </div>
-    );
-  }
+    componentDidMount() {
+        this.props.getPosts();
+    }
+
+    render() {
+        const { posts, loading } = this.props;
+
+        return (
+            <div>
+                <h2>UsersPage</h2>
+                {loading
+                    ? <div>Loading...</div>
+                    : <div>
+                        {posts.map((post, index) => <div key={index}>{post.postText}</div>)}
+                    </div>
+                }
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = state => ({
-  posts: state.postReducer.posts,
-  loading: state.postReducer.loading
+    posts: state.postsState.posts,
+    loading: state.postsState.loading
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getPosts,
+    getPosts,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

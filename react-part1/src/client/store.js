@@ -1,15 +1,17 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import userReducer from './reducers/user';
-import postReducer from './reducers/posts';
+import userState from './reducers/user';
+import postsState from './reducers/posts';
+
+const composeEnhancers = global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default (initialState) => {
-    const rootReducer = combineReducers({userReducer, postReducer});
+    const rootReducer = combineReducers({userState, postsState});
     const store = createStore(
         rootReducer,
         initialState,
-        applyMiddleware(thunkMiddleware)
+        composeEnhancers(applyMiddleware(thunkMiddleware))
     );
 
     return store;
