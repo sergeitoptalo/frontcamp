@@ -8,17 +8,14 @@ import { getPosts } from '../actions/posts';
 class MainPage extends React.Component {
     constructor(props) {
         super(props);
-        /*     this.state = {
-              posts: [],
-              loading: false
-            } */
     }
-    static defaultProps = {
+
+ /*    static defaultProps = {
         posts: [],
         loading: false,
-    };
+    }; */
 
-    static getData() {
+    static getData(dispatch) {
         return dispatch(getPosts());
     }
 
@@ -32,7 +29,7 @@ class MainPage extends React.Component {
         return (
             <div>
                 <h2>UsersPage</h2>
-                {loading
+                {loading && !posts.length
                     ? <div>Loading...</div>
                     : <div>
                         {posts.map((post, index) => <div key={index}>{post.postText}</div>)}

@@ -2,13 +2,14 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { matchRoutes } from 'react-router-config';
 
+import routes from '../client/routes';
 import configureStore from '../client/store';
-
 import App from '../client/app';
 
 function renderFullPage(html, preloadedState) {
-  return `
+    return `
       <!doctype html>
       <html>
         <head>
@@ -27,25 +28,40 @@ function renderFullPage(html, preloadedState) {
 }
 
 function handleRender(req, res) {
-  const store = configureStore();
-  const context = {};
-  const app = (
-    <Provider store={store}>
-      <StaticRouter location={req.url} context={context} >
-        <App name="World" />
-      </StaticRouter>
-    </Provider>
-  );
+    const store = configureStore();
 
-  const html = renderToString(app);
+    const branch = matchRoutes(routes, req.url);
+    const promises = branch.map(({ route, match }) => {
+        const { getData } = route.component;
 
-  if (context.url) {
-    // Somewhere a `<Redirect>` was rendered
-    return res.redirect(context.url);
-  }
+        if (!(getData instanceof Function)) {
+            return Promise.resolve(null);
+        }
 
-  const preloadedState = store.getState();
-  return res.send(renderFullPage(html, preloadedState));
+        return getData(store.dispatch, match);
+    });
+
+    return Promise.all(promises)
+        .then(() => {
+            const context = {};
+            const app = (
+                <Provider store={store}>
+                    <StaticRouter location={req.url} context={context} >
+                        <App name="World" />
+                    </StaticRouter>
+                </Provider>
+            );
+
+            const html = renderToString(app);
+
+            if (context.url) {
+                // Somewhere a `<Redirect>` was rendered
+                return res.redirect(context.url);
+            }
+
+            const preloadedState = store.getState();
+            return res.send(renderFullPage(html, preloadedState));
+        });
 }
 
 export default handleRender;

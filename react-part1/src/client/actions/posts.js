@@ -10,7 +10,7 @@ export const updatePosts = posts => ({
 export const getPosts = () => (dispatch) => {
     dispatch(loadPosts());
 
-    fetch('/api/posts')
+    return fetch('http://localhost:8000/api/posts')
         .then(res => res.json())
         .then(posts => dispatch(updatePosts(posts)));
 };
