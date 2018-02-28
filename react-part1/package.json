@@ -27,21 +27,25 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.1",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
+    "jest": "^22.4.2",
     "nodemon": "^1.14.11",
     "react-hot-loader": "^3.1.3",
+    "react-test-renderer": "^16.2.0",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1"
   },
   "scripts": {
     "inspect": "nodemon --inspect ./src/server --exec babel-node --presets env,react --watch src ",
     "build": "webpack -d",
-    "start": "npm run build && babel-node ./src/server"
+    "start": "npm run build && babel-node ./src/server",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC"
