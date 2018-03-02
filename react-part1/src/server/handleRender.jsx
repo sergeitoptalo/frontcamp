@@ -27,7 +27,7 @@ function renderFullPage(html, preloadedState) {
   `;
 }
 
-function handleRender(req, res) {
+function handleRender(req, res, next, isAuthenticated) {
     const store = configureStore();
 
     const branch = matchRoutes(routes, req.url);
@@ -60,6 +60,7 @@ function handleRender(req, res) {
             }
 
             const preloadedState = store.getState();
+            preloadedState.userState.isAuthenticated = req.isAuthenticated();
             return res.send(renderFullPage(html, preloadedState));
         });
 }

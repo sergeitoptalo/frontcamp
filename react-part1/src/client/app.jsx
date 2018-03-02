@@ -6,8 +6,8 @@ import 'isomorphic-fetch';
 
 import routes from './routes';
 
-import HomePage from './pages/HomePage';
-import UsersPage from './pages/UsersPage';
+import MainPage from './containers/MainPage';
+import UsersPage from './containers/UsersPage';
 
 const App = ({ name }) => (
     <div>
@@ -15,16 +15,13 @@ const App = ({ name }) => (
         <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/users">Users</Link></li>
+            <li><Link to="/login">Login</Link></li>
         </ul>
         <Switch>
             {renderRoutes(routes)}
         </Switch>
     </div>
 );
-
-App.propTypes = {
-    name: PropTypes.string.isRequired,
-};
 
 export default App;
 

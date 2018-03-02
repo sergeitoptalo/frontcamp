@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import Post from '../components/post';
 import { getPosts } from '../actions/posts';
 
 
@@ -9,11 +10,6 @@ class MainPage extends React.Component {
     constructor(props) {
         super(props);
     }
-
- /*    static defaultProps = {
-        posts: [],
-        loading: false,
-    }; */
 
     static getData(dispatch) {
         return dispatch(getPosts());
@@ -28,11 +24,10 @@ class MainPage extends React.Component {
 
         return (
             <div>
-                <h2>UsersPage</h2>
                 {loading && !posts.length
                     ? <div>Loading...</div>
                     : <div>
-                        {posts.map((post, index) => <div key={index}>{post.postText}</div>)}
+                        {posts.map((post, index) => <Post key={index} postItem={post} />)}
                     </div>
                 }
             </div>

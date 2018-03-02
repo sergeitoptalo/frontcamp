@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
     loading: false,
-    posts: []
+    posts: [],
+    currentPost: null
 };
 
 export default (state = INITIAL_STATE, action = {}) => {
@@ -15,6 +16,12 @@ export default (state = INITIAL_STATE, action = {}) => {
                 ...state,
                 loading: false,
                 posts: action.payload,
+            };
+        case 'UPDATE_CURRENT_POST':
+            return {
+                ...state,
+                loading: false,
+                currentPost: action.payload,
             };
         default:
             return state;
