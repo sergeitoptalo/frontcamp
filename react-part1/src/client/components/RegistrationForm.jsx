@@ -1,27 +1,34 @@
 import React from 'react';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import Input from './formComponents/Input';
-import { loginHandler } from '../api/userApi';
-import { loginSuccess } from '../actions/user';
-
+import { getUsedLogin } from '../api/userApi';
 import { atLeastOneEmptyField } from '../utilities/validation/emptyFieldsValidation';
+import { isAlreadyUsedLogin } from '../utilities/validation/loginValidation';
 
-class LoginForm extends React.Component {
+export default class RegistrationForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: null,
+            userName: '',
             login: '',
             password: '',
             message: '',
-            isAuthenticated: false
+            isRegistered: false,
+            usedLogin: [],
+            isFormDisabled: true
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        getUsedLogin()
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ usedLogin: data, isFormDisabled: false });
+            })
     }
 
     handleChange(event) {
@@ -35,28 +42,34 @@ class LoginForm extends React.Component {
     }
 
     handleSubmit(event) {
-        const { login, password } = this.state;
         event.preventDefault();
-        if (!atLeastOneEmptyField({ login, password })) {
-            loginHandler(this.state)
-                .then(response => {
-                    return response.json()
-                })
-                .then(data => {
-                    if (data.message) {
-                        return this.setState({ message: data.message });
-                    }
-                    return this.props.loginSuccess(data);
-                })
-        } else {
-            this.setState({ message: 'All fields must be filled' })
+        const { userName, login, password, usedLogin } = this.state;
+
+        if (atLeastOneEmptyField({ userName, login, password })) {
+            return this.setState({ message: 'All fields must be filled' });
         }
-        //this.props.loginHandler(this.state);
+
+        if (isAlreadyUsedLogin(login, usedLogin)) {
+            return this.setState({ message: 'Login is already in use' });
+        }
+
+        fetch('/api/register-user', {
+            method: 'POST',
+            body: JSON.stringify({ userName, login, password }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    this.setState({ isRegistered: true });
+                }
+            });
     }
 
     render() {
-        const { isAuthenticated, user } = this.props;
-        const { message } = this.state;
+        const { message, isRegistered, isFormDisabled } = this.state;
 
         return (
             <div className="container m-3">
@@ -69,6 +82,14 @@ class LoginForm extends React.Component {
                                 </div>
                                 : ``
                             }
+                            <div className="form-group">
+                                <Input
+                                    label={'Name'}
+                                    name={'userName'}
+                                    type={'text'}
+                                    onChange={this.handleChange}
+                                />
+                            </div>
                             <div className="form-group">
                                 <Input
                                     label={'Login'}
@@ -85,18 +106,14 @@ class LoginForm extends React.Component {
                                     onChange={this.handleChange}
                                 />
                             </div>
-                            <div className="form-group d-flex justify-content-between align-items-center">
-                                <div>
-                                    <input type="submit" value="Login" className="btn btn-primary" />
-                                    <Link to="/" className="btn btn-light ml-1">Cancel</Link>
-                                </div>
-                                <Link to="/registration">Registration</Link>
+                            <div>
+                                <input type="submit" value="Register" className="btn btn-primary" disabled={isFormDisabled} />
+                                <Link to="/login" className="btn btn-light ml-1">Cancel</Link>
                             </div>
                         </form>
-                        {isAuthenticated ?
+                        {isRegistered ?
                             <Redirect to={{
-                                pathname: '/',
-                                // state: { user: user, isAuthenticated: isAuthenticated }
+                                pathname: '/login'
                             }} />
                             : ``
                         }
@@ -106,16 +123,3 @@ class LoginForm extends React.Component {
         )
     }
 }
-
-const mapStateToProps = state => ({
-    isAuthenticated: state.userState.isAuthenticated,
-    userId: state.userState.userId,
-    userName: state.userState.userName,
-    message: state.userState.message
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-    loginSuccess,
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

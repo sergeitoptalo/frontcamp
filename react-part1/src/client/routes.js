@@ -2,6 +2,7 @@ import MainPage from './containers/MainPage';
 import UsersPage from './containers/UsersPage';
 import PostPage from './containers/PostPage';
 import LoginPage from './containers/LoginPage';
+import RegistrationPage from './containers/RegistrationPage';
 
 export default [
     {
@@ -22,4 +23,8 @@ export default [
         path: '/login',
         component: LoginPage,
     },
+    {
+        path: '/registration',
+        component: RegistrationPage,
+    }
 ];

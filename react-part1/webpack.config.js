@@ -7,7 +7,6 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve('./public/js/'),
     },
-
     resolve: {
         extensions: ['.js', '.jsx'],
     },
@@ -17,7 +16,7 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 use: 'babel-loader',
-            },
+            }
         ],
     },
 };

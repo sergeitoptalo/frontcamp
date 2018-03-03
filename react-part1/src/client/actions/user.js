@@ -3,7 +3,7 @@ export const updateUser = user => ({
     payload: user,
 });
 
-export const loginHandler = userData => (dispatch) => {
+/* export const loginHandler = userData => (dispatch) => {
     return fetch(`http://localhost:8000/api/loginHandler`,
         {
             method: 'POST',
@@ -17,4 +17,8 @@ export const loginHandler = userData => (dispatch) => {
         .then(user => {
             dispatch(updateUser(user))
         });
+}; */
+
+export const loginSuccess = user => (dispatch) => {
+    dispatch(updateUser(user))
 };

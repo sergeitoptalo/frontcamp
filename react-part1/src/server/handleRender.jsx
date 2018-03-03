@@ -27,7 +27,7 @@ function renderFullPage(html, preloadedState) {
   `;
 }
 
-function handleRender(req, res, next, isAuthenticated) {
+function handleRender(req, res) {
     const store = configureStore();
 
     const branch = matchRoutes(routes, req.url);
@@ -47,7 +47,7 @@ function handleRender(req, res, next, isAuthenticated) {
             const app = (
                 <Provider store={store}>
                     <StaticRouter location={req.url} context={context} >
-                        <App name="World" />
+                        <App />
                     </StaticRouter>
                 </Provider>
             );
@@ -55,7 +55,6 @@ function handleRender(req, res, next, isAuthenticated) {
             const html = renderToString(app);
 
             if (context.url) {
-                // Somewhere a `<Redirect>` was rendered
                 return res.redirect(context.url);
             }
 

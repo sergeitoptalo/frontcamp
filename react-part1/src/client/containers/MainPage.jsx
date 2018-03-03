@@ -39,6 +39,7 @@ const mapStateToProps = state => ({
     posts: state.postsState.posts,
     loading: state.postsState.loading
 });
+
 const mapDispatchToProps = dispatch => bindActionCreators({
     getPosts,
 }, dispatch);

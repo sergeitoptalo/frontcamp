@@ -62,7 +62,7 @@ server.use(session({
         url: 'mongodb://toptalo:zavani74@cluster0-shard-00-00-s1vg1.mongodb.net:27017,cluster0-shard-00-01-s1vg1.mongodb.net:27017,cluster0-shard-00-02-s1vg1.mongodb.net:27017/database?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin',
         collection: 'sessions'
     }),
-    cookie : { httpOnly: true, maxAge: 2419200000 }
+    cookie: { httpOnly: true, maxAge: 2419200000 }
 }));
 
 server.use(passport.initialize());
@@ -92,11 +92,11 @@ server.get('/api/getPost/:id', function (req, res) {
 server.post('/api/loginHandler', function (req, res, next) {
     passport.authenticate('local', function (err, user, message) {
         if (!user) {
-            return res.json({ user: {}, message: message.message });
+            return res.json({ message: message.message });
         }
         req.logIn(user, function (err) {
-            if (err) { 
-                return next(err); 
+            if (err) {
+                return next(err);
             }
             const userData = {
                 isAuthenticated: req.isAuthenticated(),
@@ -108,10 +108,38 @@ server.post('/api/loginHandler', function (req, res, next) {
     })(req, res, next)
 });
 
-server.get('/*', (req, res, next) => {
-    const isAuthenticated = req.isAuthenticated();
-    handleRender(req, res, next, isAuthenticated)
+server.post('/api/register-user', function (req, res, next) {
+    const user = new User(req.body);
+    user.save(req.body, (err, result) => {
+        if (err) {
+            res.send({ 'error': 'An error has occurred' });
+        } else {
+            res.send('added');
+        }
+    });
 });
+
+server.get('/api/get-used-login', function (req, res, next) {
+    User.aggregate([
+        {
+            $group: {
+                _id: {
+                    login: "$login"
+                }
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                login: "$_id.login"
+            }
+        }
+    ], (err, users) => {
+        res.json(users);
+    })
+});
+
+server.get('/*', handleRender);
 
 server.listen(port, () => {
     console.info(`Express listening on port ${port}`);

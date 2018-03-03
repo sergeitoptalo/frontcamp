@@ -1,8 +1,7 @@
 const INITIAL_STATE = {
     isAuthenticated: false,
     userId: null,
-    userName: null,
-    message: ''
+    userName: null
 };
 
 export default (state = INITIAL_STATE, action = {}) => {
