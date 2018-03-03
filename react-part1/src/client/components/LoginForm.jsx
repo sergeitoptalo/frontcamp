@@ -59,49 +59,45 @@ class LoginForm extends React.Component {
         const { message } = this.state;
 
         return (
-            <div className="container m-3">
-                <div className="row justify-content-md-center">
-                    <div className="col col-lg-5">
-                        <form onSubmit={this.handleSubmit} className="p-4 bg-white rounded border">
-                            {message ?
-                                <div className="alert alert-danger" role="alert">
-                                    {message}
-                                </div>
-                                : ``
-                            }
-                            <div className="form-group">
-                                <Input
-                                    label={'Login'}
-                                    name={'login'}
-                                    type={'text'}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <Input
-                                    label={'Password'}
-                                    name={'password'}
-                                    type={'password'}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                            <div className="form-group d-flex justify-content-between align-items-center">
-                                <div>
-                                    <input type="submit" value="Login" className="btn btn-primary" />
-                                    <Link to="/" className="btn btn-light ml-1">Cancel</Link>
-                                </div>
-                                <Link to="/registration">Registration</Link>
-                            </div>
-                        </form>
-                        {isAuthenticated ?
-                            <Redirect to={{
-                                pathname: '/',
-                                // state: { user: user, isAuthenticated: isAuthenticated }
-                            }} />
-                            : ``
-                        }
+            <div className="form-container">
+                <form onSubmit={this.handleSubmit} className="app-form">
+                    {message ?
+                        <div className="alert alert-danger" role="alert">
+                            {message}
+                        </div>
+                        : ``
+                    }
+                    <div className="form-group">
+                        <Input
+                            label={'Login'}
+                            name={'login'}
+                            type={'text'}
+                            onChange={this.handleChange}
+                        />
                     </div>
-                </div>
+                    <div className="form-group">
+                        <Input
+                            label={'Password'}
+                            name={'password'}
+                            type={'password'}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="form-group d-flex justify-content-between align-items-center">
+                        <div>
+                            <input type="submit" value="Login" className="button button--primary" />
+                            <Link to="/" className="button button--secondary">Cancel</Link>
+                        </div>
+                        <Link to="/registration">Registration</Link>
+                    </div>
+                </form>
+                {isAuthenticated ?
+                    <Redirect to={{
+                        pathname: '/',
+                        // state: { user: user, isAuthenticated: isAuthenticated }
+                    }} />
+                    : ``
+                }
             </div>
         )
     }

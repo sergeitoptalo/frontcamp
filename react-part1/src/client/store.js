@@ -7,7 +7,7 @@ import postsState from './reducers/posts';
 const composeEnhancers = global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default (initialState) => {
-    const rootReducer = combineReducers({userState, postsState});
+    const rootReducer = combineReducers({ userState, postsState });
     const store = createStore(
         rootReducer,
         initialState,

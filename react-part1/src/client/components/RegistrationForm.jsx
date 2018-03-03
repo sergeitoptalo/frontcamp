@@ -62,63 +62,62 @@ export default class RegistrationForm extends React.Component {
             }
         })
             .then(response => {
-                if (response.status === 200) {
-                    this.setState({ isRegistered: true });
-                }
-            });
+                return response.json();
+            })
+            .then(isRegistered => {
+                this.setState({ isRegistered })
+            })
     }
 
     render() {
         const { message, isRegistered, isFormDisabled } = this.state;
 
         return (
-            <div className="container m-3">
-                <div className="row justify-content-md-center">
-                    <div className="col col-lg-5">
-                        <form onSubmit={this.handleSubmit} className="p-4 bg-white rounded border">
-                            {message ?
-                                <div className="alert alert-danger" role="alert">
-                                    {message}
-                                </div>
-                                : ``
-                            }
-                            <div className="form-group">
-                                <Input
-                                    label={'Name'}
-                                    name={'userName'}
-                                    type={'text'}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <Input
-                                    label={'Login'}
-                                    name={'login'}
-                                    type={'text'}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <Input
-                                    label={'Password'}
-                                    name={'password'}
-                                    type={'password'}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                            <div>
-                                <input type="submit" value="Register" className="btn btn-primary" disabled={isFormDisabled} />
-                                <Link to="/login" className="btn btn-light ml-1">Cancel</Link>
-                            </div>
-                        </form>
-                        {isRegistered ?
-                            <Redirect to={{
-                                pathname: '/login'
-                            }} />
-                            : ``
-                        }
+
+
+            <div className="form-container">
+                <form onSubmit={this.handleSubmit} className="app-form">
+                    {message ?
+                        <div className="alert alert-danger" role="alert">
+                            {message}
+                        </div>
+                        : ``
+                    }
+                    <div className="form-group">
+                        <Input
+                            label={'Name'}
+                            name={'userName'}
+                            type={'text'}
+                            onChange={this.handleChange}
+                        />
                     </div>
-                </div>
+                    <div className="form-group">
+                        <Input
+                            label={'Login'}
+                            name={'login'}
+                            type={'text'}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <Input
+                            label={'Password'}
+                            name={'password'}
+                            type={'password'}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div>
+                        <input type="submit" value="Register" className="button button--primary" disabled={isFormDisabled} />
+                        <Link to="/login" className="button button--secondary">Cancel</Link>
+                    </div>
+                </form>
+                {isRegistered ?
+                    <Redirect to={{
+                        pathname: '/login'
+                    }} />
+                    : ``
+                }
             </div>
         )
     }

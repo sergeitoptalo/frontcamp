@@ -15,6 +15,7 @@ function renderFullPage(html, preloadedState) {
         <head>
           <meta charset=utf-8>
           <title>React Server Side Rendering</title>
+          <link rel="stylesheet" href="/css/styles.css" />
         </head>
         <body>
           <div id="root">${html}</div>

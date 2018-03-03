@@ -8,13 +8,14 @@ module.exports = {
         path: path.resolve('./public/js/'),
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.css'],
     },
     devtool: 'source-map',
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
+                exclude: /node_modules/,
                 use: 'babel-loader',
             }
         ],

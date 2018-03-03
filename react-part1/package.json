@@ -39,6 +39,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
     "css-loader": "^0.28.10",
+    "extract-text-webpack-plugin": "^3.0.2",
     "isomorphic-style-loader": "^4.0.0",
     "jest": "^22.4.2",
     "node-sass": "^4.7.2",
@@ -48,7 +49,8 @@
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.2",
     "webpack": "^3.11.0",
-    "webpack-dev-server": "^2.11.1"
+    "webpack-dev-server": "^2.11.1",
+    "webpack-node-externals": "^1.6.0"
   },
   "scripts": {
     "inspect": "nodemon --inspect ./src/server --exec babel-node --presets env,react --watch src ",

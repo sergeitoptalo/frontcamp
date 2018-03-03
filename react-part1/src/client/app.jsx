@@ -13,6 +13,7 @@ import UsersPage from './containers/UsersPage';
 
 const App = (props) => (
     <div>
+        <header className="app-header">
         <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/users">Users</Link></li>
@@ -25,6 +26,7 @@ const App = (props) => (
                 : <li><Link to="/login">Login</Link></li>
             }
         </ul>
+        </header>
         <Switch>
             {renderRoutes(routes)}
         </Switch>

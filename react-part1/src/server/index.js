@@ -114,7 +114,7 @@ server.post('/api/register-user', function (req, res, next) {
         if (err) {
             res.send({ 'error': 'An error has occurred' });
         } else {
-            res.send('added');
+            res.json(true);
         }
     });
 });

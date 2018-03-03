@@ -26,7 +26,7 @@ class MainPage extends React.Component {
             <div>
                 {loading && !posts.length
                     ? <div>Loading...</div>
-                    : <div>
+                    : <div className="posts-container">
                         {posts.map((post, index) => <Post key={index} postItem={post} />)}
                     </div>
                 }
