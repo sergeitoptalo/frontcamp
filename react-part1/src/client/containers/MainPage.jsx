@@ -20,14 +20,14 @@ class MainPage extends React.Component {
     }
 
     render() {
-        const { posts, loading } = this.props;
+        const { posts, loading, userId } = this.props;
 
         return (
             <div>
                 {loading && !posts.length
                     ? <div>Loading...</div>
                     : <div className="posts-container">
-                        {posts.map((post, index) => <Post key={index} postItem={post} />)}
+                        {posts.map((post, index) => <Post key={index} postItem={post} userId={userId} />)}
                     </div>
                 }
             </div>
@@ -37,7 +37,8 @@ class MainPage extends React.Component {
 
 const mapStateToProps = state => ({
     posts: state.postsState.posts,
-    loading: state.postsState.loading
+    loading: state.postsState.loading,
+    userId: state.userState.userId
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

@@ -127,4 +127,10 @@ apiRoutes.post('/create-post', (req, res) => {
     });
 });
 
+apiRoutes.get('/logout', (req, res) => {
+    req.logout();
+    let isAuthenticated = req.isAuthenticated();
+    return res.json(false);
+});
+
 export default apiRoutes;

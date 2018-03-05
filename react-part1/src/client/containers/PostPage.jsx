@@ -20,10 +20,10 @@ class PostPage extends React.Component {
     }
 
     render() {
-        const { post, loading } = this.props;
+        const { post, loading, userId } = this.props;
         return (
             <div>
-                {loading ? <div>Loading...</div> : post ? <Post postItem={post} /> : ``}
+                {loading ? <div>Loading...</div> : post ? <Post postItem={post} userId={userId} /> : ``}
             </div>
         );
     }
@@ -32,6 +32,7 @@ class PostPage extends React.Component {
 const mapStateToProps = state => ({
     post: state.postsState.currentPost,
     loading: state.postsState.loading,
+    userId: state.userState.userId
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
     getPostById,

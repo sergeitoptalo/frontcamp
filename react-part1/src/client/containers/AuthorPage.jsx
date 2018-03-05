@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Post from '../components/post';
+import Loader from '../components/Loader';
 import { getAuthorPosts } from '../actions/posts';
 
 class AuthorPage extends React.Component {
@@ -24,7 +25,7 @@ class AuthorPage extends React.Component {
         return (
             <div>
                 {loading
-                    ? <div>Loading...</div>
+                    ? <Loader />
                     : author
                         ? author.posts.map((post, index) => <Post key={index} postItem={post} />)
                         : ``}

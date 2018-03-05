@@ -22,3 +22,18 @@ export const updateUser = user => ({
 export const loginSuccess = user => (dispatch) => {
     dispatch(updateUser(user))
 };
+
+export const logout = () => (dispatch) => {
+    fetch(`http://localhost:8000/api/logout`)
+        .then(res => res.json())
+        .then(isAuthenticated => {
+            if (!isAuthenticated) {
+                dispatch(updateUser({
+                    isAuthenticated: false,
+                    userId: null,
+                    userName: null
+                }))
+            }
+        });
+};
+

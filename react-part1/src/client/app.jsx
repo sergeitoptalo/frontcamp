@@ -4,12 +4,14 @@ import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router'
 import { renderRoutes } from 'react-router-config';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import 'isomorphic-fetch';
 
 import routes from './routes';
 
 import MainPage from './containers/MainPage';
 import UsersPage from './containers/UsersPage';
+import { logout } from './actions/user';
 
 const App = (props) => (
     <div>
@@ -21,7 +23,7 @@ const App = (props) => (
                     : ``
                 }
                 {props.isAuthenticated
-                    ? <li><Link to="/logout">Logout</Link></li>
+                    ? <li><button onClick={props.logout}>Logout</button></li>
                     : <li><Link to="/login">Login</Link></li>
                 }
             </ul>
@@ -36,4 +38,8 @@ const mapStateToProps = state => ({
     isAuthenticated: state.userState.isAuthenticated
 });
 
-export default withRouter(connect(mapStateToProps)(App));
+const mapDispatchToProps = dispatch => bindActionCreators({
+    logout,
+}, dispatch);
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
