@@ -1,7 +1,8 @@
 const INITIAL_STATE = {
     loading: false,
     posts: [],
-    currentPost: null
+    currentPost: null,
+    currentAuthor: null
 };
 
 export default (state = INITIAL_STATE, action = {}) => {
@@ -22,6 +23,12 @@ export default (state = INITIAL_STATE, action = {}) => {
                 ...state,
                 loading: false,
                 currentPost: action.payload,
+            };
+        case 'UPDATE_CURRENT_AUTHOR':
+            return {
+                ...state,
+                loading: false,
+                currentAuthor: action.payload,
             };
         default:
             return state;

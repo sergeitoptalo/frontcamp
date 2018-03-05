@@ -1,6 +1,6 @@
 import express from 'express';
 import handleRender from './handleRender';
-import { apiRoutes } from './routes/apiRoutes';
+import apiRoutes from './routes/apiRoutes';
 
 const Post = require('./schema/schema').Post;
 
@@ -139,6 +139,7 @@ server.get('/api/get-used-login', function (req, res, next) {
     })
 });
 
+server.use('/api/', apiRoutes);
 server.get('/*', handleRender);
 
 server.listen(port, () => {

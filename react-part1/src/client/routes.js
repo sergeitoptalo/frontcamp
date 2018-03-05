@@ -3,6 +3,7 @@ import UsersPage from './containers/UsersPage';
 import PostPage from './containers/PostPage';
 import LoginPage from './containers/LoginPage';
 import RegistrationPage from './containers/RegistrationPage';
+import AuthorPage from './containers/AuthorPage';
 
 export default [
     {
@@ -26,5 +27,9 @@ export default [
     {
         path: '/registration',
         component: RegistrationPage,
+    },
+    {
+        path: '/author/:authorId',
+        component: AuthorPage,
     }
 ];

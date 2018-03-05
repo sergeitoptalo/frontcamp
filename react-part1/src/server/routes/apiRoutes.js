@@ -4,7 +4,7 @@ const User = require('../schema/schema').User;
 const passport = require('passport');
 
 
-apiRoutes.get('/posts', function (req, res) {
+/* apiRoutes.get('/posts', function (req, res) {
     Post.find({}).
         populate('author').
         exec(function (err, posts) {
@@ -94,6 +94,15 @@ apiRoutes.get('/logout', (req, res) => {
     req.logout();
     let isAuthenticated = req.isAuthenticated();
     return res.json({ isAuthenticated: isAuthenticated });
+}); */
+
+apiRoutes.get('/author/:id', (req, res) => {
+    let authorId = req.params.id;
+    User.findById(authorId)
+        .populate('posts')
+        .exec(function (err, author) {
+            res.send(author);
+        });
 });
 
-module.exports = { apiRoutes };
+export default apiRoutes;
