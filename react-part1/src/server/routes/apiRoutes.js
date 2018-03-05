@@ -127,6 +127,17 @@ apiRoutes.post('/create-post', (req, res) => {
     });
 });
 
+apiRoutes.delete('/delete/:id', (req, res) => {
+    let postId = req.params.id;
+    Post.findByIdAndRemove(postId, function (err, post) {
+        if (err) {
+            res.json({ 'error': 'An error has occurred' });
+        } else {
+            res.json(post);
+        }
+    });
+});
+
 apiRoutes.get('/logout', (req, res) => {
     req.logout();
     let isAuthenticated = req.isAuthenticated();

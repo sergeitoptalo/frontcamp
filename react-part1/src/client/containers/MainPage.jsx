@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Post from '../components/post';
+import Loader from '../components/Loader';
 import { getPosts } from '../actions/posts';
 
 
@@ -20,14 +21,14 @@ class MainPage extends React.Component {
     }
 
     render() {
-        const { posts, loading, userId } = this.props;
+        const { posts, loading } = this.props;
 
         return (
             <div>
                 {loading && !posts.length
-                    ? <div>Loading...</div>
+                    ? <Loader />
                     : <div className="posts-container">
-                        {posts.map((post, index) => <Post key={index} postItem={post} userId={userId} />)}
+                        {posts.map((post, index) => <Post key={index} postItem={post}/>)}
                     </div>
                 }
             </div>
@@ -37,8 +38,7 @@ class MainPage extends React.Component {
 
 const mapStateToProps = state => ({
     posts: state.postsState.posts,
-    loading: state.postsState.loading,
-    userId: state.userState.userId
+    loading: state.postsState.loading
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

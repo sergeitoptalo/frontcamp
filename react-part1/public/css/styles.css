@@ -2,8 +2,20 @@
     box-sizing: border-box;
 }
 
-.app-header {
+body {
+    margin: 0;
+    padding: 0;
+}
 
+body, button, input, textarea {
+    font-family: 'Roboto', sans-serif;
+}
+
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 /* FORMS */

@@ -23,7 +23,7 @@ class PostPage extends React.Component {
         const { post, loading, userId } = this.props;
         return (
             <div>
-                {loading ? <div>Loading...</div> : post ? <Post postItem={post} userId={userId} /> : ``}
+                {loading ? <div>Loading...</div> : post ? <Post postItem={post} /> : ``}
             </div>
         );
     }

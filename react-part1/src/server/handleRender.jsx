@@ -23,6 +23,7 @@ function renderFullPage(html, preloadedState) {
             window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
           </script>
           <script src="/js/bundle.js"></script>
+          <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
         </body>
       </html>
   `;

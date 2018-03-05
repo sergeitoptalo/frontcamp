@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Loader = (props) => (
-    <div class="bouncing-loader">
+    <div className="bouncing-loader">
         <div></div>
         <div></div>
         <div></div>
