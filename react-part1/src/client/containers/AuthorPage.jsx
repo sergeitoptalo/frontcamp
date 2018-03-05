@@ -37,6 +37,7 @@ const mapStateToProps = state => ({
     author: state.postsState.currentAuthor,
     loading: state.postsState.loading,
 });
+
 const mapDispatchToProps = dispatch => bindActionCreators({
     getAuthorPosts,
 }, dispatch);

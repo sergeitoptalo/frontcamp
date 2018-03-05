@@ -105,4 +105,26 @@ apiRoutes.get('/author/:id', (req, res) => {
         });
 });
 
+apiRoutes.post('/create-post', (req, res) => {
+    req.body.date = new Date();
+
+    const user = User.findById(req.body.authorId, (err, user) => {
+        const post = new Post({
+            postText: req.body.postText,
+            date: req.body.date,
+            author: user._id
+        });
+
+        post.save(function (err) {
+            if (err) {
+                return err.message;
+            };
+            user.posts.push(post);
+            user.save();
+            res.json('Post was added');
+        });
+
+    });
+});
+
 export default apiRoutes;
