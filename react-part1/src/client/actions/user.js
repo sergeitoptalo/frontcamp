@@ -24,16 +24,14 @@ export const loginSuccess = user => (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
-    fetch(`http://localhost:8000/api/logout`)
-        .then(res => res.json())
-        .then(isAuthenticated => {
-            if (!isAuthenticated) {
-                dispatch(updateUser({
-                    isAuthenticated: false,
-                    userId: null,
-                    userName: null
-                }))
-            }
-        });
+    dispatch(updateUser({
+        isAuthenticated: false,
+        userId: null,
+        userName: null
+    }));
+
+     fetch(`http://localhost:8000/api/logout`, { method: 'GET', credentials: 'include' })
+        //.then(res => res.json())
+       // .then((response) => response.json());
 };
 

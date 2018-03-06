@@ -1,4 +1,6 @@
-export const createPost = (post) => fetch('http://localhost:8000/api/create-post', {
+import appConfig from '../../config/appConfig';
+
+export const createPost = (post) => fetch(`${appConfig.host}/api/create-post`, {
     method: 'POST',
     body: JSON.stringify(post),
     headers: {

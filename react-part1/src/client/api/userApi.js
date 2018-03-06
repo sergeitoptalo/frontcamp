@@ -3,6 +3,7 @@ export const loginHandler = (userData) => {
         {
             method: 'POST',
             body: JSON.stringify(userData),
+            credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'

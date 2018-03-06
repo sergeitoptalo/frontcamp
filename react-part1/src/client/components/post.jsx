@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { deletePost } from '../api/postApi';
+import { withRouter } from 'react-router'
 
 class Post extends React.Component {
     constructor(props) {
@@ -14,11 +15,19 @@ class Post extends React.Component {
     }
 
     deletePostHandler() {
+        let _this = this;
         deletePost(this.props.postItem._id)
             .then(response => {
                 return response.json()
             })
-            .then(() => this.props.history.goBack())
+            .then(() => {
+                if (_this.props.location.pathname === '/') {
+                    _this.props.history.push('/');
+                } else {
+                    _this.props.history.goBack();
+                }
+
+            })
     }
 
     componentDidMount() {
@@ -52,4 +61,4 @@ const mapStateToProps = state => ({
     userId: state.userState.userId
 });
 
-export default connect(mapStateToProps)(Post);
+export default withRouter(connect(mapStateToProps)(Post));

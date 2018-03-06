@@ -11,11 +11,24 @@ body, button, input, textarea {
     font-family: 'Roboto', sans-serif;
 }
 
+#root {
+    margin-top: 100px;
+}
+
 .app-header {
+    background: #b30e2f;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+}
+
+.app-header a {
+    color: #fff;
+}
+
+a {
+    color: #b30e2f;
 }
 
 /* FORMS */

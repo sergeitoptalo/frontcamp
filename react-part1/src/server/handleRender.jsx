@@ -31,7 +31,7 @@ function renderFullPage(html, preloadedState) {
 
 function handleRender(req, res) {
     const store = configureStore();
-
+console.log('app: ' + req.isAuthenticated());
     const branch = matchRoutes(routes, req.url);
     const promises = branch.map(({ route, match }) => {
         const { getData } = route.component;
@@ -46,6 +46,7 @@ function handleRender(req, res) {
     return Promise.all(promises)
         .then(() => {
             const context = {};
+            const isAuthenticated = req.isAuthenticated()
             const app = (
                 <Provider store={store}>
                     <StaticRouter location={req.url} context={context} >

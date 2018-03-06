@@ -139,9 +139,13 @@ apiRoutes.delete('/delete/:id', (req, res) => {
 });
 
 apiRoutes.get('/logout', (req, res) => {
+    console.log('before logout: ' + req.isAuthenticated())
     req.logout();
+    console.log('after logout: ' + req.isAuthenticated())
     let isAuthenticated = req.isAuthenticated();
-    return res.json(false);
+    //res.json('logout');
+    return res.redirect('/');
+    //return res.json(isAuthenticated);
 });
 
 export default apiRoutes;

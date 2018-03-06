@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
 import { renderRoutes } from 'react-router-config';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
