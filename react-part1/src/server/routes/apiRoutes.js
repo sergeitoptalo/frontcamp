@@ -1,6 +1,7 @@
 const apiRoutes = require('express').Router();
 const Post = require('../schema/schema').Post;
 const User = require('../schema/schema').User;
+const SessionUser = require('../schema/schema').SessionUser;
 const passport = require('passport');
 
 
@@ -96,6 +97,81 @@ apiRoutes.get('/logout', (req, res) => {
     return res.json({ isAuthenticated: isAuthenticated });
 }); */
 
+apiRoutes.get('/posts', function (req, res) {
+    Post.find({}).
+        populate('author').
+        exec(function (err, posts) {
+            res.send(posts);
+        });
+});
+
+apiRoutes.get('/getPost/:id', function (req, res) {
+    let postId = req.params.id;
+    Post.findById(postId)
+        .populate('author')
+        .exec(function (err, post) {
+            res.send(post);
+        });
+});
+
+apiRoutes.post('/loginHandler', function (req, res, next) {
+    passport.authenticate('local', function (err, user, message) {
+        if (!user) {
+            return res.json({ message: message.message });
+        }
+        req.logIn(user, function (err) {
+            if (err) {
+                return next(err);
+            }
+            const userData = {
+                isAuthenticated: req.isAuthenticated(),
+                userName: user.userName,
+                userId: user.id
+            }
+            const sessionUser = new SessionUser(userData);
+            sessionUser.save(req.body, (err, result) => {
+                if (err) {
+                    res.send({ 'error': 'An error has occurred' });
+                } else {
+                    //res.json(true);
+                }
+            });
+            return res.json(userData);
+        });
+    })(req, res, next)
+});
+
+apiRoutes.post('/register-user', function (req, res, next) {
+    const user = new User(req.body);
+    user.save(req.body, (err, result) => {
+        if (err) {
+            res.send({ 'error': 'An error has occurred' });
+        } else {
+            res.json(true);
+        }
+    });
+});
+
+apiRoutes.get('/get-used-login', function (req, res, next) {
+    User.aggregate([
+        {
+            $group: {
+                _id: {
+                    login: "$login"
+                }
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                login: "$_id.login"
+            }
+        }
+    ], (err, users) => {
+        res.json(users);
+    })
+});
+
 apiRoutes.get('/author/:id', (req, res) => {
     let authorId = req.params.id;
     User.findById(authorId)
@@ -143,8 +219,15 @@ apiRoutes.get('/logout', (req, res) => {
     req.logout();
     console.log('after logout: ' + req.isAuthenticated())
     let isAuthenticated = req.isAuthenticated();
-    //res.json('logout');
-    return res.redirect('/');
+    SessionUser.remove({}, function (err, post) {
+        if (err) {
+            res.json({ 'error': 'An error has occurred' });
+        } else {
+            //res.json(post);
+        }
+    });
+    res.end();
+    //return res.redirect('/');
     //return res.json(isAuthenticated);
 });
 

@@ -23,7 +23,7 @@ class AuthorPage extends React.Component {
     render() {
         const { author, loading } = this.props;
         return (
-            <div>
+            <div className="posts-container">
                 {loading
                     ? <Loader />
                     : author

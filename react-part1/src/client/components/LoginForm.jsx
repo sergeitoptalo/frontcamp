@@ -51,7 +51,6 @@ class LoginForm extends React.Component {
         } else {
             this.setState({ message: 'All fields must be filled' })
         }
-        //this.props.loginHandler(this.state);
     }
 
     render() {
@@ -83,8 +82,8 @@ class LoginForm extends React.Component {
                             onChange={this.handleChange}
                         />
                     </div>
-                    <div className="form-group d-flex justify-content-between align-items-center">
-                        <div>
+                    <div>
+                        <div className="form-buttons">
                             <input type="submit" value="Login" className="button button--primary" />
                             <Link to="/" className="button button--secondary">Cancel</Link>
                         </div>

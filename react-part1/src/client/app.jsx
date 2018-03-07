@@ -16,26 +16,34 @@ import { logout } from './actions/user';
 const App = (props) => (
     <div>
         <header className="app-header">
-            <ul>
-                <li><Link to="/">Home</Link></li>
+            <div className="logo">
+                <Link to="/">Home</Link>
+            </div>
+            <div>
                 {props.isAuthenticated
-                    ? <li><Link to="/add-post">Add post</Link></li>
+                    ? <Link to="/add-post" className="button button--primary">Add post</Link>
+                    : ``
+                }
+                {props.userName
+                    ? <div>{props.userName}</div>
                     : ``
                 }
                 {props.isAuthenticated
-                    ? <li><button onClick={props.logout}>Logout</button></li>
-                    : <li><Link to="/login">Login</Link></li>
+                    ? <button onClick={() => {props.logout(props.history)}} className="button button--primary">Logout</button>
+                    : <Link to="/login" className="button button--primary">Login</Link>
                 }
-            </ul>
+            </div>
         </header>
         <Switch>
             {renderRoutes(routes)}
         </Switch>
-    </div>
+        <div className="overlay"></div>
+    </div >
 );
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.userState.isAuthenticated
+    isAuthenticated: state.userState.isAuthenticated,
+    userName: state.userState.userName
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

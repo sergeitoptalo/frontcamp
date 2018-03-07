@@ -7,6 +7,24 @@ body {
     padding: 0;
 }
 
+body.disabled {
+    overflow: hidden;
+}
+
+.overlay {
+    display: none;
+}
+
+.disabled .overlay {
+    display: block;
+    position: fixed;
+    background: rgba(0,0,0,0.3);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 body, button, input, textarea {
     font-family: 'Roboto', sans-serif;
 }
@@ -16,19 +34,29 @@ body, button, input, textarea {
 }
 
 .app-header {
+    align-items: center;
     background: #b30e2f;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+    z-index: 100;
 }
 
 .app-header a {
     color: #fff;
+    display: inline-block;
 }
 
 a {
     color: #b30e2f;
+}
+
+a:hover {
+    text-decoration: none;
 }
 
 /* FORMS */
@@ -52,6 +80,10 @@ a {
     margin-top: 10px;
     padding: .7em;
     width: 100%;
+}
+
+.form-buttons {
+    margin: 20px 0 15px;
 }
 
 .button {
@@ -100,6 +132,19 @@ a {
     outline: 1px solid transparent;
 }
 
+.delete-post-button {
+    border: 1px solid #ddd;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #fff;
+}
+
+.delete-post-button:hover {
+    box-shadow: 0px 0px 5px rgba(0,0,0,.3);
+}
+
 .alert {
     position: absolute;
     bottom: 100%;
@@ -125,6 +170,16 @@ a {
     border: 1px solid #ddd;
     margin: -1px 0 0;
     padding: 20px;
+    position: relative;
+}
+
+.post p {
+    padding: 5px 30px;
+}
+
+.post-date {
+    font-size: 13px;
+    color: #898b93;
 }
 
 

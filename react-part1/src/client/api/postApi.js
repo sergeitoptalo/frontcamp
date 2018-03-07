@@ -1,4 +1,6 @@
-import appConfig from '../../config/appConfig';
+import { appConfig } from '../../config/appConfig';
+
+export const getPosts = (post) => fetch('http://localhost:8000/api/posts');
 
 export const createPost = (post) => fetch(`${appConfig.host}/api/create-post`, {
     method: 'POST',

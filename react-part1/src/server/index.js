@@ -56,7 +56,7 @@ server.use(cookieParser('secrettexthere'));
 
 server.use(session({
     secret: 'secrettexthere',
-    saveUninitialized: true,
+    saveUninitialized: false,
     resave: true,
     store: new MongoStore({
         url: 'mongodb://toptalo:zavani74@cluster0-shard-00-00-s1vg1.mongodb.net:27017,cluster0-shard-00-01-s1vg1.mongodb.net:27017,cluster0-shard-00-02-s1vg1.mongodb.net:27017/database?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin',
@@ -69,75 +69,6 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 server.use(express.static('public'));
-
-
-
-server.get('/api/posts', function (req, res) {
-    Post.find({}).
-        populate('author').
-        exec(function (err, posts) {
-            res.send(posts);
-        });
-});
-
-server.get('/api/getPost/:id', function (req, res) {
-    let postId = req.params.id;
-    Post.findById(postId)
-        .populate('author')
-        .exec(function (err, post) {
-            res.send(post);
-        });
-});
-
-server.post('/api/loginHandler', function (req, res, next) {
-    passport.authenticate('local', function (err, user, message) {
-        if (!user) {
-            return res.json({ message: message.message });
-        }
-        req.logIn(user, function (err) {
-            if (err) {
-                return next(err);
-            }
-            const userData = {
-                isAuthenticated: req.isAuthenticated(),
-                userName: user.userName,
-                userId: user.id
-            }
-            return res.json(userData);
-        });
-    })(req, res, next)
-});
-
-server.post('/api/register-user', function (req, res, next) {
-    const user = new User(req.body);
-    user.save(req.body, (err, result) => {
-        if (err) {
-            res.send({ 'error': 'An error has occurred' });
-        } else {
-            res.json(true);
-        }
-    });
-});
-
-server.get('/api/get-used-login', function (req, res, next) {
-    User.aggregate([
-        {
-            $group: {
-                _id: {
-                    login: "$login"
-                }
-            }
-        },
-        {
-            $project: {
-                _id: 0,
-                login: "$_id.login"
-            }
-        }
-    ], (err, users) => {
-        res.json(users);
-    })
-});
 
 server.use('/api/', apiRoutes);
 server.get('/*', handleRender);

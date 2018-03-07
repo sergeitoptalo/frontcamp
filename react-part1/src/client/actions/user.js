@@ -23,15 +23,22 @@ export const loginSuccess = user => (dispatch) => {
     dispatch(updateUser(user))
 };
 
-export const logout = () => (dispatch) => {
+export const logout = (history) => (dispatch) => {
+    document.body.classList.add('disabled');
+    
     dispatch(updateUser({
         isAuthenticated: false,
-        userId: null,
-        userName: null
+        userName: null,
+        userId: null
     }));
+    
 
-     fetch(`http://localhost:8000/api/logout`, { method: 'GET', credentials: 'include' })
-        //.then(res => res.json())
-       // .then((response) => response.json());
+    fetch(`http://localhost:8000/api/logout`, { method: 'GET', credentials: 'include' })
+    .then(() => {
+        //document.body.classList.remove('disabled');
+        history.go(0);
+    })
+    //.then(res => res.json())
+    // .then((response) => response.json());
 };
 

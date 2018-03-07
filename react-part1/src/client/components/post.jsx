@@ -22,11 +22,10 @@ class Post extends React.Component {
             })
             .then(() => {
                 if (_this.props.location.pathname === '/') {
-                    _this.props.history.push('/');
+                    _this.props.history.go(0);
                 } else {
                     _this.props.history.goBack();
                 }
-
             })
     }
 
@@ -44,12 +43,12 @@ class Post extends React.Component {
         return (
             <div className="post">
                 <Link to={`/author/${postItem.author._id}`}>{postItem.author.userName}</Link>
-                <div>{postItem.date}</div>
+                <div className="post-date">{postItem.date}</div>
                 <p>{postItem.postText}</p>
                 <Link to={`/posts/${postItem._id}`}>></Link>
                 {
                     isEditable
-                        ? <button onClick={this.deletePostHandler}>Delete post</button>
+                        ? <button onClick={this.deletePostHandler} className="delete-post-button">Delete</button>
                         : ``
                 }
             </div>

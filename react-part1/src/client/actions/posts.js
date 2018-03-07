@@ -1,3 +1,5 @@
+import * as postApi from '../api/postApi';
+
 export const loadPosts = () => ({
     type: 'LOAD_POSTS',
 });
@@ -20,7 +22,7 @@ export const updateCurrentAuthor = author => ({
 export const getPosts = () => (dispatch) => {
     dispatch(loadPosts());
 
-    return fetch('http://localhost:8000/api/posts')
+    return postApi.getPosts()
         .then(res => res.json())
         .then(posts => dispatch(updatePosts(posts)));
 };
