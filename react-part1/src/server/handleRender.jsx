@@ -66,10 +66,6 @@ function handleRender(req, res) {
             }
         });
     }
-    /*   */
-    /*    } else {
-           serverRender(store);
-       } */
 
     function serverRender(updatedStore) {
 

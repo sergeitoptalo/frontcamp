@@ -24,7 +24,7 @@ export const getPosts = () => (dispatch) => {
 
     return postApi.getPosts()
         .then(res => res.json())
-        .then(posts => dispatch(updatePosts(posts)));
+        .then(posts => dispatch(updatePosts(posts.reverse())));
 };
 
 export const getPostById = postId => (dispatch) => {

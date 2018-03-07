@@ -51,6 +51,10 @@ body, button, input, textarea {
     display: inline-block;
 }
 
+.app-header .user {
+    display: inline-block;
+}
+
 a {
     color: #b30e2f;
 }

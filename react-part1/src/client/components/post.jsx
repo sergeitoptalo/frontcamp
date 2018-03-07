@@ -11,7 +11,8 @@ class Post extends React.Component {
         this.state = {
             isEditable: false
         }
-        this.deletePostHandler = this.deletePostHandler.bind(this);
+        this.author = this.props.postItem.author._id,
+            this.deletePostHandler = this.deletePostHandler.bind(this);
     }
 
     deletePostHandler() {
@@ -21,17 +22,18 @@ class Post extends React.Component {
                 return response.json()
             })
             .then(() => {
-                if (_this.props.location.pathname === '/') {
-                    _this.props.history.go(0);
-                } else {
+                if (_this.props.location.pathname.match(/posts\/.*/g)) {
                     _this.props.history.goBack();
+                } else {
+                    _this.props.history.go(0);
                 }
             })
     }
 
     componentDidMount() {
         const { postItem, userId } = this.props;
-        if (postItem.author === userId || postItem.author._id === userId) {
+        //if (postItem.author === userId || postItem.author._id === userId) {
+        if (this.author === userId) {
             this.setState({ isEditable: true })
         }
     }

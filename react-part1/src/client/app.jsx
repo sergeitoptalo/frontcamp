@@ -20,16 +20,18 @@ const App = (props) => (
                 <Link to="/">Home</Link>
             </div>
             <div>
+                {props.userName
+                    ? <div className="user">
+                        <Link to={`/author/${props.userId}`}>{props.userName}</Link>
+                    </div>
+                    : ``
+                }
                 {props.isAuthenticated
                     ? <Link to="/add-post" className="button button--primary">Add post</Link>
                     : ``
                 }
-                {props.userName
-                    ? <div>{props.userName}</div>
-                    : ``
-                }
                 {props.isAuthenticated
-                    ? <button onClick={() => {props.logout(props.history)}} className="button button--primary">Logout</button>
+                    ? <button onClick={() => { props.logout(props.history) }} className="button button--primary">Logout</button>
                     : <Link to="/login" className="button button--primary">Login</Link>
                 }
             </div>
@@ -43,7 +45,8 @@ const App = (props) => (
 
 const mapStateToProps = state => ({
     isAuthenticated: state.userState.isAuthenticated,
-    userName: state.userState.userName
+    userName: state.userState.userName,
+    userId: state.userState.userId
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
