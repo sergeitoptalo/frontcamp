@@ -40,7 +40,7 @@ function handleRender(req, res) {
     global.sessionStorage;
     let hi = req.session.name;
 
-    if (!req.isAuthenticated() /* && store.getState().userState.isAuthenticated === true */) {
+    if (!req.isAuthenticated()) {
         store.dispatch(updateUser({
             isAuthenticated: false,
             userId: null,

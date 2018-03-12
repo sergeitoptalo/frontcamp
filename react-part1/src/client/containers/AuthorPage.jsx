@@ -27,7 +27,9 @@ class AuthorPage extends React.Component {
                 {loading
                     ? <Loader />
                     : author
-                        ? author.posts.map((post, index) => <Post key={index} postItem={post} />)
+                        ? author.posts.length > 0
+                            ? author.posts.map((post, index) => <Post key={index} postItem={post} />)
+                            : `The author has no posts`
                         : ``}
             </div>
         );

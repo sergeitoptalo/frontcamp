@@ -205,13 +205,33 @@ apiRoutes.post('/create-post', (req, res) => {
 
 apiRoutes.delete('/delete/:id', (req, res) => {
     let postId = req.params.id;
-    Post.findByIdAndRemove(postId, function (err, post) {
+    /* Post.findByIdAndRemove(postId, function (err, post) {
         if (err) {
             res.json({ 'error': 'An error has occurred' });
         } else {
+            User.fin
             res.json(post);
         }
-    });
+    }); */
+
+    Post.findByIdAndRemove(postId)
+        .populate('author')
+        .exec(function (err, post) {
+            let a = post.author.posts.indexOf(postId);
+            post.author.posts.splice(a, 1);
+            let query = `posts.${a}`;
+            post.author.update({ posts: post.author.posts }, function (err, post) {
+                if (err) {
+                    res.json({ 'error': 'An error has occurred' });
+                } else {
+                    let a = post;
+                    //res.json(post);
+                }
+            })
+            // post.author.posts.update({}, {$unset : {query: 1 }}) 
+            //post.author.posts.find(postId).remove();
+            //res.send(author);
+        });
 });
 
 apiRoutes.get('/logout', (req, res) => {

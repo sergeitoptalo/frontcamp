@@ -17,7 +17,7 @@ const App = (props) => (
     <div>
         <header className="app-header">
             <div className="logo">
-                <Link to="/">Home</Link>
+                <Link to="/">App</Link>
             </div>
             <div>
                 {props.userName

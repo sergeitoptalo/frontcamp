@@ -59,31 +59,27 @@ class AddPostPage extends React.Component {
                     pathname: '/login'
                 }} />
                 }
-                <div className="container">
-                    <div className="row justify-content-md-center m-3">
-                        <div className="col col-lg-8">
-                            <h4 className="mt-3 mb-3">Add post</h4>
-                            <form onSubmit={this.handleSubmit}>
-                                <div className="form-group">
-                                    <textarea
-                                        name="postText"
-                                        className="form-control"
-                                        rows="8"
-                                        value={postText}
-                                        onChange={this.handleChange}>
-                                    </textarea>
-                                </div>
-                                <input type="submit" value="Add" className="btn btn-primary" />
-                                <Link to="/" className="btn btn-light ml-1">Cancel</Link>
-                            </form>
-                            {message ?
-                                <div className="alert alert-success mt-3" role="alert">
-                                    {message}
-                                </div>
-                                : ``
-                            }
+                <div className="add-post-container">
+                    <h4>Add post</h4>
+                    <form onSubmit={this.handleSubmit}>
+                        <div>
+                            <textarea
+                                name="postText"
+                                className="form-control"
+                                rows="8"
+                                value={postText}
+                                onChange={this.handleChange}>
+                            </textarea>
                         </div>
-                    </div>
+                        <input type="submit" value="Add" className="button button--primary" />
+                        <Link to="/" className="button button--secondary">Cancel</Link>
+                    </form>
+                    {message ?
+                        <div className="alert alert-success" role="alert">
+                            {message}
+                        </div>
+                        : ``
+                    }
                 </div>
             </Fragment>
         )

@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { deletePost } from '../api/postApi';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
+
+import { getFullDate } from '../utilities/dateTransform/getFullDate';
 
 class Post extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isEditable: false
-        }
-        this.author = this.props.postItem.author._id,
-            this.deletePostHandler = this.deletePostHandler.bind(this);
+        this.deletePostHandler = this.deletePostHandler.bind(this);
     }
 
     deletePostHandler() {
@@ -30,29 +28,26 @@ class Post extends React.Component {
             })
     }
 
-    componentDidMount() {
-        const { postItem, userId } = this.props;
-        //if (postItem.author === userId || postItem.author._id === userId) {
-        if (this.author === userId) {
-            this.setState({ isEditable: true })
-        }
-    }
-
     render() {
-        const { postItem } = this.props;
-        const { isEditable } = this.state;
+        const { postItem, userId } = this.props;
 
         return (
             <div className="post">
                 <Link to={`/author/${postItem.author._id}`}>{postItem.author.userName}</Link>
-                <div className="post-date">{postItem.date}</div>
+                <div className="post-date">{getFullDate(postItem.date).date}, {getFullDate(postItem.date).time}</div>
                 <p>{postItem.postText}</p>
-                <Link to={`/posts/${postItem._id}`}>></Link>
-                {
-                    isEditable
-                        ? <button onClick={this.deletePostHandler} className="delete-post-button">Delete</button>
-                        : ``
-                }
+                <div className="post-controls">
+                    {
+                        postItem.author._id === userId
+                            ? <button onClick={this.deletePostHandler} className="delete-post-button">Delete</button>
+                            : ``
+                    }
+                    {
+                        this.props.location.pathname.match(/posts\/.*/g)
+                            ? ``
+                            : <Link to={`/posts/${postItem._id}`} className="post-in-new-window"></Link>
+                    }
+                </div>
             </div>
         )
     }
