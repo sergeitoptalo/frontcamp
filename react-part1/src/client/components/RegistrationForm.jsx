@@ -73,8 +73,6 @@ export default class RegistrationForm extends React.Component {
         const { message, isRegistered, isFormDisabled } = this.state;
 
         return (
-
-
             <div className="form-container">
                 <form onSubmit={this.handleSubmit} className="app-form">
                     {message ?

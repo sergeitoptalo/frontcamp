@@ -1,5 +1,7 @@
+import { appConfig } from '../../config/appConfig';
+
 export const loginHandler = (userData) => {
-    return fetch(`http://localhost:8000/api/loginHandler`,
+    return fetch(`${appConfig.host}/api/loginHandler`,
         {
             method: 'POST',
             body: JSON.stringify(userData),
@@ -12,5 +14,5 @@ export const loginHandler = (userData) => {
 };
 
 export const getUsedLogin = () => {
-    return fetch(`http://localhost:8000/api/get-used-login`, { method: 'GET' })
+    return fetch(`${appConfig.host}/api/get-used-login`, { method: 'GET' })
 };

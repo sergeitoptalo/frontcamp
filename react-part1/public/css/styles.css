@@ -52,7 +52,23 @@ body, button, input, textarea {
     display: inline-block;
 }
 
+.app-controls {
+    display: flex;
+    align-items: center;
+}
+
 .app-header .user {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,0.75);
+    color: #8385aa;
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+}
+
+.app-header .user a {
+    color: #8385aa;
     display: inline-block;
 }
 
@@ -67,7 +83,7 @@ a:hover {
 /* FORMS */
 .app-form {
     box-shadow: 0px 0px 5px rgba(0,0,0,.3);
-    margin: 20px auto 0 auto;
+    margin: 120px auto 0 auto;
     padding: 20px;
     position: relative;
     width: 400px;
@@ -259,3 +275,36 @@ a:hover {
   .bouncing-loader > div:nth-of-type(3) {
     animation-delay: 0.4s;
   }
+
+
+@media all and (max-width: 820px) {
+    .posts-container {
+        margin: 0;
+        width: 100%;
+    }
+
+    .post {
+        border-left: 0;
+        border-right: 0;
+        overflow: hidden;
+    }
+
+    .add-post-container {
+        margin: 0;
+        padding: 0 10px;
+        width: 100%;
+    }
+}
+
+@media all and (max-width: 600px) {
+    .app-form {
+        box-shadow: none;
+    }
+}
+
+@media all and (max-width: 440px) {
+    .app-form {
+        box-shadow: none;
+        width: 100%;
+    }
+}

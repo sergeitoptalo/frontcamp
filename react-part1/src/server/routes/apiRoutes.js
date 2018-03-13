@@ -224,13 +224,13 @@ apiRoutes.delete('/delete/:id', (req, res) => {
                 if (err) {
                     res.json({ 'error': 'An error has occurred' });
                 } else {
-                    let a = post;
-                    //res.json(post);
+                    //let a = post;
+                    res.json(post);
                 }
             })
             // post.author.posts.update({}, {$unset : {query: 1 }}) 
-            //post.author.posts.find(postId).remove();
-            //res.send(author);
+            // post.author.posts.find(postId).remove();
+            // res.send(author);
         });
 });
 

@@ -3,42 +3,23 @@ export const updateUser = user => ({
     payload: user,
 });
 
-/* export const loginHandler = userData => (dispatch) => {
-    return fetch(`http://localhost:8000/api/loginHandler`,
-        {
-            method: 'POST',
-            body: JSON.stringify(userData),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(res => res.json())
-        .then(user => {
-            dispatch(updateUser(user))
-        });
-}; */
-
 export const loginSuccess = user => (dispatch) => {
     dispatch(updateUser(user))
 };
 
 export const logout = (history) => (dispatch) => {
     document.body.classList.add('disabled');
-    
+
     dispatch(updateUser({
         isAuthenticated: false,
         userName: null,
         userId: null
     }));
-    
+
 
     fetch(`http://localhost:8000/api/logout`, { method: 'GET', credentials: 'include' })
-    .then(() => {
-        //document.body.classList.remove('disabled');
-        history.go(0);
-    })
-    //.then(res => res.json())
-    // .then((response) => response.json());
+        .then(() => {
+            history.go(0);
+        })
 };
 

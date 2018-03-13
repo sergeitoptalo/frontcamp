@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import { createPost } from '../api/postApi';
 
-
 class AddPostPage extends React.Component {
     constructor(props) {
         super(props);
@@ -16,10 +15,6 @@ class AddPostPage extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    componentDidMount() {
-
     }
 
     handleChange(event) {
@@ -55,10 +50,7 @@ class AddPostPage extends React.Component {
 
         return (
             <Fragment>
-                {isAuthenticated ? `` : <Redirect to={{
-                    pathname: '/login'
-                }} />
-                }
+                {isAuthenticated ? `` : <Redirect to={{ pathname: '/login' }} />}
                 <div className="add-post-container">
                     <h4>Add post</h4>
                     <form onSubmit={this.handleSubmit}>

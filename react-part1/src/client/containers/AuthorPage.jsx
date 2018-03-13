@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Post from '../components/post';
+import Post from '../components/Post';
 import Loader from '../components/Loader';
 import { getAuthorPosts } from '../actions/posts';
 
@@ -27,9 +27,14 @@ class AuthorPage extends React.Component {
                 {loading
                     ? <Loader />
                     : author
-                        ? author.posts.length > 0
-                            ? author.posts.map((post, index) => <Post key={index} postItem={post} />)
-                            : `The author has no posts`
+                        ? <div>
+                            <h4>{author.userName}</h4>
+                            {
+                                author.posts.length > 0
+                                    ? author.posts.map((post, index) => <Post key={index} postItem={post} />)
+                                    : `The author has no posts`
+                            }
+                        </div>
                         : ``}
             </div>
         );

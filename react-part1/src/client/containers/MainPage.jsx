@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Post from '../components/post';
+import Post from '../components/Post';
 import Loader from '../components/Loader';
 import { getPosts } from '../actions/posts';
 

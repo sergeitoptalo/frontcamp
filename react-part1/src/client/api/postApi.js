@@ -1,6 +1,12 @@
 import { appConfig } from '../../config/appConfig';
 
-export const getPosts = (post) => fetch('http://localhost:8000/api/posts');
+export const getPosts = () => {
+    return fetch(`${appConfig.host}/api/posts`)
+};
+
+export const getPost = (postId) => fetch(`${appConfig.host}/api/getPost/${postId}`);
+
+export const getAuthor = (authorId) => fetch(`${appConfig.host}/api/author/${authorId}`);
 
 export const createPost = (post) => fetch(`${appConfig.host}/api/create-post`, {
     method: 'POST',
@@ -11,4 +17,4 @@ export const createPost = (post) => fetch(`${appConfig.host}/api/create-post`, {
     }
 });
 
-export const deletePost = (postId) => fetch(`http://localhost:8000/api/delete/${postId}`, { method: 'DELETE' });
+export const deletePost = (postId) => fetch(`${appConfig.host}/api/delete/${postId}`, { method: 'DELETE' });

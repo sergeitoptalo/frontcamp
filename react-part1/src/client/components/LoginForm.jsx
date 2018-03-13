@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 import Input from './formComponents/Input';
 import { loginHandler } from '../api/userApi';
 import { loginSuccess } from '../actions/user';
-
 import { atLeastOneEmptyField } from '../utilities/validation/emptyFieldsValidation';
 
 class LoginForm extends React.Component {
@@ -92,8 +91,7 @@ class LoginForm extends React.Component {
                 </form>
                 {isAuthenticated ?
                     <Redirect to={{
-                        pathname: '/',
-                        // state: { user: user, isAuthenticated: isAuthenticated }
+                        pathname: '/'
                     }} />
                     : ``
                 }

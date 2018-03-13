@@ -19,7 +19,7 @@ const App = (props) => (
             <div className="logo">
                 <Link to="/">App</Link>
             </div>
-            <div>
+            <div className="app-controls">
                 {props.userName
                     ? <div className="user">
                         <Link to={`/author/${props.userId}`}>{props.userName}</Link>

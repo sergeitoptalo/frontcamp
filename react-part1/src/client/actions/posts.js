@@ -30,7 +30,7 @@ export const getPosts = () => (dispatch) => {
 export const getPostById = postId => (dispatch) => {
     dispatch(loadPosts());
 
-    return fetch(`http://localhost:8000/api/getPost/${postId}`)
+    return postApi.getPost(postId)
         .then(res => res.json())
         .then(post => dispatch(updateCurrentPost(post)));
 };
@@ -38,7 +38,7 @@ export const getPostById = postId => (dispatch) => {
 export const getAuthorPosts = authorId => (dispatch) => {
     dispatch(loadPosts());
 
-    return fetch(`http://localhost:8000/api/author/${authorId}`)
+    return postApi.getAuthor(authorId)
         .then(res => res.json())
         .then(currentAuthor => dispatch(updateCurrentAuthor(currentAuthor)));
 };
