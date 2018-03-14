@@ -16,7 +16,6 @@ export const logout = (history) => (dispatch) => {
         userId: null
     }));
 
-
     fetch(`http://localhost:8000/api/logout`, { method: 'GET', credentials: 'include' })
         .then(() => {
             history.go(0);

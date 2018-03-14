@@ -10,7 +10,6 @@ import 'isomorphic-fetch';
 import routes from './routes';
 
 import MainPage from './containers/MainPage';
-import UsersPage from './containers/UsersPage';
 import { logout } from './actions/user';
 
 const App = (props) => (

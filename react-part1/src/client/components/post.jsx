@@ -57,7 +57,7 @@ class Post extends React.Component {
                         postItem.author._id === userId || postItem.author === userId
                             ?
                             <Fragment>
-                                <button onClick={this.editPostHandler} className="delete-post-button">Edit</button>
+                                <Link to={`/edit/${postItem._id}`} className="delete-post-button">Edit</Link>
                                 <button onClick={this.deletePostHandler} className="delete-post-button">Delete</button>
                             </Fragment>
                             : ``

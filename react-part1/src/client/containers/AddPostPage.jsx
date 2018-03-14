@@ -2,15 +2,17 @@ import React, { Fragment } from 'react';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { createPost } from '../api/postApi';
+import { getPost, createPost, updatePost } from '../api/postApi';
 
 class AddPostPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             authorId: props.authorId,
+            postId: null,
             postText: '',
-            message: ''
+            message: '',
+            isEditable: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -33,15 +35,33 @@ class AddPostPage extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        createPost(this.state)
-            .then(response => {
-                if (response.status === 200) {
-                    return response.json();
-                }
-            })
+        if (this.state.isEditable) {
+            let { postId, postText } = this.state;
+            updatePost({ postId, postText })
+            .then(response => response.json())
             .then(data => {
-                this.setState({ message: data, postText: '' });
+                this.setState({ message: data });
             })
+        } else {
+            createPost(this.state)
+                .then(response => {
+                    if (response.status === 200) {
+                        return response.json();
+                    }
+                })
+                .then(data => {
+                    this.setState({ message: data, postText: '' });
+                })
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.match.path === '/edit/:id') {
+            this.setState({ isEditable: true, postId: this.props.match.params.id });
+            getPost(this.props.match.params.id)
+                .then(response => response.json())
+                .then(data => this.setState({ postText: data.postText }));
+        };
     }
 
     render() {
@@ -52,7 +72,6 @@ class AddPostPage extends React.Component {
             <Fragment>
                 {isAuthenticated ? `` : <Redirect to={{ pathname: '/login' }} />}
                 <div className="add-post-container">
-                    <h4>Add post</h4>
                     <form onSubmit={this.handleSubmit}>
                         <div>
                             <textarea
@@ -63,7 +82,7 @@ class AddPostPage extends React.Component {
                                 onChange={this.handleChange}>
                             </textarea>
                         </div>
-                        <input type="submit" value="Add" className="button button--primary" />
+                        <input type="submit" value={this.state.isEditable ? "Update" : "Add"} className="button button--primary" />
                         <Link to="/" className="button button--secondary">Cancel</Link>
                     </form>
                     {message ?

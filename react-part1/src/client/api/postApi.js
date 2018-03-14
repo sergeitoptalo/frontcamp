@@ -17,4 +17,13 @@ export const createPost = (post) => fetch(`${appConfig.host}/api/create-post`, {
     }
 });
 
+export const updatePost = (post) => fetch(`${appConfig.host}/api/update/${post.postId}`, {
+    method: 'PUT',
+    body: JSON.stringify(post),
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+});
+
 export const deletePost = (postId) => fetch(`${appConfig.host}/api/delete/${postId}`, { method: 'DELETE' });

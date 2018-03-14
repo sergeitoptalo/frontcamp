@@ -176,6 +176,14 @@ a:hover {
     box-shadow: 0px 0px 5px rgba(0,0,0,.3);
 }
 
+a.delete-post-button {
+    color: #000;
+    font-size: 13.333px;
+    margin-right: 5px;
+    padding: 1px 6px;
+    text-decoration: none;
+}
+
 .alert {
     position: absolute;
     bottom: 100%;

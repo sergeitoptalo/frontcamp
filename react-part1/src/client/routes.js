@@ -1,5 +1,4 @@
 import MainPage from './containers/MainPage';
-import UsersPage from './containers/UsersPage';
 import PostPage from './containers/PostPage';
 import LoginPage from './containers/LoginPage';
 import RegistrationPage from './containers/RegistrationPage';
@@ -11,10 +10,6 @@ export default [
         path: '/',
         exact: true,
         component: MainPage,
-    },
-    {
-        path: '/users',
-        component: UsersPage,
     },
     {
         path: '/posts/:postId',
@@ -36,5 +31,9 @@ export default [
     {
         path: '/add-post',
         component: AddPostPage,
+    },
+    {
+        path: '/edit/:id',
+        component: AddPostPage
     }
 ];
