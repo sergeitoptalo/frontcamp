@@ -10,7 +10,6 @@ import App from '../client/app';
 
 import { renderFullPage } from './templates/pageTemplate';
 import { updateUser } from '../client/actions/user';
-//import { loadApp } from '../client/actions/app';
 
 const SessionUser = require('./schema/schema').SessionUser;
 

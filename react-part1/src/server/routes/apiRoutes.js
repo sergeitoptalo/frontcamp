@@ -66,7 +66,6 @@ apiRoutes.delete('/delete/:id', (req, res) => {
                 if (err) {
                     res.json({ 'error': 'An error has occurred' });
                 } else {
-                    //let a = post;
                     res.json(post);
                 }
             })
@@ -81,6 +80,7 @@ apiRoutes.get('/author/:id', (req, res) => {
             res.send(author);
         });
 });
+
 
 apiRoutes.post('/loginHandler', function (req, res, next) {
     passport.authenticate('local', function (err, user, message) {
@@ -101,7 +101,7 @@ apiRoutes.post('/loginHandler', function (req, res, next) {
                 if (err) {
                     res.send({ 'error': 'An error has occurred' });
                 } else {
-                    //res.json(true);
+
                 }
             });
             return res.json(userData);
@@ -149,7 +149,7 @@ apiRoutes.get('/logout', (req, res) => {
         if (err) {
             res.json({ 'error': 'An error has occurred' });
         } else {
-            //res.json(post);
+
         }
     });
     res.end();

@@ -6,7 +6,6 @@ const Post = require('./schema/schema').Post;
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-//const session = require('cookie-session');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
@@ -52,7 +51,6 @@ passport.deserializeUser(function (user, done) {
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(cookieParser('secrettexthere'));
-//app.use(session({ secret: 'SECRET' }))
 
 server.use(session({
     secret: 'secrettexthere',
