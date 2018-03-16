@@ -10,51 +10,35 @@ import { getFullDate } from '../utilities/dateTransform/getFullDate';
 class Post extends React.Component {
     constructor(props) {
         super(props);
-        this.editPostHandler = this.editPostHandler.bind(this);
         this.deletePostHandler = this.deletePostHandler.bind(this);
     }
 
-    editPostHandler() {
-        let _this = this;
-        deletePost(this.props.postItem._id)
-            .then(response => {
-                return response.json()
-            })
-            .then(() => {
-                if (_this.props.location.pathname.match(/posts\/.*/g)) {
-                    _this.props.history.goBack();
-                } else {
-                    _this.props.history.go(0);
-                }
-            })
-    }
-
     deletePostHandler() {
-        let _this = this;
-        deletePost(this.props.postItem._id)
+        const { history, location, postItem } = this.props;
+        deletePost(postItem._id)
             .then(response => {
                 return response.json()
             })
             .then(() => {
-                if (_this.props.location.pathname.match(/posts\/.*/g)) {
-                    _this.props.history.goBack();
+                if (location.pathname.match(/posts\/.*/g)) {
+                    history.goBack();
                 } else {
-                    _this.props.history.go(0);
+                    history.go(0);
                 }
             })
     }
 
     render() {
-        const { postItem, userId } = this.props;
+        const { location: { pathname: locationPath }, postItem, postItem: { author: postAuthor }, userId } = this.props;
 
         return (
             <div className="post">
-                <Link to={`/author/${postItem.author._id}`}>{postItem.author.userName}</Link>
+                <Link to={`/author/${postAuthor._id}`}>{postAuthor.userName}</Link>
                 <div className="post-date">{getFullDate(postItem.date).date}, {getFullDate(postItem.date).time}</div>
                 <p>{postItem.postText}</p>
                 <div className="post-controls">
                     {
-                        postItem.author._id === userId || postItem.author === userId
+                        postAuthor._id === userId || postAuthor === userId
                             ?
                             <Fragment>
                                 <Link to={`/edit/${postItem._id}`} className="delete-post-button">Edit</Link>
@@ -63,7 +47,7 @@ class Post extends React.Component {
                             : ``
                     }
                     {
-                        this.props.location.pathname.match(/posts\/.*/g)
+                        locationPath.match(/posts\/.*/g)
                             ? ``
                             : <Link to={`/posts/${postItem._id}`} className="post-in-new-window"></Link>
                     }

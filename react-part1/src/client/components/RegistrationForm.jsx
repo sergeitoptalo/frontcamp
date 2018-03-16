@@ -83,25 +83,25 @@ export default class RegistrationForm extends React.Component {
                     }
                     <div className="form-group">
                         <Input
-                            label={'Name'}
-                            name={'userName'}
-                            type={'text'}
+                            label="Name"
+                            name="userName"
+                            type="text"
                             onChange={this.handleChange}
                         />
                     </div>
                     <div className="form-group">
                         <Input
-                            label={'Login'}
-                            name={'login'}
-                            type={'text'}
+                            label="Login"
+                            name="login"
+                            type="text"
                             onChange={this.handleChange}
                         />
                     </div>
                     <div className="form-group">
                         <Input
-                            label={'Password'}
-                            name={'password'}
-                            type={'password'}
+                            label="Password"
+                            name="password"
+                            type="password"
                             onChange={this.handleChange}
                         />
                     </div>

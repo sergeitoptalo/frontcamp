@@ -85,7 +85,7 @@ apiRoutes.get('/author/:id', (req, res) => {
 apiRoutes.post('/loginHandler', function (req, res, next) {
     passport.authenticate('local', function (err, user, message) {
         if (!user) {
-            return res.json({ message: message.message });
+            return res.json({ message: { text: message.message, status: 'danger' }});
         }
         req.logIn(user, function (err) {
             if (err) {

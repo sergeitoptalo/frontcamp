@@ -199,12 +199,12 @@ a.delete-post-button {
     top: 0;
 }
 
-.alert-danger {
+.alert.danger {
     background: #b30e2f;
     color: #fff;
 }
 
-.alert-success {
+.alert.success {
     background: #8daf01;
     color: #fff;
 }

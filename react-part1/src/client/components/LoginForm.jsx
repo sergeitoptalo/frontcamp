@@ -3,7 +3,9 @@ import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import Form from './formComponents/Form';
 import Input from './formComponents/Input';
+import FormMessage from './formComponents/FormMessage';
 import { loginHandler } from '../api/userApi';
 import { loginSuccess } from '../actions/user';
 import { atLeastOneEmptyField } from '../utilities/validation/emptyFieldsValidation';
@@ -15,7 +17,10 @@ class LoginForm extends React.Component {
             user: null,
             login: '',
             password: '',
-            message: '',
+            message: {
+                text: '',
+                status: 'danger'
+            },
             isAuthenticated: false
         };
 
@@ -41,43 +46,43 @@ class LoginForm extends React.Component {
                 .then(response => {
                     return response.json()
                 })
-                .then(data => {
+                .then((data) => {
                     if (data.message) {
-                        return this.setState({ message: data.message });
+                        const { text, status } = data.message;
+                        return this.setState({ message: { text, status } });
                     }
                     return this.props.loginSuccess(data);
                 })
         } else {
-            this.setState({ message: 'All fields must be filled' })
+            this.setState({ message: { text: 'All fields must be filled', status: 'danger' } })
         }
     }
 
     render() {
         const { isAuthenticated, user } = this.props;
-        const { message } = this.state;
+        const { text: messageText, status: messageStatus } = this.state.message;
 
         return (
             <div className="form-container">
-                <form onSubmit={this.handleSubmit} className="app-form">
-                    {message ?
-                        <div className="alert alert-danger" role="alert">
-                            {message}
-                        </div>
-                        : ``
+                <Form onSubmit={this.handleSubmit} className="app-form">
+                    {
+                        messageText
+                            ? <FormMessage text={messageText} status={messageStatus} />
+                            : ``
                     }
                     <div className="form-group">
                         <Input
-                            label={'Login'}
-                            name={'login'}
-                            type={'text'}
+                            label="Login"
+                            name="login"
+                            type="text"
                             onChange={this.handleChange}
                         />
                     </div>
                     <div className="form-group">
                         <Input
-                            label={'Password'}
-                            name={'password'}
-                            type={'password'}
+                            label="Password"
+                            name="password"
+                            type="password"
                             onChange={this.handleChange}
                         />
                     </div>
@@ -88,7 +93,7 @@ class LoginForm extends React.Component {
                         </div>
                         <Link to="/registration">Registration</Link>
                     </div>
-                </form>
+                </Form>
                 {isAuthenticated ?
                     <Redirect to={{
                         pathname: '/'
