@@ -1,6 +1,18 @@
-var app = angular.module('toDoApp', [])
+import angular from 'angular';
+import uiRouter from 'angular-ui-router';
 
-app.factory("todoFactory", function(){
+//import routes from './app.routes';
+import { TodoListController } from './app.controller';
+
+export const todoApp = angular.module('todoApp', []);
+//todoApp.controller('TodoListController', TodoListController);
+
+require('./todoList.component');
+
+/* export default angular.module('todoApp', [route, todoListComponent])
+    .config(routes) */
+
+/* app.factory("todoFactory", function(){
     var taskList = ["New Delhi", "Mumbai", "Kolkata", "Chennai"];
     return {
         getTasks: function getTasks() {
@@ -15,8 +27,6 @@ app.factory("todoFactory", function(){
     };
 });
 
-
-
 app.controller('toDoController', ['$scope', 'todoFactory', function ($scope, todoFactory) {
     $scope.tasks = todoFactory.getTasks()
     $scope.newTaskName = '';
@@ -30,3 +40,4 @@ app.controller('toDoController', ['$scope', 'todoFactory', function ($scope, tod
         todoFactory.removeTask(text);
     }
 }]);
+ */
