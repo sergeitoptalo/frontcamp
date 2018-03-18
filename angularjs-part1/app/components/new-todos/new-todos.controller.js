@@ -1,5 +1,9 @@
 export function NewTodosController ($scope, factory) {
     $scope.todos = factory.getTasks();
+    $scope.doneTodos = factory.getDoneTasks();
+    $scope.switchTaskToDone = (todo) => {
+        factory.switchTaskToDone(todo);
+    }
     /* this.todos = [
         {
             name: 'Nexus S',

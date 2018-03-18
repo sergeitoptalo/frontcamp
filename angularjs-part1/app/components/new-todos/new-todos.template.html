@@ -1,6 +1,6 @@
 <h4>New todos</h4>
 <ul>
     <li ng-repeat="todo in todos">
-        <button>{{todo}}</button>
+        <button ng-click="switchTaskToDone(todo)">{{todo}}</button>
     </li>
 </ul>
