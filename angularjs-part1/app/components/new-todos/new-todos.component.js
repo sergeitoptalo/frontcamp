@@ -4,5 +4,6 @@ angular.
     module('newTodos').
     component('newTodos', {
         templateUrl: 'app/components/new-todos/new-todos.template.html',
-        controller: NewTodosController
+        controllerAs: 'NewTodosCtrl',
+        controller: ['$scope', 'todosFactory', ($scope, todosFactory) => NewTodosController($scope, todosFactory)]
     });

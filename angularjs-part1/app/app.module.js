@@ -3,9 +3,11 @@ import uiRouter from 'angular-ui-router';
 
 //import routes from './app.routes';
 import { TodoListController } from './app.controller';
+import { todosFactory } from './factory/todosFactory';
 require('./components/new-todos/new-todos.module');
 
 export const todoApp = angular.module('todoApp', ['newTodos']);
+todoApp.factory('todosFactory', todosFactory);
 //todoApp.controller('TodoListController', TodoListController);
 
 //require('./todoList.component');

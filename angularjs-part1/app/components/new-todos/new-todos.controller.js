@@ -1,5 +1,6 @@
-export function NewTodosController () {
-    this.todos = [
+export function NewTodosController ($scope, factory) {
+    $scope.todos = factory.getTasks();
+    /* this.todos = [
         {
             name: 'Nexus S',
             snippet: 'Fast just got faster with Nexus S.'
@@ -10,5 +11,5 @@ export function NewTodosController () {
             name: 'MOTOROLA XOOM™',
             snippet: 'The Next, Next Generation tablet.'
         }
-    ];
+    ]; */
 }
