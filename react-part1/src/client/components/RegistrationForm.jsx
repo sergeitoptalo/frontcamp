@@ -115,43 +115,6 @@ export default class RegistrationForm extends React.Component {
                         <Link to="/login" className="button button--secondary">Cancel</Link>
                     </div>
                 </Form>
-
-                {/* <form onSubmit={this.handleSubmit} className="app-form">
-                    {message ?
-                        <div className="alert alert-danger" role="alert">
-                            {message}
-                        </div>
-                        : ``
-                    }
-                    <div className="form-group">
-                        <Input
-                            label="Name"
-                            name="userName"
-                            type="text"
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <Input
-                            label="Login"
-                            name="login"
-                            type="text"
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <Input
-                            label="Password"
-                            name="password"
-                            type="password"
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <input type="submit" value="Register" className="button button--primary" disabled={isFormDisabled} />
-                        <Link to="/login" className="button button--secondary">Cancel</Link>
-                    </div>
-                </form> */}
                 {isRegistered ?
                     <Redirect to={{
                         pathname: '/login'
