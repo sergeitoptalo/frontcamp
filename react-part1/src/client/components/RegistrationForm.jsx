@@ -1,7 +1,9 @@
 import React from 'react';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
+import Form from './formComponents/Form';
 import Input from './formComponents/Input';
+import FormMessage from './formComponents/FormMessage';
 import { getUsedLogin } from '../api/userApi';
 import { atLeastOneEmptyField } from '../utilities/validation/emptyFieldsValidation';
 import { isAlreadyUsedLogin } from '../utilities/validation/loginValidation';
@@ -13,7 +15,10 @@ export default class RegistrationForm extends React.Component {
             userName: '',
             login: '',
             password: '',
-            message: '',
+            message: {
+                text: '',
+                status: 'danger'
+            },
             isRegistered: false,
             usedLogin: [],
             isFormDisabled: true
@@ -46,11 +51,11 @@ export default class RegistrationForm extends React.Component {
         const { userName, login, password, usedLogin } = this.state;
 
         if (atLeastOneEmptyField({ userName, login, password })) {
-            return this.setState({ message: 'All fields must be filled' });
+            return this.setState({ message: { text: 'All fields must be filled', status: 'danger' } });
         }
 
         if (isAlreadyUsedLogin(login, usedLogin)) {
-            return this.setState({ message: 'Login is already in use' });
+            return this.setState({ message: { text: 'Login is already in use', status: 'danger' } });
         }
 
         fetch('/api/register-user', {
@@ -70,11 +75,48 @@ export default class RegistrationForm extends React.Component {
     }
 
     render() {
-        const { message, isRegistered, isFormDisabled } = this.state;
+        const { isRegistered, isFormDisabled } = this.state;
+        const { text: messageText, status: messageStatus } = this.state.message;
 
         return (
             <div className="form-container">
-                <form onSubmit={this.handleSubmit} className="app-form">
+                <Form onSubmit={this.handleSubmit} className="app-form">
+                    {
+                        messageText
+                            ? <FormMessage text={messageText} status={messageStatus} />
+                            : ``
+                    }
+                    <div className="form-group">
+                        <Input
+                            label="Name"
+                            name="userName"
+                            type="text"
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <Input
+                            label="Login"
+                            name="login"
+                            type="text"
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <Input
+                            label="Password"
+                            name="password"
+                            type="password"
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div>
+                        <input type="submit" value="Register" className="button button--primary" disabled={isFormDisabled} />
+                        <Link to="/login" className="button button--secondary">Cancel</Link>
+                    </div>
+                </Form>
+
+                {/* <form onSubmit={this.handleSubmit} className="app-form">
                     {message ?
                         <div className="alert alert-danger" role="alert">
                             {message}
@@ -109,7 +151,7 @@ export default class RegistrationForm extends React.Component {
                         <input type="submit" value="Register" className="button button--primary" disabled={isFormDisabled} />
                         <Link to="/login" className="button button--secondary">Cancel</Link>
                     </div>
-                </form>
+                </form> */}
                 {isRegistered ?
                     <Redirect to={{
                         pathname: '/login'
