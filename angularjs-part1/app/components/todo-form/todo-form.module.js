@@ -1,7 +1,10 @@
 import angular from 'angular';
+import TodoFormComponent from './todo-form.component';
 
-angular.module('todoForm', [
-    'ngRoute'
-]);
+const todoForm = angular
+  .module('todo.form', [])
+  .component('todoForm', TodoFormComponent)
+  .value('EventEmitter', payload => ({ $event: payload}))
+  .name;
 
-require('./todo-form.component');
+export default todoForm;

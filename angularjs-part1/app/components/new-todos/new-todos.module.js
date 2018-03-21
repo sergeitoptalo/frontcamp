@@ -1,6 +1,9 @@
 import angular from 'angular';
+import NewTodosComponent from './new-todos.component';
 
+const newTodos = angular
+  .module('mainPage.newTodos', [])
+  .component('newTodos', NewTodosComponent)
+  .name;
 
-angular.module('newTodos', []);
-
-require('./new-todos.component');
+export default newTodos;

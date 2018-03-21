@@ -1,9 +1,10 @@
-import { NewTodosController } from './new-todos.controller';
+const TodoListComponent = {
+    bindings: {
+        todos: '<',
+    },
+    template: `
+      <pre>{{$ctrl.todos|json}}</pre>
+    `
+};
 
-angular.
-    module('newTodos').
-    component('newTodos', {
-        templateUrl: 'app/components/new-todos/new-todos.template.html',
-        controllerAs: 'NewTodosCtrl',
-        controller: ['$scope', 'todosFactory', '$filter', ($scope, todosFactory, $filter) => NewTodosController($scope, todosFactory, $filter)]
-    });
+export default TodoListComponent;
