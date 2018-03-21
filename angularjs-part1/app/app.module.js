@@ -1,14 +1,27 @@
 import angular from 'angular';
-import uiRouter from 'angular-ui-router';
+import ngRoute from 'angular-route';
 
 //import routes from './app.routes';
 import { TodoListController } from './app.controller';
 import { todosFactory } from './factory/todosFactory';
 require('./components/new-todos/new-todos.module');
 require('./components/done-todos/done-todos.module');
+require('./components/todo-form/todo-form.module');
 
-export const todoApp = angular.module('todoApp', ['newTodos', 'doneTodos']);
+export const todoApp = angular.module('todoApp', [ngRoute, 'newTodos', 'doneTodos', 'todoForm']);
 todoApp.factory('todosFactory', todosFactory);
+todoApp.filter('filterByDays', function() {
+    return function(todos, daysAgo) {
+        let result = todos;
+        if (daysAgo) {
+            result = todos.filter(todo => daysAgo === new Date().getDate() - new Date(todo.date).getDate());
+        }
+        
+        return result;
+    }
+});
+
+require('./app.config');
 //todoApp.controller('TodoListController', TodoListController);
 
 //require('./todoList.component');
