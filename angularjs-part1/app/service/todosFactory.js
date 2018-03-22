@@ -1,18 +1,4 @@
-export function todosFactory() {
-    var taskList = [{
-        text: 'task1',
-        date: '2018-03-17T15:04:42.580Z'
-    },
-    {
-        text: 'task2',
-        date: '2018-03-18T15:04:42.580Z'
-    },
-    {
-        text: 'task3',
-        date: '2018-03-19T15:04:42.580Z'
-    }];
-
-    let doneTasks = [];
+/* export function todosFactory() {
     return {
         getTasks: function getTasks() {
             return taskList;
@@ -35,4 +21,20 @@ export function todosFactory() {
             doneTasks.splice(doneTasks.indexOf(task), 1);
         }
     };
+} */
+
+
+
+class TodosFactory {
+    constructor(TodoService) {
+        this.TodoService = TodoService;
+    }
+
+    getTodos() {
+        this.TodoService.getTodos();
+    }
 }
+
+TodosFactory.$inject = ['TodoService'];
+
+export default TodosFactory;

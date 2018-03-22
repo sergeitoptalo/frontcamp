@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "inspect": "nodemon --inspect ./server.js --exec babel-node --presets env --watch src ",
     "start": "concurrently \"lite-server -c light-server.config.json\" \"webpack --watch\"",
+    "server": "npm run build && babel-node ./server.js",
     "build": "webpack --mode development",
     "dev": "npm run build && webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,15 +17,20 @@
     "angular": "^1.6.9",
     "angular-route": "^1.6.9",
     "angular-ui-router": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.11",
     "webpack": "^4.1.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "concurrently": "^3.5.1",
     "html-loader": "^0.5.5",
     "lite-server": "^2.3.0",
+    "nodemon": "^1.17.2",
     "webpack-cli": "^2.0.12"
   }
 }
