@@ -1,11 +1,13 @@
 import controller from './main-page.controller';
+import { getMainPageTemplate } from './main-page.template';
 
 const MainPageComponent = { 
-  bindings: {
+  /* bindings: {
     todoData: '<'
-  },
+  }, */
   controller,
-  template: `
+  //templateUrl: 'app/components/main-page/main-page.template.html'
+ /*  template: `
     <div class="todo">
       <todo-form
         todo="$ctrl.newTodo"
@@ -14,7 +16,8 @@ const MainPageComponent = {
       <new-todos
         todos="$ctrl.todos"></new-todos>
     </div>
-  `
+  ` */
+  template: getMainPageTemplate()
 };
 
 export default MainPageComponent;

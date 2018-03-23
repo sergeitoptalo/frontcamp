@@ -11,6 +11,7 @@ const TodoFormComponent = {
       <input type="text" ng-model="$ctrl.todo.title">
       <button type="submit">Submit</button>
     </form>
+    <a href="#!/dashboard">Close</a>
   `
 };
 

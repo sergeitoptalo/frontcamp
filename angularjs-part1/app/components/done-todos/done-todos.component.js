@@ -1,9 +1,13 @@
-import { DoneTodosController } from './done-todos.controller';
+import controller from './done-todos.controller';
+import { getDoneTodosTemplate } from './done-todos.template.js';
 
-angular.
-    module('doneTodos').
-    component('doneTodos', {
-        templateUrl: 'app/components/done-todos/done-todos.template.html',
-        controllerAs: 'DoneTodosCtrl',
-        controller: ['$scope', 'todosFactory', ($scope, todosFactory) => DoneTodosController($scope, todosFactory)]
-    });
+const DoneTodosComponent = {
+    bindings: {
+        todos: '<',
+        onChangeTodoState: '&'
+    },
+    controller,
+    template: getDoneTodosTemplate()
+};
+
+export default DoneTodosComponent;

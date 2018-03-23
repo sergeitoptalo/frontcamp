@@ -1,5 +1,6 @@
 class TodoFormController {
     constructor(EventEmitter) {
+        'ngInject';
         this.EventEmitter = EventEmitter;
     }
     $onChanges(changes) {

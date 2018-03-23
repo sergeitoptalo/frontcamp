@@ -1,10 +1,14 @@
-const TodoListComponent = {
+import controller from './new-todos.controller';
+import { getNewTodosTemplate } from './new-todos.template.js';
+
+const NewTodosComponent = {
     bindings: {
         todos: '<',
+        onChangeTodoState: '&'
+        //switchTodoToDone: '&'
     },
-    template: `
-      <pre>{{$ctrl.todos|json}}</pre>
-    `
+    controller,
+    template: getNewTodosTemplate()
 };
 
-export default TodoListComponent;
+export default NewTodosComponent;

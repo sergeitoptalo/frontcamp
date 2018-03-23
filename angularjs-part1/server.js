@@ -10,4 +10,4 @@ app.use('/public', express.static('public'));
 //app.use(express.static('/public'));
 app.use('/', routes);
 
-app.listen(8000, () => console.log('Running'));
+app.listen(8000, () => console.log('Running on 8000'));

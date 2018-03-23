@@ -43,6 +43,12 @@ h4 {
     width: 800px;
 }
 
+.app-container:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
 .column {
     float: left;
 
@@ -60,3 +66,33 @@ h4 {
     margin: -90px auto 0;
     width: 800px;
 }
+
+.filters-section:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.days-ago-filter {
+    background: #d9dfe7;
+    float: left;
+    margin: 10px 0;
+    padding: 5px;
+}
+
+.days-ago-input {
+    width: 50px;
+}
+
+.add-task-button {
+    background: #689400;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px rgba(0,0,0,.3);
+    color: #fff;
+    cursor: pointer;
+    height: 50px;
+    position: relative;
+    width: 50px;
+}
+
