@@ -23,7 +23,18 @@ const newTodos = angular
 
     }
   })
-  .value('EventEmitter', payload => ({ $event: payload}))
+  .filter('filterDaysAgo', function () {
+    return function (todos, daysAgo) {
+
+      let result = todos;
+      if (daysAgo) {
+        result = todos.filter(todo => daysAgo === new Date().getDate() - new Date(todo.creationDate).getDate());
+      }
+      return result;
+
+    }
+  })
+  .value('EventEmitter', payload => ({ $event: payload }))
   .name;
 
 export default newTodos;

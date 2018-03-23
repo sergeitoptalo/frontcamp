@@ -2,6 +2,7 @@ class NewTodosController {
     constructor(EventEmitter) {
         'ngInject';
         this.EventEmitter = EventEmitter;
+        this.daysAgo = '';
     }
 
     switchTodoToDone(todo) {
@@ -10,6 +11,10 @@ class NewTodosController {
         this.onChangeTodoState(
             this.EventEmitter(todo._id)
         )
+    }
+
+    clearDaysAgoFilter() {
+        this.daysAgo = '';
     }
 
     $onChanges(changes) {
