@@ -13,12 +13,20 @@ class MainPageController {
             selected: false
         }; */
 
-        this.todoService.getTodos()
-            .then(response => this.todos = response.data);
+        this.updateTodos();
+
+        /* this.todoService.getTodos()
+            .then(response => this.todos = response.data); */
+
         /*   this.todoService.getTodos().then(response => {
               console.log(response);
               this.todos = response
           }); */
+    }
+
+    updateTodos() {
+        this.todoService.getTodos()
+            .then(response => this.todos = response.data);
     }
 
     changeTodoState(changedTodo) {
@@ -41,14 +49,11 @@ class MainPageController {
         alert('bye');
       };
 
-    addTodo({ todo }) {
-        if (!todo) return;
-        this.todos.unshift(todo);
-        console.log(this.todos);
-        /* this.newTodo = {
-            title: '',
-            selected: false
-        }; */
+    addTodo(message) {
+       // this.todos.unshift(todo);
+       // console.log(this.todos);
+       // this.todos.push({text: todo.text, creationDate: new Date()});
+       this.updateTodos();
     }
 
 }

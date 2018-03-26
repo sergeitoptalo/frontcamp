@@ -44,4 +44,15 @@ routes.get('/api/todos', (req, res) => {
     })
 });
 
+routes.post('/api/add', (req, res) => {
+    const todo = new Todo(req.body);
+    todo.save(req.body, (err, result) => {
+        if (err) {
+            //res.send({ 'error': 'An error has occurred' });
+        } else {
+            res.status(200).send('Todo was added');
+        }
+    });
+});
+
 module.exports = routes;

@@ -16,7 +16,7 @@ export const getNewTodosTemplate = () =>
         <li ng-repeat="todo in $ctrl.todos | filterNewTodos | filterDaysAgo:$ctrl.daysAgo">
             <div>
                 <button ng-click="$ctrl.switchTodoToDone(todo)">-</button>
-                <button>{{todo.text}}</button>
+                <a href="#!/edit/{{todo._id}}">{{todo.text}}</a>
             </div>
             <div>{{todo.creationDate | date: "dd.MM.yyyy 'at' HH:mm"}}</div>
         </li>

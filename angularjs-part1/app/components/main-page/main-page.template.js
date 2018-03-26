@@ -7,8 +7,6 @@ export const getMainPageTemplate = () =>
         <div class="column">
             <done-todos todos="$ctrl.todos"></done-todos>
         </div>
-        
-       
-
     </div>
+    <div ui-view></div>
     `

@@ -8,7 +8,7 @@ const TodoFormComponent = {
   controller,
   template: `
     <form name="todoForm" ng-submit="$ctrl.onSubmit();">
-      <input type="text" ng-model="$ctrl.todo.title">
+      <input type="text" ng-model="$ctrl.todo.text">
       <button type="submit">Submit</button>
     </form>
     <a href="#!/dashboard">Close</a>

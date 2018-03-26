@@ -7,17 +7,17 @@ const todoForm = angular
   .component('todoForm', TodoFormComponent)
   .service('TodoService', TodoService)
   .value('EventEmitter', payload => ({ $event: payload }))
-  .config(($stateProvider, $urlRouterProvider) => {
-    $stateProvider
-      .state('add', {
-        url: '/add',
-        component: 'todoForm',
+  //.config(($stateProvider, $urlRouterProvider) => {
+   // $stateProvider
+   //   .state('add', {
+    //    url: '/add',
+    //    component: 'todoForm',
         /*  resolve: {
              todoData: TodoService => TodoService.getTodos()
          } */
-      })
-    $urlRouterProvider.otherwise('/dashboard');
-  })
+    //  })
+   // $urlRouterProvider.otherwise('/dashboard');
+  //})
   .name;
 
 export default todoForm;

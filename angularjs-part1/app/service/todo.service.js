@@ -11,6 +11,14 @@ class TodoService {
         }]); */
         return this.$http.get('/api/todos');
     }
+
+    getTodo(id) {
+        return this.$http
+    }
+
+    addTodo(todo) {
+        return this.$http({ method: 'POST', url: '/api/add', data: todo});
+    }
 }
 
 TodoService.$inject = ['$http', '$q'];
