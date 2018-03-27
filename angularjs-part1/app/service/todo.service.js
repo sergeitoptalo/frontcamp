@@ -13,7 +13,7 @@ class TodoService {
     }
 
     getTodo(id) {
-        return this.$http
+        return this.$http.get(`/api/edit/${id}`);
     }
 
     addTodo(todo) {

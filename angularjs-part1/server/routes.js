@@ -44,6 +44,18 @@ routes.get('/api/todos', (req, res) => {
     })
 });
 
+routes.get('/api/edit/:id', function (req, res) {
+    let todoId = req.params.id;
+    Todo.findById(todoId,
+        (err, todo) => {
+            if (err) {
+                //res.send({ 'error': 'An error has occurred' });
+            } else {
+                res.send(todo);
+            }
+        })
+});
+
 routes.post('/api/add', (req, res) => {
     const todo = new Todo(req.body);
     todo.save(req.body, (err, result) => {

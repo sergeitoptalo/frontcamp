@@ -4,11 +4,11 @@ class TodoFormController {
         this.todoService = TodoService;
         this.EventEmitter = EventEmitter;
     }
-    $onChanges(changes) {
+   /*  $onChanges(changes) {
         if (changes.todo) {
-            this.todo = Object.assign({}, this.todo);
+            this.todo.text = this.todo.text;
         }
-    }
+    } */
     onSubmit() {
         if (!this.todo.text) return;
         this.todoService.addTodo({

@@ -5,11 +5,14 @@ const EditTodoPageComponent = {
        todo: '<',
        onAddTodo: '&'
      }, */
-     controller,
-     template: `
+    bindings: {
+        todoData: '<'
+    },
+    controller,
+    template: `
      <h3>Edit todo</h3>
-       <todo-form on-edit-todo="$parent.$parent.$ctrl.editTodo($event)"></todo-form>
+       <todo-form todo="$ctrl.todoData" on-edit-todo="$parent.$parent.$ctrl.editTodo($event)"></todo-form>
      `
-   };
-   
-   export default EditTodoPageComponent;
+};
+
+export default EditTodoPageComponent;
