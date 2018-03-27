@@ -50,14 +50,24 @@ h4 {
 }
 
 .column {
+    border-right: 1px solid #d6dbe2;
     float: left;
-
-
+    padding: 10px;
     width: 50%;
 }
 
-.new-todos-list {
+.column:last-child {
+    border-right: 0;
+}
+
+.new-todos-list,
+.done-todos-list {
+    height: 400px;
     overflow: auto;
+}
+
+li.todo-item {
+    border-bottom: 1px solid #d9dfe7;
 }
 
 .output {
@@ -121,3 +131,11 @@ h4 {
     width: 50px;
 }
 
+/* FORM */
+input.ng-pristine.ng-untouched {
+    border: 1px solid #7c838e
+}
+
+input.ng-invalid {
+    border: 1px solid #c20505;
+}

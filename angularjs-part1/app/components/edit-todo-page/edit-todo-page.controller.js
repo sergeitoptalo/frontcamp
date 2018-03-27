@@ -10,18 +10,10 @@ class EditTodoPageController {
     }
 
     $onChanges(changes) {
-        if (changes.todo) {
-            this.todo = Object.assign({}, this.todo);
-        }
-
         if (changes.todoData) {
             this.todoData = this.todoData.data;
         }
-
     }
-
-
-
 }
 
 EditTodoPageController.$inject = ['TodoService'];

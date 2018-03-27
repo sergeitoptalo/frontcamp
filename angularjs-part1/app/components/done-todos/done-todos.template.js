@@ -1,13 +1,13 @@
 export const getDoneTodosTemplate = () =>
-`        
-<div class="filters-section">
-        <div class="days-ago-filter">
-            <span>Done</span>
-            <input type="number" class="days-ago-input"/>
-            <span>days ago</span>
-        </div>
-    </div>
-<ul>
+    `        
+        <div class="filters-section">
+                <div class="days-ago-filter">
+                    <span>Done</span>
+                    <input type="number" class="days-ago-input"/>
+                    <span>days ago</span>
+                </div>
+            </div>
+        <ul class="done-todos-list">
             <li ng-repeat="todo in $ctrl.todos | filterDoneTodos">
                 <div>
                     <button ng-click="$ctrl.switchTodoToNew(todo)">v</button> 

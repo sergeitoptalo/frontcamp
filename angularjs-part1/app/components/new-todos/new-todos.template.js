@@ -11,9 +11,13 @@ export const getNewTodosTemplate = () =>
                 <button ng-show="$ctrl.daysAgo !== ''" ng-click="$ctrl.clearDaysAgoFilter()">x</button>
             </div>
         </div>
+        <div>
+            <button>A-Z</button>
+            <button>Date</button>
+        </div>
     </div>
-    <ul>
-        <li ng-repeat="todo in $ctrl.todos | filterNewTodos | filterDaysAgo:$ctrl.daysAgo">
+    <ul class="new-todos-list">
+        <li ng-repeat="todo in $ctrl.todos | filterNewTodos | filterDaysAgo:$ctrl.daysAgo" class="todo-item">
             <div>
                 <button ng-click="$ctrl.switchTodoToDone(todo)">-</button>
                 <a href="#!/edit/{{todo._id}}">{{todo.text}}</a>
