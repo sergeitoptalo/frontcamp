@@ -28,7 +28,7 @@ const newTodos = angular
 
       let result = todos;
       if (daysAgo) {
-        result = todos.filter(todo => daysAgo === new Date().getDate() - new Date(todo.creationDate).getDate());
+        result = todos.filter(todo => Number(daysAgo) === new Date().getDate() - new Date(todo.creationDate).getDate());
       }
       return result;
 

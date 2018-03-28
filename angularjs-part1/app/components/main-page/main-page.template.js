@@ -8,5 +8,5 @@ export const getMainPageTemplate = () =>
             <done-todos todos="$ctrl.todos"></done-todos>
         </div>
     </div>
-    <div ui-view></div>
+    <div ui-view class="output"></div>
     `

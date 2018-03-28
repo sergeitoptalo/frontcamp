@@ -26,7 +26,7 @@ class MainPageController {
 
     updateTodos() {
         this.todoService.getTodos()
-            .then(response => this.todos = response.data);
+            .then(response => this.todos = response.data.reverse());
     }
 
     changeTodoState(changedTodo) {

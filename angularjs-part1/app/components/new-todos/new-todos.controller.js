@@ -3,6 +3,8 @@ class NewTodosController {
         'ngInject';
         this.EventEmitter = EventEmitter;
         this.daysAgo = '';
+        this.sortingReverse = false;
+        this.sortingPropertyName = '';
     }
 
     switchTodoToDone(todo) {
@@ -13,8 +15,33 @@ class NewTodosController {
         )
     }
 
+    validateDaysAgoInput() {
+        const validationRegExp = /\d+$/
+        if (!validationRegExp.test(this.daysAgo)) {
+            this.daysAgo = '';
+        }
+    }
+
     clearDaysAgoFilter() {
         this.daysAgo = '';
+    }
+
+    incrementDaysAgo() {
+        this.daysAgo === '' ? this.daysAgo = 0 : this.daysAgo = Number(this.daysAgo) + 1;
+    }
+
+    decrementDaysAgo() {
+        this.daysAgo !== 0 ? this.daysAgo = Number(this.daysAgo) - 1 : this.daysAgo = '';
+    }
+
+    sortBy(sortingPropertyName) {
+        this.sortingReverse = (this.sortingPropertyName === sortingPropertyName) ? !this.sortingReverse : false;
+        this.sortingPropertyName = sortingPropertyName;
+    }
+
+    clearSortByFilter() {
+        this.sortingPropertyName = '';
+        this.sortingReverse = false;
     }
 
     $onChanges(changes) {
@@ -22,6 +49,7 @@ class NewTodosController {
             this.todo = Object.assign({}, this.todo);
         }
     }
+
     onSubmit() {
         if (!this.todo.title) return;
         // with EventEmitter wrapper
