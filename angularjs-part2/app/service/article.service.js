@@ -4,8 +4,8 @@ class TodoService {
         this.$q = $q;
     }
 
-    getTodos() {
-        return this.$http.get('/api/todos');
+    getArticles() {
+        return this.$http.get('/api/articles');
     }
 
     getTodo(id) {

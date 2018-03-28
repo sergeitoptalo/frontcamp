@@ -4,14 +4,12 @@ mongoose.connect('mongodb://toptalo:zavani74@cluster0-shard-00-00-s1vg1.mongodb.
 
 let Schema = mongoose.Schema;
 
-const todoSchema = new Schema({
-    text: String,
-    creationDate: Date,
-    isDone: Boolean,
-    doneDate: Date,
-    updateDate: Date
+const articleSchema = new Schema({
+    articleTitle: String,
+    articleText: String,
+    creationDate: Date    
 });
 
-const Todo = mongoose.model('Todo', todoSchema);
+const Article = mongoose.model('Article', articleSchema);
 
-module.exports = { Todo };
+module.exports = { Article };

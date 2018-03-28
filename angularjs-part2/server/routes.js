@@ -1,5 +1,5 @@
 const routes = require('express').Router();
-const Todo = require('./schema').Todo;
+const Article = require('./schema').Article;
 
 
 routes.get('/', (req, res) => {
@@ -33,9 +33,9 @@ routes.get('/', (req, res) => {
 });
 
 
-routes.get('/api/todos', (req, res) => {
-    Todo.find({}, (err, todos) => {
-        res.send(todos);
+routes.get('/api/articles', (req, res) => {
+    Article.find({}, (err, articles) => {
+        res.send(articles);
     })
 });
 
