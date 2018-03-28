@@ -1,5 +1,3 @@
-//import controller from './todo-form.controller';
-
 const AddTodoPageComponent = {
     template: `
         <div class="add-todo-page">

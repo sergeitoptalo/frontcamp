@@ -8,18 +8,6 @@ export class Nonnegative {
     }
 
     link($scope, $element, $attrs) {
-        /* $scope.$watch($attrs.ngModel, (newValue, oldValue) => {
-          if (!newValue) {
-            return false;
-          }
-          if (newValue.length > 20) {
-              return true;
-          } else {
-              return false;
-          }
-    
-          //this.$timeout(() => $element[0].focus());
-        }); */
         $scope.todoForm.todoText.$validators.todoMinLength = (value) => {
 
             if (!value) {

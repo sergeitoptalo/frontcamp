@@ -8,7 +8,7 @@ const EditTodoPageComponent = {
     template: `
         <div class="edit-todo-page">
             <h3>Edit task</h3>
-            <todo-form todo="$ctrl.todoData" on-edit-todo="$parent.$parent.$ctrl.editTodo($event)"></todo-form>
+            <todo-form todo="$ctrl.todoData" on-update-todo="$parent.$parent.$ctrl.updateTodos($event)"></todo-form>
         </div>
     `
 };

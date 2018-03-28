@@ -282,6 +282,15 @@ body .clear-sorting-button {
     background: #ec9a01;
 }
 
+.submit-button:disabled {
+    cursor: auto;
+    opacity: 0.3;
+}
+
+.submit-button:disabled:hover {
+    background: #52778c;
+}
+
 .close-form-button {
     color: #52778c;
     font-size: 20px;
@@ -327,6 +336,13 @@ input.ng-pristine.ng-untouched {
 input.ng-invalid {
     border: 2px solid #c20505;
 }
+
+.validation-message {
+    color: #c20505;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
 
 .checkbox-new,
 .checkbox-done {

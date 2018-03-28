@@ -3,12 +3,6 @@ class EditTodoPageController {
         this.todoService = TodoService;
     }
 
-    $onInit() {
-
-        //this.todoService.getTodo();
-
-    }
-
     $onChanges(changes) {
         if (changes.todoData) {
             this.todoData = this.todoData.data;

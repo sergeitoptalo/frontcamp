@@ -4,14 +4,10 @@ const Todo = require('./schema').Todo;
 
 routes.get('/', (req, res) => {
     res.send(`<!DOCTYPE html>
-
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title></title>
-        
-    </head>
-    
-    
+    </head>    
     <body ng-app="app">
     <script src="public/js/app.bundle.js"></script>
         <link rel="stylesheet" href="public/css/styles.css" />
@@ -33,7 +29,6 @@ routes.get('/', (req, res) => {
         
         <link href="https://fonts.googleapis.com/css?family=Arsenal:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
     </body>
-    
     </html>`);
 });
 
@@ -45,11 +40,11 @@ routes.get('/api/todos', (req, res) => {
 });
 
 routes.get('/api/edit/:id', function (req, res) {
-    let todoId = req.params.id;
+    const todoId = req.params.id;
     Todo.findById(todoId,
         (err, todo) => {
             if (err) {
-                //res.send({ 'error': 'An error has occurred' });
+                res.send('An error has occurred');
             } else {
                 res.send(todo);
             }
@@ -60,9 +55,20 @@ routes.post('/api/add', (req, res) => {
     const todo = new Todo(req.body);
     todo.save(req.body, (err, result) => {
         if (err) {
-            //res.send({ 'error': 'An error has occurred' });
+            res.send('An error has occurred');
         } else {
             res.status(200).send('Todo was added');
+        }
+    });
+});
+
+routes.put('/api/update/:id', (req, res) => {
+    const todoId = req.params.id;
+    Todo.findByIdAndUpdate(todoId, req.body, function (err, docs) {
+        if (err) {
+            res.send({ 'error': 'An error has occurred' });
+        } else {
+            res.json('Task was updated');
         }
     });
 });

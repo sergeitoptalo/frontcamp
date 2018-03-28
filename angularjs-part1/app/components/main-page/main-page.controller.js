@@ -8,20 +8,7 @@ class MainPageController {
     }
 
     $onInit() {
-        /* this.newTodo = {
-            title: '',
-            selected: false
-        }; */
-
         this.updateTodos();
-
-        /* this.todoService.getTodos()
-            .then(response => this.todos = response.data); */
-
-        /*   this.todoService.getTodos().then(response => {
-              console.log(response);
-              this.todos = response
-          }); */
     }
 
     updateTodos() {
@@ -30,32 +17,20 @@ class MainPageController {
     }
 
     changeTodoState(changedTodo) {
-        //let changedTodoIndex = this.todos.findIndex(todo => todo._id === changedTodo._id);
-       // this.todos[changedTodoIndex] = changedTodo;
-        //changedTodo.isDone = !changedTodo.isDone;
+        this.todoService.updateTodo({
+            _id: changedTodo._id,
+            isDone: changedTodo.isDone,
+            doneDate: changedTodo.doneDate
+        })
     }
 
-    switchTodoToDone(todo) {
-        todo.isDone = true;
-    }
-
-    /* $onChanges(changes) {
-        if (changes.todoData) {
-            this.todos = Object.assign({}, this.todoData);
-        }
-    } */
-
-    $onExit () {
+    $onExit() {
         alert('bye');
-      };
+    };
 
     addTodo(message) {
-       // this.todos.unshift(todo);
-       // console.log(this.todos);
-       // this.todos.push({text: todo.text, creationDate: new Date()});
-       this.updateTodos();
+        this.updateTodos();
     }
-
 }
 
 MainPageController.$inject = ['TodoService'];

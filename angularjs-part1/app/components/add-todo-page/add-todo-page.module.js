@@ -12,9 +12,6 @@ const addTodoPage = angular
             .state('add', {
                 url: '/add',
                 component: 'addTodoPage',
-                /*  resolve: {
-                     todoData: TodoService => TodoService.getTodos()
-                 } */
             })
         $urlRouterProvider.otherwise('/dashboard');
     })

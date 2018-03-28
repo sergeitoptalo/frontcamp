@@ -2,14 +2,47 @@ class DoneTodosController {
     constructor(EventEmitter) {
         'ngInject';
         this.EventEmitter = EventEmitter;
+        this.daysAgo = '';
+        this.sortingReverse = false;
+        this.sortingPropertyName = '';
     }
 
     switchTodoToNew(todo) {
         todo.isDone = false;
+        todo.doneDate = '';
 
         this.onChangeTodoState(
             this.EventEmitter(todo)
         )
+    }
+
+    validateDaysAgoInput() {
+        const validationRegExp = /\d+$/
+        if (!validationRegExp.test(this.daysAgo)) {
+            this.daysAgo = '';
+        }
+    }
+
+    incrementDaysAgo() {
+        this.daysAgo === '' ? this.daysAgo = 0 : this.daysAgo = Number(this.daysAgo) + 1;
+    }
+
+    decrementDaysAgo() {
+        this.daysAgo !== 0 ? this.daysAgo = Number(this.daysAgo) - 1 : this.daysAgo = '';
+    }
+
+    clearDaysAgoFilter() {
+        this.daysAgo = '';
+    }
+
+    sortBy(sortingPropertyName) {
+        this.sortingReverse = (this.sortingPropertyName === sortingPropertyName) ? !this.sortingReverse : false;
+        this.sortingPropertyName = sortingPropertyName;
+    }
+
+    clearSortByFilter() {
+        this.sortingPropertyName = '';
+        this.sortingReverse = false;
     }
 
     $onChanges(changes) {
@@ -19,18 +52,11 @@ class DoneTodosController {
     }
     onSubmit() {
         if (!this.todo.title) return;
-        // with EventEmitter wrapper
         this.onChangeTodoState(
             this.EventEmitter({
                 todo: this.todo
             })
         );
-        // without EventEmitter wrapper
-        /*this.onAddTodo({
-          $event: {
-            todo: this.todo
-          }
-        });*/
     }
 }
 

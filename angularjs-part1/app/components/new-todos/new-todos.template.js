@@ -31,7 +31,7 @@ export const getNewTodosTemplate = () =>
         </div>
     </div>
     <ul class="new-todos-list">
-        <li ng-repeat="todo in $ctrl.todos | filterNewTodos | filterDaysAgo:$ctrl.daysAgo | orderBy:$ctrl.sortingPropertyName:$ctrl.sortingReverse" class="todo-item">
+        <li ng-repeat="todo in $ctrl.todos | filterNewTodos | filterDaysAgoNew:$ctrl.daysAgo | orderBy:$ctrl.sortingPropertyName:$ctrl.sortingReverse" class="todo-item">
             <div>
                 <button ng-click="$ctrl.switchTodoToDone(todo)" class="checkbox-new"></button>
                 <a href="#!/edit/{{todo._id}}">{{todo.text}}</a>

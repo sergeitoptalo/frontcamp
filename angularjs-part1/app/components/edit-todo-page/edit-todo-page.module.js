@@ -13,8 +13,8 @@ const editTodoPage = angular
                 url: '/edit/:id',
                 component: 'editTodoPage',
                 resolve: {
-                     todoData: (TodoService, $stateParams) => TodoService.getTodo($stateParams.id)
-                 } 
+                    todoData: (TodoService, $stateParams) => TodoService.getTodo($stateParams.id)
+                }
             })
         $urlRouterProvider.otherwise('/dashboard');
     })

@@ -5,7 +5,6 @@ const NewTodosComponent = {
     bindings: {
         todos: '<',
         onChangeTodoState: '&'
-        //switchTodoToDone: '&'
     },
     controller,
     template: getNewTodosTemplate()

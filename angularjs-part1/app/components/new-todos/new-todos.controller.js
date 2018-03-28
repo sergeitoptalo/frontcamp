@@ -11,7 +11,7 @@ class NewTodosController {
         todo.isDone = true;
         todo.doneDate = new Date();
         this.onChangeTodoState(
-            this.EventEmitter(todo._id)
+            this.EventEmitter(todo)
         )
     }
 
@@ -52,18 +52,11 @@ class NewTodosController {
 
     onSubmit() {
         if (!this.todo.title) return;
-        // with EventEmitter wrapper
         this.onChangeTodoState(
             this.EventEmitter({
                 todo: this.todo
             })
         );
-        // without EventEmitter wrapper
-        /*this.onAddTodo({
-          $event: {
-            todo: this.todo
-          }
-        });*/
     }
 }
 

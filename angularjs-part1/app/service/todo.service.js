@@ -3,12 +3,8 @@ class TodoService {
         this.$http = $http;
         this.$q = $q;
     }
-    
+
     getTodos() {
-        /* return this.$q.when([{
-            title: 'Default',
-            selected: false
-        }]); */
         return this.$http.get('/api/todos');
     }
 
@@ -17,7 +13,11 @@ class TodoService {
     }
 
     addTodo(todo) {
-        return this.$http({ method: 'POST', url: '/api/add', data: todo});
+        return this.$http({ method: 'POST', url: '/api/add', data: todo });
+    }
+
+    updateTodo(todo) {
+        return this.$http({ method: 'PUT', url: `/api/update/${todo._id}`, data: todo })
     }
 }
 
