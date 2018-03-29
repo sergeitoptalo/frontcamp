@@ -2,12 +2,10 @@ class MainPageController {
     constructor(ArticleService) {
         this.articleService = ArticleService;
         this.articles = [];
-        //this.newTodos = [];
-        //this.doneTodos = [];
-       // window.onbeforeunload = this.$onExit;
+        this.current;
     }
 
-    $onInit() {
+    $onInit(init) {
         this.updateArticles();
     }
 
@@ -24,6 +22,13 @@ class MainPageController {
             isDone: changedTodo.isDone,
             doneDate: changedTodo.doneDate
         })
+    }
+
+    $onChanges(changes) {
+        if (changes.current) {
+            this.current = Number(this.current);
+            //this.currentPage = changes.currentPage.currentValue;
+        }
     }
 
     $onExit() {

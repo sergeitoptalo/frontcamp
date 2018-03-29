@@ -15,6 +15,19 @@ const MainPageModule = angular
     ])
     .component('mainPage', MainPageComponent)
     .service('ArticleService', ArticleService)
+    .config(($stateProvider, $urlRouterProvider) => {
+        $stateProvider
+            .state('mainPage', {
+                url: '/articles/page/:id',
+                component: 'mainPage',
+                resolve: {
+                    current: ($stateParams) =>  {
+                        return $stateParams.id;
+                    }
+                }
+            })
+        $urlRouterProvider.otherwise('/articles/page/1');
+    })
     .name;
 
 export default MainPageModule;

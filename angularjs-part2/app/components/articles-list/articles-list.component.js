@@ -4,6 +4,8 @@ import { getArticlesListTemplate } from './articles-list.template.js';
 const ArticlesListComponent = {
     bindings: {
         articles: '<',
+        //pages: '<',
+        current: '<'
         //onChangeTodoState: '&'
     },
     controller,
