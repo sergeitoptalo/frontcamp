@@ -6,6 +6,7 @@ class ArticlesListController {
         //this.sortingReverse = false;
         //this.sortingPropertyName = '';
         //this.currentPage = 1;
+        this.previousPage = 0;
         this.nextPage = null;
         this.itemsOnPage = 3;
         this.pages = 0;
@@ -21,7 +22,6 @@ class ArticlesListController {
         if (this.pages > 1) {
             this.nextPage = this.current + 1;
         }
-
         /* if (changes.current) {
             this.currentPage = changes.currentPage;
         } */
