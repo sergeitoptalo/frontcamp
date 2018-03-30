@@ -2,13 +2,9 @@ class ArticlesListController {
     constructor(EventEmitter, $stateProvider) {
         'ngInject';
         this.EventEmitter = EventEmitter;
-        //this.daysAgo = '';
-        //this.sortingReverse = false;
-        //this.sortingPropertyName = '';
-        //this.currentPage = 1;
         this.previousPage = 0;
         this.nextPage = null;
-        this.itemsOnPage = 3;
+        this.itemsOnPage = 8;
         this.pages = 0;
         this.currentPage;
     }
@@ -22,9 +18,6 @@ class ArticlesListController {
         if (this.pages > 1) {
             this.nextPage = this.current + 1;
         }
-        /* if (changes.current) {
-            this.currentPage = changes.currentPage;
-        } */
     }
 
     detectCurrentPage() {

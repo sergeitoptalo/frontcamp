@@ -14,6 +14,11 @@ body {
     padding: 20px;
 }
 
+header {
+    background: rgb(228, 175, 10);
+    padding: 20px;
+}
+
 ul {
     margin: 0;
     padding: 0;

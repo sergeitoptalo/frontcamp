@@ -5,14 +5,6 @@ const articlesList = angular
     .module('articlesList', [])
     .component('articlesList', ArticlesListComponent)
     .value('EventEmitter', payload => ({ $event: payload }))
- /*    .config(($stateProvider, $urlRouterProvider) => {
-        $stateProvider
-            .state('articles', {
-                url: '/articles',
-                component: 'articlesList',
-            })
-        $urlRouterProvider.otherwise('/articles');
-    }) */
     .filter('pagination', function () {
         return function (articles, currentPage, itemsOnPage) {
             let result = articles;

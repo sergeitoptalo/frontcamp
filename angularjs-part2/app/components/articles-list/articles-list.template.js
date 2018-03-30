@@ -5,9 +5,8 @@ export const getArticlesListTemplate = () =>
         <li ng-repeat="article in $ctrl.articles | pagination:$ctrl.current:$ctrl.itemsOnPage" class="article-item">
             <a href="#!/articles/{{article._id}}">{{article.articleTitle}}</a>
         </li>
-        
     </ul>
-    <div>
+    <div ng-show="$ctrl.current <= $ctrl.pages">
     <a href="#!/articles/page/{{$ctrl.current - 1}}" ng-show="$ctrl.current !== 1">Prev</a>
         <span>Page</span>
         <input type="number" ng-model="$ctrl.current" ng-change="$ctrl.detectCurrentPage()"/>

@@ -9,8 +9,6 @@ import ArticlesList from '../articles-list/articles-list.module';
 const MainPageModule = angular
     .module('mainPage', [
         uiRouter,
-        //NewTodos,
-        //DoneTodos,
         ArticlesList
     ])
     .component('mainPage', MainPageComponent)
