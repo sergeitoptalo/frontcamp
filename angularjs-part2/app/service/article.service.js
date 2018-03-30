@@ -1,4 +1,4 @@
-class TodoService {
+class ArticleService {
     constructor($http, $q) {
         this.$http = $http;
         this.$q = $q;
@@ -8,19 +8,19 @@ class TodoService {
         return this.$http.get('/api/articles');
     }
 
-    getTodo(id) {
+    getArticle(id) {
         return this.$http.get(`/api/edit/${id}`);
     }
 
-    addTodo(todo) {
-        return this.$http({ method: 'POST', url: '/api/add', data: todo });
+    addArticle(article) {
+        return this.$http({ method: 'POST', url: '/api/add', data: article });
     }
 
-    updateTodo(todo) {
-        return this.$http({ method: 'PUT', url: `/api/update/${todo._id}`, data: todo })
+    updateArticle(article) {
+        return this.$http({ method: 'PUT', url: `/api/update/${article._id}`, data: article })
     }
 }
 
-TodoService.$inject = ['$http', '$q'];
+ArticleService.$inject = ['$http', '$q'];
 
-export default TodoService;
+export default ArticleService;

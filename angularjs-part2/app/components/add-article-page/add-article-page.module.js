@@ -8,14 +8,14 @@ const addArticlePage = angular
     .component('addArticlePage', AddArticlePageComponent)
     .service('ArticleService', ArticleService)
     .value('EventEmitter', payload => ({ $event: payload }))
-/*     .config(($stateProvider, $urlRouterProvider) => {
+    .config(($stateProvider, $urlRouterProvider) => {
         $stateProvider
             .state('add', {
                 url: '/add',
                 component: 'addArticlePage',
             })
-        $urlRouterProvider.otherwise('/articles');
-    }) */
+        $urlRouterProvider.otherwise('/articles/page/1');
+    })
     .name;
 
 export default addArticlePage;

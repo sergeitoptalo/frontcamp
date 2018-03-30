@@ -1,5 +1,5 @@
 class ArticlesListController {
-    constructor(EventEmitter, $ngModel) {
+    constructor(EventEmitter, $stateProvider) {
         'ngInject';
         this.EventEmitter = EventEmitter;
         //this.daysAgo = '';

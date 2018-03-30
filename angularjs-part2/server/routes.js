@@ -40,31 +40,31 @@ routes.get('/api/articles', (req, res) => {
 });
 
 routes.get('/api/edit/:id', function (req, res) {
-    const todoId = req.params.id;
-    Todo.findById(todoId,
-        (err, todo) => {
+    const articleId = req.params.id;
+    Article.findById(articleId,
+        (err, article) => {
             if (err) {
                 res.send('An error has occurred');
             } else {
-                res.send(todo);
+                res.send(article);
             }
         })
 });
 
 routes.post('/api/add', (req, res) => {
-    const todo = new Todo(req.body);
-    todo.save(req.body, (err, result) => {
+    const article = new Article(req.body);
+    article.save(req.body, (err, result) => {
         if (err) {
             res.send('An error has occurred');
         } else {
-            res.status(200).send('Todo was added');
+            res.status(200).send('Article was added');
         }
     });
 });
 
 routes.put('/api/update/:id', (req, res) => {
-    const todoId = req.params.id;
-    Todo.findByIdAndUpdate(todoId, req.body, function (err, docs) {
+    const articleId = req.params.id;
+    Article.findByIdAndUpdate(articleId, req.body, function (err, docs) {
         if (err) {
             res.send({ 'error': 'An error has occurred' });
         } else {
