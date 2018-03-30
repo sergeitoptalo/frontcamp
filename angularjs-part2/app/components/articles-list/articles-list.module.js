@@ -8,9 +8,7 @@ const articlesList = angular
     .filter('pagination', function () {
         return function (articles, currentPage, itemsOnPage) {
             let result = articles;
-
             result = result.slice(currentPage * itemsOnPage - itemsOnPage, currentPage * itemsOnPage);
-
             return result;
         }
     })
