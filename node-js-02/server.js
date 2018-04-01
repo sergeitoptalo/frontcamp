@@ -64,3 +64,4 @@ app.use(function (err, req, res, next) {
 
 app.listen(8080, () => console.log('Running'));
 
+module.exports = app;
