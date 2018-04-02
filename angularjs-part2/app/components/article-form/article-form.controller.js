@@ -3,6 +3,15 @@ class ArticleFormController {
         'ngInject';
         this.articleService = ArticleService;
         this.EventEmitter = EventEmitter;
+        this.submitted = false;
+        this.successMessage = '';
+    }
+
+    clearSuccessMessage() {
+        if (this.submitted) {
+            this.successMessage = '';
+            this.submitted = false;
+        }
     }
 
     onSubmit() {
@@ -20,6 +29,8 @@ class ArticleFormController {
                             );
                             this.article.articleTitle = '';
                             this.article.articleText = '';
+                            this.submitted = true;
+                            this.successMessage = response.data;
                         }
                     })
             } else {
@@ -33,8 +44,10 @@ class ArticleFormController {
                             this.onUpdateArticles(
                                 this.EventEmitter(response.data)
                             );
+                            this.submitted = true;
+                            this.successMessage = response.data;
                         }
-                        
+
                     })
             }
         }

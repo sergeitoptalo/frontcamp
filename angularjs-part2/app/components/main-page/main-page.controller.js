@@ -27,7 +27,6 @@ class MainPageController {
     $onChanges(changes) {
         if (changes.current) {
             this.current = Number(this.current);
-            //this.currentPage = changes.currentPage.currentValue;
         }
     }
 

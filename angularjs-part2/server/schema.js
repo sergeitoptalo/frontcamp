@@ -7,7 +7,8 @@ let Schema = mongoose.Schema;
 const articleSchema = new Schema({
     articleTitle: String,
     articleText: String,
-    creationDate: Date    
+    creationDate: Date,
+    updateDate: Date
 });
 
 const Article = mongoose.model('Article', articleSchema);

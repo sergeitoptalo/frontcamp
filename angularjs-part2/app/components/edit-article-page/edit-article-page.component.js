@@ -1,16 +1,12 @@
 import controller from './edit-article-page.controller';
+import { getEditArticlePageTemplate } from './edit-article-page.template.js';
 
 const EditArticlePageComponent = {
     bindings: {
         articleData: '<'
     },
     controller,
-    template: `
-        <div class="edit-article-page">
-            <h3>Edit article</h3>
-            <article-form article="$ctrl.articleData" on-update-article="$parent.$parent.$ctrl.updateArticles($event)"></article-form>
-        </div>
-    `
+    template: getEditArticlePageTemplate()
 };
 
 export default EditArticlePageComponent;

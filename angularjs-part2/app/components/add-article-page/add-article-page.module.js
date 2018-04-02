@@ -1,7 +1,6 @@
 import angular from 'angular';
 import AddArticlePageComponent from './add-article-page.component';
 import ArticleService from '../../service/article.service';
-import ArticlesListPageComponent from '../articles-list-pagination/articles-list-page.component';
 
 const addArticlePage = angular
     .module('articlesListPage.add-article-page', [])
@@ -13,6 +12,12 @@ const addArticlePage = angular
             .state('add', {
                 url: '/add',
                 component: 'addArticlePage',
+                resolve: {
+                    backRoute: ($stateParams, $state) =>  {
+                        let a = $state.getCurrentPath();
+                        return $state;
+                    }
+                }
             })
         $urlRouterProvider.otherwise('/articles/page/1');
     })
