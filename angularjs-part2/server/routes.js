@@ -12,21 +12,6 @@ routes.get('/', (req, res) => {
     <script src="public/js/app.bundle.js"></script>
         <link rel="stylesheet" href="public/css/styles.css" />
         <app></app>
-        <!-- <div class="page-wrapper">
-            <div class="app-container">
-                <div class="column">
-                    <new-todos></new-todos>
-                </div>
-                <div class="column">
-                    <done-todos></done-todos>
-                </div>
-            </div>
-    
-            <div class="output">
-                <div ng-view></div>
-            </div>
-        </div> -->
-        
         <link href="https://fonts.googleapis.com/css?family=Arsenal:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
     </body>
     </html>`);
