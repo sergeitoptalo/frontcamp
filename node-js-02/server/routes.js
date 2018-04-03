@@ -97,7 +97,11 @@ routes.post('/loginHandler', function (req, res, next) {
 
 /* Add blog */
 routes.get('/addBlogPage', (req, res) => {
-    res.status(200).render('form', { isEditing: false });
+    if (req.isAuthenticated()) {
+        res.status(200).render('form', { isEditing: false });
+    } else {
+        res.status(200).redirect('/');
+    }
 });
 
 routes.post('/add-blog', (req, res) => {
