@@ -1,11 +1,11 @@
 let mongoose = require("mongoose");
-let Blog = require('../server/schema').Blog;
-const app = require('../server').app;
-const routes = require('../server/routes');
+let Blog = require('../server/schema.js').Blog;
+const app = require('../server.js').app;
+const routes = require('../server/routes.js');
 //Require the dev-dependencies
 let chai = require('chai');
 let chaiHttp = require('chai-http');
-let server = require('../server');
+let server = require('../server.js');
 let should = chai.should();
 var expect = chai.expect;
 var sinon = require('sinon');
@@ -13,15 +13,13 @@ var sinon = require('sinon');
 chai.use(chaiHttp);
 
 describe('/GET index', () => {
-    it('it should GET all the blogs', (done) => {
+    
+    it('it should GET all the blogs for the index page', (done) => {
 
         chai.request(server)
             .get('/')
             .end((err, res) => {
                 res.should.have.status(200);
-                // expect(spy.calledWithMatch(/\/index\.pug$/)).to.be.true;
-                //expect(res.render.calledOnce).to.be.true;
-                //spy.restore();
                 done();
             });
     });
@@ -29,7 +27,7 @@ describe('/GET index', () => {
 
 describe('Blogs', () => {
     describe('/GET blogs', () => {
-        it('it should GET all the blogs', (done) => {
+        it('it should GET all the blogs on the route /blogs', (done) => {
             chai.request(server)
                 .get('/blogs')
                 .end((err, res) => {
@@ -38,26 +36,24 @@ describe('Blogs', () => {
                     done();
                 });
         });
+    });
+});
+
+describe('Blog', () => {
+    describe('/GET single blog', () => {
+        it('it should GET single blog on route /blogs/:id', (done) => {
+            chai.request(server)
+                .get('/blogs/5ac394fdb41e361198a28ee2')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    
+                    done();
+                });
+        });
         after(function () {
             //server.close();
             process.exit(0);
         });
     });
-
-    it('should throw an error', function (done) {
-        chai.request(server)
-            .get('/')
-            .end((err, res) => {
-                res.body.error.should.eql({ 'error': 'An error has occurred' });
-                done();
-            });
-        /*         getAppStatus(function (err, data) {
-                    err.should.be.an.instanceof(Error);
-                    done();
-                }); */
-    });
-    after(function () {
-        mock.restore();
-    });
-
 });

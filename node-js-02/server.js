@@ -1,13 +1,13 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const routes = require('./server/routes');
+const routes = require('./server/routes.js');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('cookie-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('./server/schema').User;
+const User = require('./server/schema.js').User;
 
 passport.use(new LocalStrategy({
     usernameField: 'login',
