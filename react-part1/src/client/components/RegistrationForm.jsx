@@ -91,6 +91,7 @@ export default class RegistrationForm extends React.Component {
                             label="Name"
                             name="userName"
                             type="text"
+                            id="userName"
                             onChange={this.handleChange}
                         />
                     </div>
@@ -99,6 +100,7 @@ export default class RegistrationForm extends React.Component {
                             label="Login"
                             name="login"
                             type="text"
+                            id="login"
                             onChange={this.handleChange}
                         />
                     </div>
@@ -107,6 +109,7 @@ export default class RegistrationForm extends React.Component {
                             label="Password"
                             name="password"
                             type="password"
+                            id="password"
                             onChange={this.handleChange}
                         />
                     </div>

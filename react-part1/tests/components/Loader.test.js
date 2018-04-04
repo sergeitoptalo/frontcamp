@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 
 import Loader from '../../src/client/components/Loader';
 
-it('Should be rendered correctly', () => {
+it('Loader should be rendered correctly', () => {
     const component = renderer.create(
         <Loader />
     )

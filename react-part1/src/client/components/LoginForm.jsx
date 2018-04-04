@@ -10,6 +10,11 @@ import { loginHandler } from '../api/userApi';
 import { loginSuccess } from '../actions/user';
 import { atLeastOneEmptyField } from '../utilities/validation/emptyFieldsValidation';
 
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
+
 class LoginForm extends React.Component {
     constructor(props) {
         super(props);
@@ -75,6 +80,7 @@ class LoginForm extends React.Component {
                             label="Login"
                             name="login"
                             type="text"
+                            id="login"
                             onChange={this.handleChange}
                         />
                     </div>
@@ -83,6 +89,7 @@ class LoginForm extends React.Component {
                             label="Password"
                             name="password"
                             type="password"
+                            id="password"
                             onChange={this.handleChange}
                         />
                     </div>
