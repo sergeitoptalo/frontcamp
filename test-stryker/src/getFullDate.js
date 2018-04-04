@@ -1,4 +1,4 @@
-let addZeroesToTime = (date) => {
+global.addZeroesToTime = function(date) {
     let givenDate = new Date(date);
     let minutes = givenDate.getMinutes();
     let hours = givenDate.getHours();
@@ -7,7 +7,7 @@ let addZeroesToTime = (date) => {
     return result;
 }
 
-let monthNameFromNumber = (monthNumber) => {
+global.monthNameFromNumber = (monthNumber) => {
     const month = [
         '',
         'January',
@@ -27,7 +27,7 @@ let monthNameFromNumber = (monthNumber) => {
     return month[monthNumber];
 }
 
-let getFullDate = (passedDate) => {
+global.getFullDate = (passedDate) => {
     let date = new Date(passedDate);
     let time = addZeroesToTime(date);
     let resultDate = `${monthNameFromNumber(date.getMonth() + 1)} ${date.getDate()}`;
