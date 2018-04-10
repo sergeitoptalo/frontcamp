@@ -1,10 +1,11 @@
 require('../src/getFullDate.js');
+require('../src/config/dateString');
 var assert = require('assert');
 
 describe('Time', function () {
     describe('add zeroes to time', function () {
         it('should return 03:17 from input 3:17', function () {
-            assert.equal(addZeroesToTime('Wed Apr 04 2018 3:17:58 GMT+0300 (Belarus Standard Time)'), '03:17');
+            assert.equal(addZeroesToTime(getDateConfig()), '03:17');
         });
     });
 });
@@ -20,10 +21,10 @@ describe('Month', function () {
 describe('Full date', function () {
     describe('get month from number', function () {
         it('should return transformed date', function () {
-            assert.equal(getFullDate('Wed Apr 04 2018 3:17:58 GMT+0300 (Belarus Standard Time)').date, 'April 4');
+            assert.equal(getFullDate(getDateConfig()).date, 'April 4');
         });
         it('should return transformed time', function () {
-            assert.equal(getFullDate('Wed Apr 04 2018 3:17:58 GMT+0300 (Belarus Standard Time)').time, '03:17');
+            assert.equal(getFullDate(getDateConfig()).time, '03:17');
         });
     });
 });
