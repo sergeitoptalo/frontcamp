@@ -47,7 +47,7 @@ describe('Get single blog', () => {
 });
 
 describe('Add blog', () => {
-    it('it should send success message if blog was added', (done) => {
+    it('it should get success status if blog was added', (done) => {
         let blog = {
             title: "title 2",
             author: "author 2",
@@ -59,7 +59,7 @@ describe('Add blog', () => {
             .post('/add-blog')
             .send(blog)
             .end((err, res) => {
-                res.text.should.be.equal('added');
+                res.should.have.status(200);
                 done();
             });
     });
